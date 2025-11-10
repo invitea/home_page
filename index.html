@@ -518,7 +518,7 @@
             </ul>
 
             <div class="plan-cta-row">
-              <button type="button" class="btn plan-cta" data-plan="Básico" data-price="15" aria-label="Comprar plan Básico">Comprar</button>
+              <button type="button" class="btn plan-cta" data-plan="Básico" data-price="499 MXN" aria-label="Comprar plan Básico">Comprar</button>
             </div>
           </article>
 
@@ -540,7 +540,7 @@
             </ul>
 
             <div class="plan-cta-row">
-              <button type="button" class="btn plan-cta" data-plan="Estándar" data-price="28" aria-label="Comprar plan Estándar">Comprar</button>
+              <button type="button" class="btn plan-cta" data-plan="Estándar" data-price="899 MXN" aria-label="Comprar plan Estándar">Comprar</button>
             </div>
           </article>
 
@@ -560,7 +560,7 @@
             </ul>
 
             <div class="plan-cta-row">
-              <button type="button" class="btn plan-cta" data-plan="Premium" data-price="45" aria-label="Comprar plan Premium">Comprar</button>
+              <button type="button" class="btn plan-cta" data-plan="Premium" data-price="1,199 MXN" aria-label="Comprar plan Premium">Comprar</button>
             </div>
           </article>
         </div>
@@ -629,6 +629,15 @@
           </div>
 
           <div class="contact-left">
+            <!-- ========================FORMULARIO CONTACTO (REEMPLAZAR)======================== -->
+            <!-- ====== flatpickr (estilos + script) - colocar justo ANTES del <script type="module"> ====== -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
+            <!-- ========================
+              FORMULARIO CONTACTO (con datepicker y máscara de teléfono)
+              ======================== -->
             <form id="contactForm" class="contact-form-modern" novalidate aria-describedby="formHelp" autocomplete="on">
               <div class="row" style="margin-bottom:12px">
                 <label class="field">
@@ -640,23 +649,30 @@
                   <input id="email" name="email" type="email" placeholder=" " required autocomplete="email" />
                   <span class="label">Correo</span>
                 </label>
+
+                <!-- ahora requerido -->
+                <label class="field">
+                  <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="55 1234 5678" required autocomplete="tel" />
+                  <span class="label">Teléfono</span>
+
+                </label>
               </div>
 
               <div class="row" style="margin-bottom:12px">
-                <!-- select-field wrapper keeps chevron and positioning -->
                 <label class="field select-field">
                   <select id="type" name="type" required>
                     <option value="" disabled selected>Selecciona tipo de evento</option>
                     <option value="Boda">Boda</option>
-                    <option value="Cumplea\u00f1os">Cumplea\u00f1os</option>
-                    <option value="Baby Shower">Baby shower</option>
+                    <option value="Cumpleanios">Cumpleaños</option>
+                    <option value="BabyShower">Baby shower</option>
                     <option value="Corporativo">Corporativo</option>
                     <option value="Otro">Otro</option>
                   </select>
                 </label>
 
+                <!-- Fecha: tipo text con placeholder dd/mm/aaaa, pero inicializado con flatpickr -->
                 <label class="field">
-                  <input id="date" name="date" type="date" placeholder=" " />
+                  <input id="date" name="date" type="text" placeholder="dd/mm/aaaa" required aria-describedby="dateHelp" />
                   <span class="label">Fecha del evento</span>
                 </label>
               </div>
@@ -666,11 +682,13 @@
                 <span class="label">Mensaje / Detalles</span>
               </label>
 
+              <!-- CAMPO OCULTO para almacenar el plan seleccionado (Opción B) -->
+              <input type="hidden" id="selectedPlan" name="selectedPlan" value="">
+
               <div class="inline-controls" role="group" aria-label="Acciones del formulario">
                 <button class="btn btn-primary" type="submit" id="submitBtn">Enviar solicitud</button>
 
                 <button type="button" class="btn btn-outline" id="whatsappBtn" data-phone="5215512345678" aria-label="Contactar por WhatsApp">
-                  <!-- simple icon -->
                   <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="margin-right:8px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.199.297-.768.966-.94 1.163-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.617-.92-2.23-.242-.579-.487-.5-.672-.51l-.573-.01c-.199 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487  .709.306 1.26.489 1.692.626.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="#0F1724"/></svg>
                   WhatsApp
                 </button>
@@ -691,15 +709,9 @@
                 <p class="muted-small">Elige un plan en la sección de precios o cuéntanos tu idea y te proponemos 2 opciones en 48 horas.</p>
               </div>
 
-              <ul class="quick-features" aria-hidden="true">
-                <li><strong>Entrega digital</strong> en JPG/PNG/PDF</li>
-                <li><strong>RSVP integrado</strong> y mapa</li>
-                <li><strong>Revisiones</strong> según el paquete</li>
-              </ul>
-
               <div class="aside-actions">
-                <a class="btn btn-ghost" href="#precios">Ver planes</a>
-                <button id="quickSample" class="btn btn-secondary" type="button">Solicitar muestra</button>
+                <a class="btn btn-primary" href="#precios" aria-label="Ver planes">Ver planes</a>
+                <button id="quickSample" class="btn btn-secondary" type="button" aria-label="Solicitar muestra">Solicitar muestra</button>
               </div>
 
               <div class="contact-card">
@@ -770,252 +782,426 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">Mensaje enviado</div>
 
+   <!-- ========================SCRIPT UNIFICADO (module)======================== -->
+  <script type="module">
+  /* eslint-disable no-console */
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp,
+    enableIndexedDbPersistence
+  } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
+  // ---------- Firebase config ----------
+  const firebaseConfig = {
+    apiKey: "AIzaSyCTh8kPdvu-6Z5_cckNts22VrhdUTLVspM",
+    authDomain: "invitea-f7331.firebaseapp.com",
+    projectId: "invitea-f7331",
+    storageBucket: "invitea-f7331.firebasestorage.app",
+    messagingSenderId: "145115727672",
+    appId: "1:145115727672:web:d1d89c20bf946b9e2663cd",
+    measurementId: "G-8JS1MDZVGQ"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  let db;
+  try {
+    db = getFirestore(app);
+    try { enableIndexedDbPersistence(db).catch(e => console.warn('IndexedDB persistence no disponible:', e && e.code ? e.code : e)); }
+    catch(e){ console.warn('Error al habilitar persistencia:', e); }
+  } catch (e) {
+    console.warn('Firestore no disponible:', e);
+    db = null;
+  }
+
+  // ---------- util DOM ----------
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+  const toastEl = document.getElementById('contactToast') || document.getElementById('toast');
+
+  function showToast(msg){
+    if(!toastEl) { console.log('[toast]', msg); return; }
+    toastEl.textContent = msg;
+    toastEl.style.display = 'block';
+    setTimeout(()=> { toastEl.style.display = 'none'; }, 2600);
+  }
+
+  function setFormStatus(msg){
+    const s = document.getElementById('formStatus');
+    if(s) s.textContent = msg;
+  }
+
+  function clearInvalids(form){
+    ['name','email','phone','type','date','message'].forEach(id=>{
+      const el = form[id];
+      if(el) el.removeAttribute('aria-invalid');
+    });
+    setFormStatus('');
+  }
+
+  function markInvalid(el, msg){
+    if(!el) return;
+    el.setAttribute('aria-invalid','true');
+    if(msg) setFormStatus(msg);
+  }
+
+  // ---------- Inicializar flatpickr para #date (d/m/Y) ----------
+  function initDatepicker(){
+    if(typeof flatpickr === 'undefined'){ console.warn('flatpickr no cargado'); return; }
+    // localizar a español si está disponible
+    try { if(flatpickr.l10ns && flatpickr.l10ns.es) flatpickr.localize(flatpickr.l10ns.es); } catch(e){}
+    flatpickr('#date', {
+      dateFormat: 'd/m/Y',        // dd/mm/aaaa
+      altInput: false,
+      allowInput: true,
+      clickOpens: true,
+      // disableMobile false -> on mobile browsers native datepicker may appear; keep flatpickr for consistent format
+      disableMobile: true,
+      // minDate: 'today' // opcional: no permitir fechas pasadas
+    });
+  }
+
+  // ---------- Máscara de teléfono simple (sin librería) ----------
+  // Formatea como: "55 1234 5678" (si digits = 10), o agrupa razonablemente.
+  function formatPhoneDigits(digits){
+    // quitar espacios y +, etc; digits aquí ya debe ser solo números
+    if(!digits) return '';
+    // si empieza con country code 52, sepáralo
+    let prefix = '';
+    let core = digits;
+    if(core.startsWith('52') && core.length > 2){
+      prefix = '+52 ';
+      core = core.slice(2);
+    } else if(core.startsWith('521') && core.length > 3){
+      // por si incluyen 521 (mobile)
+      prefix = '+52 ';
+      core = core.slice(core.startsWith('521') ? 3 : 2);
+    }
+    // formatear core: primer bloque 2 (lada) si longitud>=2, luego 4 y 4
+    if(core.length <= 2) return prefix + core;
+    if(core.length <= 6) {
+      return prefix + core.slice(0,2) + ' ' + core.slice(2);
+    }
+    // core.length >=7
+    const a = core.slice(0,2);         // lada
+    const b = core.slice(2,6);         // primeros 4
+    const c = core.slice(6,10);        // últimos 4 (si existen)
+    if(c) return prefix + `${a} ${b} ${c}`;
+    return prefix + `${a} ${b}`;       // si no hay suficientes para c
+  }
+
+  function wirePhoneMask(){
+    const phoneEl = document.getElementById('phone');
+    if(!phoneEl) return;
+    phoneEl.addEventListener('input', (e) => {
+      const cur = phoneEl.value;
+      const digits = cur.replace(/\D/g,'');
+      const formatted = formatPhoneDigits(digits);
+      // Mantener cursor al final (simple)
+      phoneEl.value = formatted;
+    });
+    // también limpiar al pegar
+    phoneEl.addEventListener('paste', (ev) => {
+      ev.preventDefault();
+      const text = (ev.clipboardData || window.clipboardData).getData('text') || '';
+      const digits = text.replace(/\D/g,'');
+      phoneEl.value = formatPhoneDigits(digits);
+    });
+  }
+
+  // ---------- PLAN CTA: escribir en hidden selectedPlan (Opción B) ----------
+  function wirePlanCTAs(){
+    const planBtns = $$('.plan-cta');
+    planBtns.forEach(b => { b.replaceWith(b.cloneNode(true)); });
+    $$('.plan-cta').forEach(b => b.addEventListener('click', ()=> {
+      const plan = b.dataset.plan || '';
+      const price = b.dataset.price || '';
+      const nameField = $('#name');
+      const messageField = $('#message');
+      const selectedPlanField = $('#selectedPlan');
+
+      if (selectedPlanField) selectedPlanField.value = `${plan} — paquete seleccionado (${price})`;
+      if (messageField) messageField.value = `Estoy interesad@ en el plan "${plan}" (pago único ${price}).`;
+
+      const contacto = $('#contacto');
+      if (contacto) contacto.scrollIntoView({behavior:'smooth', block:'start'});
+      setTimeout(()=>{ if(nameField) nameField.focus(); }, 600);
+    }));
+  }
+
+  // ---------- PREVIEW BUTTONS (modal) ----------
+  function wirePreviewButtonsDynamicImage() {
+    const buttons = Array.from(document.querySelectorAll('.previewBtn'));
+    buttons.forEach(btn => {
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      newBtn.addEventListener('click', () => {
+        const clickedCard = newBtn.closest('.card');
+        const clickedImg = clickedCard ? clickedCard.querySelector('img') : null;
+        const srcFromBtn = newBtn.dataset?.src || '';
+        const src = srcFromBtn || (clickedImg ? clickedImg.src : '');
+        const canonical = getCanonicalTextData();
+        openModal(src, canonical.title, canonical.desc);
+      });
+    });
+  }
+
+  // modal helpers (mismo comportamiento)
+  const modal = $('#modal'), modalImage = $('#modalImage'), modalTitle = $('#modalTitle'), modalDesc = $('#modalDesc'), modalClose = $('#modalClose');
+  let lastFocused = null;
+  function setBackgroundInert(inert){
+    const main = $('main'), head = $('header'), foot = $('footer');
+    [main, head, foot].forEach(el=>{
+      if(!el) return;
+      if('inert' in HTMLElement.prototype) el.inert = inert;
+      else inert ? el.setAttribute('aria-hidden','true') : el.removeAttribute('aria-hidden');
+    });
+  }
+  function getModalFocusables() {
+    return Array.from(modal.querySelectorAll('a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'))
+      .filter(el => el.offsetParent !== null && el.getClientRects().length);
+  }
+  function trapFocus(e){
+    if(e.key !== 'Tab') return;
+    const focusables = getModalFocusables();
+    if (focusables.length === 0) { e.preventDefault(); return; }
+    const first = focusables[0], last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  }
+  function onModalKey(e){ if(e.key === 'Escape'){ closeModal(); return; } trapFocus(e); }
+  function openModal(src, title, desc){
+    if(!modal) return;
+    lastFocused = document.activeElement;
+    if(modalImage) modalImage.src = src || '';
+    if(modalTitle) modalTitle.textContent = title || 'Invitación';
+    if(modalDesc) modalDesc.textContent = desc || 'Vista previa del diseño.';
+    modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+    setBackgroundInert(true);
+    setTimeout(()=>{ if(modalClose) modalClose.focus(); }, 40);
+    document.addEventListener('keydown', onModalKey);
+  }
+  function closeModal(){
+    if(!modal) return;
+    modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); if(modalImage) modalImage.src = '';
+    document.body.style.overflow=''; setBackgroundInert(false);
+    if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    document.removeEventListener('keydown', onModalKey);
+  }
+  if (modal) { modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); }); }
+  if(modalClose) modalClose.addEventListener('click', closeModal);
+
+  function getCanonicalCard() {
+    const byType = document.querySelector('.card[data-type="cumple"]');
+    if(byType) return byType;
+    const all = document.querySelectorAll('.card');
+    return all.length > 1 ? all[1] : all[0] || null;
+  }
+  function getCanonicalTextData() {
+    const card = getCanonicalCard();
+    if(!card) return { title: 'Invitación', desc: '' };
+    const title = card.dataset.title || (card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : 'Invitación');
+    const desc = card.querySelector('p') ? card.querySelector('p').textContent.trim() : '';
+    return { title, desc };
+  }
+
+  // WhatsApp y quick sample
+  function wireWhatsAppAndQuickSample(){
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    if(whatsappBtn){
+      whatsappBtn.addEventListener('click', ()=>{
+        const attrPhone = whatsappBtn.dataset.phone;
+        const PHONE_IN_E164 = (typeof attrPhone === 'string' && attrPhone.trim() !== '') ? attrPhone.replace(/\D/g,'') : '5215512345678';
+        const validPhone = /^[0-9]{7,15}$/.test(PHONE_IN_E164);
+        if(!validPhone){ showToast('WhatsApp no configurado'); return; }
+        const text = encodeURIComponent('Hola, quiero información sobre una invitación digital. ¿Podrían ayudarme?');
+        const url = `https://wa.me/${PHONE_IN_E164}?text=${text}`;
+        const win = window.open(url, '_blank', 'noopener');
+        if(win) try { win.opener = null; } catch(e){ }
+        else { window.location.href = url; }
+      });
+    }
+
+    const quickSample = document.getElementById('quickSample');
+    if(quickSample){
+      quickSample.addEventListener('click', ()=>{
+        const el = document.getElementById('message');
+        if(el) el.value = 'Hola, ¿podrían enviarme una muestra de diseños similares a...';
+        document.getElementById('name')?.focus();
+        showToast('Formulario prellenado — edita y envía');
+      });
+    }
+  }
+
+  // FORM SUBMIT actualizado: teléfono y fecha obligatorios; fecha validada en dd/mm/aaaa y convertida a ISO
+  (function wireContactForm(){
+    const form = document.getElementById('contactForm');
+    if(!form) { console.warn('Contacto: no se encontró #contactForm'); return; }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      clearInvalids(form);
+
+      const submitBtn = document.getElementById('submitBtn');
+      const name = (form.name?.value || '').trim();
+      const email = (form.email?.value || '').trim();
+      const phoneRaw = (form.phone?.value || '').trim();
+      const phoneDigits = phoneRaw.replace(/\D/g,'');
+      const phoneOk = phoneDigits.length >= 7; // criterio mínimo
+      const type = (form.type?.value || '').trim();
+      const message = (form.message?.value || '').trim();
+      const dateVal = (form.date?.value || '').trim(); // esperado dd/mm/aaaa
+      const selectedPlan = (form.selectedPlan && form.selectedPlan.value) ? form.selectedPlan.value : null;
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
+
+      // fecha regex dd/mm/aaaa
+      const dateMatch = dateVal.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+      let dateISO = null;
+      let dateOk = false;
+      if(dateMatch){
+        const d = parseInt(dateMatch[1],10), m = parseInt(dateMatch[2],10), y = parseInt(dateMatch[3],10);
+        const candidate = new Date(y, m - 1, d);
+        if(candidate && candidate.getFullYear() === y && (candidate.getMonth() + 1) === m && candidate.getDate() === d){
+          dateOk = true;
+          const mm = String(m).padStart(2,'0');
+          const dd = String(d).padStart(2,'0');
+          dateISO = `${y}-${mm}-${dd}`;
+        }
+      }
+
+      if(!name || !emailOk || !phoneOk || !type || !message || !dateOk){
+        if(!name) markInvalid(form.name);
+        if(!emailOk) markInvalid(form.email, 'Ingresa un correo válido');
+        if(!phoneOk) markInvalid(form.phone, 'Ingresa un teléfono válido (mín. 7 dígitos)');
+        if(!type) markInvalid(form.type);
+        if(!message) markInvalid(form.message);
+        if(!dateOk) markInvalid(form.date, 'Fecha inválida. Usa dd/mm/aaaa');
+        const firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if(firstInvalid && typeof firstInvalid.focus === 'function') firstInvalid.focus();
+        showToast('Completa todos los campos correctamente');
+        return;
+      }
+
+      const payloadForServer = {
+        name,
+        email,
+        phone: phoneDigits,
+        type,
+        message,
+        date_ddmmyyyy: dateVal,
+        date_iso: dateISO,
+        selectedPlan: selectedPlan || '',
+        ts: new Date().toISOString()
+      };
+
+      const prevBtnText = submitBtn ? submitBtn.textContent : null;
+      if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
+      form.setAttribute('aria-busy','true');
+      setFormStatus('');
+
+      let firestoreOk = false;
+      if(db){
+        try {
+          const colRef = collection(db, 'contact_requests');
+          await addDoc(colRef, {
+            ...payloadForServer,
+            createdAt: serverTimestamp(),
+            userAgent: navigator.userAgent || null
+          });
+          firestoreOk = true;
+          form.reset();
+          showToast('¡Solicitud enviada!');
+          setFormStatus('¡Gracias! Recibimos tu solicitud. Te contactamos pronto.');
+        } catch (err) {
+          console.error('Error escribiendo en Firestore:', err);
+        }
+      }
+
+      if(!firestoreOk){
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(payloadForServer),
+            credentials: 'omit'
+          });
+          if(!res.ok) throw new Error('Error de envío servidor');
+          form.reset();
+          showToast(firestoreOk ? '¡Solicitud registrada!' : '¡Solicitud enviada (vía servidor)!');
+          setFormStatus('¡Gracias! Recibimos tu solicitud. Te contactamos pronto.');
+        } catch (err){
+          console.error('Fallback (POST /api/contact) falló:', err);
+          showToast('Error al enviar. Intenta más tarde.');
+          setFormStatus('Error al enviar. Escríbenos a invitea.design@gmail.com');
+        }
+      }
+
+      if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = prevBtnText || 'Enviar solicitud'; }
+      form.removeAttribute('aria-busy');
+    });
+  })();
+
+  // INIT wiring
+  (function init(){
+    // datepicker primero (flatpickr cargado vía CDN arriba)
+    initDatepicker();
+
+    wirePreviewButtonsDynamicImage();
+    wirePlanCTAs();
+    wireWhatsAppAndQuickSample();
+    wirePhoneMask();
+
+    const yearEl = $('#year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // mobile toggle
+    const btnMobile = $('#btnMobile'), mobileMenu = $('#mobileMenu');
+    let mobileOpen = false;
+    function toggleMobile(open){
+      if(!mobileMenu || !btnMobile) return;
+      mobileOpen = !!open;
+      mobileMenu.style.display = mobileOpen ? 'block' : 'none';
+      mobileMenu.setAttribute('aria-hidden', String(!mobileOpen));
+      btnMobile.setAttribute('aria-expanded', String(mobileOpen));
+      const main = document.querySelector('main');
+      if(main){
+        if('inert' in HTMLElement.prototype){ main.inert = mobileOpen; }
+        else { if(mobileOpen) main.setAttribute('aria-hidden', 'true'); else main.removeAttribute('aria-hidden'); }
+      }
+    }
+    if(btnMobile){ btnMobile.addEventListener('click', ()=> toggleMobile(!mobileOpen)); }
+
+    // smooth anchors
+    $$('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const target = a.getAttribute('href');
+        if(target === '#') return;
+        const el = document.querySelector(target);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); if(mobileOpen && mobileMenu){ toggleMobile(false); } }
+      });
+    });
+
+    // brand image fallback
+    (function ensureBrandImages(){
+      const headerImg = $('#brandImg');
+      if(headerImg) headerImg.addEventListener('error', ()=>{ headerImg.style.display='none'; const wrap = headerImg.closest('.logo-img-wrap'); if(wrap && !wrap.querySelector('.fallback-text')){ const f=document.createElement('div'); f.className='fallback-text'; f.style.color='white'; f.style.fontWeight='700'; f.style.fontSize='18px'; f.textContent='Invitea'; wrap.appendChild(f); }}); 
+    })();
+
+    // small enter animations
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('.fade-up').forEach((el,i)=> setTimeout(()=> el.classList.add('in'), 100 + i*80));
+      const planCards = Array.from(document.querySelectorAll('.plans-grid .plan-card'));
+      planCards.forEach((card, idx)=> setTimeout(()=> card.classList.add('in'), 220 + idx*110));
+    });
+  })();
+
+  </script>
+
   <script src="https://unpkg.com/wicg-inert@3.0.0/dist/inert.min.js" defer></script>
 
-  <script>
-    (function(){
-      const $ = sel => document.querySelector(sel);
-      const $$ = sel => Array.from(document.querySelectorAll(sel));
-
-      const yearEl = $('#year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
-
-      const btnMobile = $('#btnMobile'), mobileMenu = $('#mobileMenu');
-      let mobileOpen = false;
-      function toggleMobile(open){
-        if(!mobileMenu || !btnMobile) return;
-        mobileOpen = !!open;
-        mobileMenu.style.display = mobileOpen ? 'block' : 'none';
-        mobileMenu.setAttribute('aria-hidden', String(!mobileOpen));
-        btnMobile.setAttribute('aria-expanded', String(mobileOpen));
-        const main = document.querySelector('main');
-        if(main){
-          if('inert' in HTMLElement.prototype){ main.inert = mobileOpen; }
-          else { if(mobileOpen) main.setAttribute('aria-hidden', 'true'); else main.removeAttribute('aria-hidden'); }
-        }
-      }
-      if(btnMobile){ btnMobile.addEventListener('click', ()=> toggleMobile(!mobileOpen)); }
-
-      $$('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', (e)=>{
-          const target = a.getAttribute('href');
-          if(target === '#') return;
-          const el = document.querySelector(target);
-          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); if(mobileOpen && mobileMenu){ toggleMobile(false); } }
-        });
-      });
-
-      const modal = $('#modal'), modalImage = $('#modalImage'), modalTitle = $('#modalTitle'), modalDesc = $('#modalDesc'), modalClose = $('#modalClose');
-      let lastFocused = null;
-      function setBackgroundInert(inert){
-        const main = $('main'), head = $('header'), foot = $('footer');
-        [main, head, foot].forEach(el=>{
-          if(!el) return;
-          if('inert' in HTMLElement.prototype) el.inert = inert;
-          else inert ? el.setAttribute('aria-hidden','true') : el.removeAttribute('aria-hidden');
-        });
-      }
-      function getModalFocusables() {
-        return Array.from(modal.querySelectorAll('a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'))
-          .filter(el => el.offsetParent !== null && el.getClientRects().length);
-      }
-      function trapFocus(e){
-        if(e.key !== 'Tab') return;
-        const focusables = getModalFocusables();
-        if (focusables.length === 0) { e.preventDefault(); return; }
-        const first = focusables[0], last = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
-        else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
-      }
-      function onModalKey(e){ if(e.key === 'Escape'){ closeModal(); return; } trapFocus(e); }
-
-      function openModal(src, title, desc){
-        if(!modal) return;
-        lastFocused = document.activeElement;
-        if(modalImage) modalImage.src = src || '';
-        if(modalTitle) modalTitle.textContent = title || 'Invitación';
-        if(modalDesc) modalDesc.textContent = desc || 'Vista previa del diseño.';
-        modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
-        setBackgroundInert(true);
-        setTimeout(()=>{ if(modalClose) modalClose.focus(); }, 40);
-        document.addEventListener('keydown', onModalKey);
-      }
-      function closeModal(){
-        if(!modal) return;
-        modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); if(modalImage) modalImage.src = '';
-        document.body.style.overflow=''; setBackgroundInert(false);
-        if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-        document.removeEventListener('keydown', onModalKey);
-      }
-      if (modal) { modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); }); }
-      if(modalClose) modalClose.addEventListener('click', closeModal);
-
-      function getCanonicalCard() {
-        const byType = document.querySelector('.card[data-type="cumple"]');
-        if(byType) return byType;
-        const all = document.querySelectorAll('.card');
-        return all.length > 1 ? all[1] : all[0] || null;
-      }
-      function getCanonicalTextData() {
-        const card = getCanonicalCard();
-        if(!card) return { title: 'Invitación', desc: '' };
-        const title = card.dataset.title || (card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : 'Invitación');
-        const desc = card.querySelector('p') ? card.querySelector('p').textContent.trim() : '';
-        return { title, desc };
-      }
-
-      function wirePreviewButtonsDynamicImage() {
-        const buttons = Array.from(document.querySelectorAll('.previewBtn'));
-        buttons.forEach(btn => {
-          const newBtn = btn.cloneNode(true);
-          btn.parentNode.replaceChild(newBtn, btn);
-          newBtn.addEventListener('click', () => {
-            const clickedCard = newBtn.closest('.card');
-            const clickedImg = clickedCard ? clickedCard.querySelector('img') : null;
-            const srcFromBtn = newBtn.dataset?.src || '';
-            const src = srcFromBtn || (clickedImg ? clickedImg.src : '');
-            const canonical = getCanonicalTextData();
-            openModal(src, canonical.title, canonical.desc);
-          });
-        });
-      }
-
-      wirePreviewButtonsDynamicImage();
-
-      $$('.plan-cta').forEach(b => b.addEventListener('click', ()=> {
-        const plan = b.dataset.plan || '';
-        const price = b.dataset.price || '';
-        const nameField = $('#name'); const typeField = $('#type'); const messageField = $('#message');
-        if(plan && typeField) typeField.value = `${plan} — paquete seleccionado ($${price})`;
-        const contacto = $('#contacto'); if(contacto) contacto.scrollIntoView({behavior:'smooth', block:'start'});
-        setTimeout(()=>{ 
-          if(nameField) nameField.focus(); 
-          if(messageField) { messageField.value = `Estoy interesad@ en el plan "${plan}" (pago único $${price}). Fecha del evento: \n\n`; }
-        }, 600);
-      }));
-
-      // Ensure brand images fallback
-      (function ensureBrandImages(){
-        const headerImg = $('#brandImg');
-        if(headerImg) headerImg.addEventListener('error', ()=>{ headerImg.style.display='none'; const wrap = headerImg.closest('.logo-img-wrap'); if(wrap && !wrap.querySelector('.fallback-text')){ const f=document.createElement('div'); f.className='fallback-text'; f.style.color='white'; f.style.fontWeight='700'; f.style.fontSize='18px'; f.textContent='Invitea'; wrap.appendChild(f); }}); 
-      })();
-
-      window.addEventListener('load', ()=>{
-        document.querySelectorAll('.fade-up').forEach((el,i)=> setTimeout(()=> el.classList.add('in'), 100 + i*80));
-        const planCards = Array.from(document.querySelectorAll('.plans-grid .plan-card'));
-        planCards.forEach((card, idx)=> setTimeout(()=> card.classList.add('in'), 220 + idx*110));
-      });
-
-      // =============
-      // Contact form (rediseñado)
-      // =============
-      (function(){
-        const form = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formStatus = document.getElementById('formStatus');
-        const toast = document.getElementById('contactToast');
-        const whatsappBtn = document.getElementById('whatsappBtn');
-        const quickSample = document.getElementById('quickSample');
-
-        function showToast(text){
-          if(!toast) return;
-          toast.textContent = text;
-          toast.style.display = 'block';
-          setTimeout(()=>{ toast.style.display = 'none'; }, 2600);
-        }
-
-        function setInvalid(el, msg){
-          if(!el) return;
-          el.setAttribute('aria-invalid','true');
-          if(msg && formStatus) formStatus.textContent = msg;
-        }
-
-        function clearInvalids(){
-          ['name','email','type','message'].forEach(id=>{
-            const el = form[id];
-            if(el) el.removeAttribute('aria-invalid');
-          });
-          if(formStatus) formStatus.textContent = '';
-        }
-
-        if(form){
-          form.addEventListener('submit', async function(e){
-            e.preventDefault();
-            clearInvalids();
-            const name = form.name?.value.trim();
-            const email = form.email?.value.trim();
-            const type = form.type?.value || '';
-            const message = form.message?.value.trim();
-            const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
-
-            if(!name || !emailOk || type === '' || !message){
-              if(!name) setInvalid(form.name);
-              if(!emailOk) setInvalid(form.email, 'Ingresa un correo válido');
-              if(type === '') setInvalid(form.type);
-              if(!message) setInvalid(form.message);
-
-              // focus the first invalid field for better UX
-              const firstInvalid = form.querySelector('[aria-invalid="true"]');
-              if(firstInvalid && typeof firstInvalid.focus === 'function'){ firstInvalid.focus(); }
-
-              showToast('Completa todos los campos');
-              return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Enviando…';
-            form.setAttribute('aria-busy','true');
-
-            try {
-              const payload = { name, email, type, message, date: form.date?.value || '', ts: new Date().toISOString() };
-              // Endpoint - conserva el tuyo (ajusta si es necesario)
-              const res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {'Content-Type':'application/json'},
-                body: JSON.stringify(payload),
-                credentials: 'omit'
-              });
-              if(!res.ok) throw new Error('Error de envío');
-
-              form.reset();
-              showToast('¡Solicitud enviada!');
-              if(formStatus) formStatus.textContent = '¡Gracias! Recibimos tu solicitud. Te contactamos pronto.';
-            } catch (err){
-              console.error('Contact form error:', err);
-              if(formStatus) formStatus.textContent = 'Error al enviar. Escríbenos a invitea.design@gmail.com';
-              showToast('Error al enviar');
-            } finally {
-              submitBtn.disabled = false;
-              submitBtn.textContent = 'Enviar solicitud';
-              form.removeAttribute('aria-busy');
-            }
-          });
-        }
-
-        if(whatsappBtn){
-          whatsappBtn.addEventListener('click', ()=>{
-            const attrPhone = whatsappBtn.dataset.phone;
-            const PHONE_IN_E164 = (typeof attrPhone === 'string' && attrPhone.trim() !== '') ? attrPhone.replace(/\D/g,'') : '5215512345678';
-            const validPhone = /^[0-9]{7,15}$/.test(PHONE_IN_E164);
-            if(!validPhone){ showToast('WhatsApp no configurado'); return; }
-            const text = encodeURIComponent('Hola, quiero información sobre una invitación digital. ¿Podrían ayudarme?');
-            const url = `https://wa.me/${PHONE_IN_E164}?text=${text}`;
-            const win = window.open(url, '_blank', 'noopener');
-            if(win) try { win.opener = null; } catch(e){ }
-            else { window.location.href = url; }
-          });
-        }
-
-        if(quickSample){
-          quickSample.addEventListener('click', ()=>{
-            const el = document.getElementById('message');
-            if(el) el.value = 'Hola, ¿podrían enviarme una muestra de diseños similares a...';
-            document.getElementById('name')?.focus();
-            showToast('Formulario prellenado — edita y envía');
-          });
-        }
-      })();
-
-    })();
-  </script>
+  
 </body>
 </html>
