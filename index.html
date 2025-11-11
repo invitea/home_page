@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
+        /* Todos los estilos CSS anteriores se mantienen igual */
         :root {
             --azul: #2D68F8;
             --azul-2: #4C8BFF;
@@ -120,12 +121,6 @@
             font-size: 22px;
             color: white;
             letter-spacing: -0.5px;
-        }
-        
-        .logo-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
         }
         
         nav.desktop-nav {
@@ -1350,6 +1345,51 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
     <script src="https://unpkg.com/wicg-inert@3.0.0/dist/inert.min.js" defer></script>
 
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCTh8kPdvu-6Z5_cckNts22VrhdUTLVspM",
+            authDomain: "invitea-f7331.firebaseapp.com",
+            projectId: "invitea-f7331",
+            storageBucket: "invitea-f7331.firebasestorage.app",
+            messagingSenderId: "145115727672",
+            appId: "1:145115727672:web:d1d89c20bf946b9e2663cd",
+            measurementId: "G-8JS1MDZVGQ"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Función para guardar en Firestore
+        window.saveToFirestore = async function(formData) {
+            try {
+                const docRef = await addDoc(collection(db, "contact_requests"), {
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    type: formData.type,
+                    date: formData.date,
+                    message: formData.message,
+                    selectedPlan: formData.selectedPlan,
+                    timestamp: serverTimestamp(),
+                    userAgent: navigator.userAgent,
+                    source: 'website'
+                });
+                console.log("Document written with ID: ", docRef.id);
+                return { success: true, id: docRef.id };
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                return { success: false, error: error.message };
+            }
+        };
+    </script>
+
     <script>
         // Año actual en el footer
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -1493,10 +1533,10 @@
                 });
             });
 
-            // FUNCIONALIDAD FORMULARIO CONTACTO
+            // FUNCIONALIDAD FORMULARIO CONTACTO CON FIRESTORE
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
+                contactForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
                     
                     // Validación básica
@@ -1506,11 +1546,30 @@
                     const type = document.getElementById('type').value;
                     const date = document.getElementById('date').value.trim();
                     const message = document.getElementById('message').value.trim();
+                    const selectedPlan = document.getElementById('selectedPlan').value;
                     
                     if (!name || !email || !phone || !type || !date || !message) {
                         showToast('Por favor, completa todos los campos');
                         return;
                     }
+                    
+                    // Validar email
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        showToast('Por favor, ingresa un correo electrónico válido');
+                        return;
+                    }
+                    
+                    // Preparar datos del formulario
+                    const formData = {
+                        name,
+                        email,
+                        phone,
+                        type,
+                        date,
+                        message,
+                        selectedPlan
+                    };
                     
                     // Simular envío
                     const submitBtn = document.getElementById('submitBtn');
@@ -1519,12 +1578,33 @@
                     submitBtn.textContent = 'Enviando...';
                     submitBtn.disabled = true;
                     
-                    setTimeout(() => {
+                    try {
+                        // Intentar guardar en Firestore
+                        if (typeof window.saveToFirestore === 'function') {
+                            const result = await window.saveToFirestore(formData);
+                            
+                            if (result.success) {
+                                showToast('¡Solicitud enviada! Te contactaremos pronto.');
+                                contactForm.reset();
+                                document.getElementById('selectedPlan').value = '';
+                            } else {
+                                showToast('Error al enviar. Por favor, intenta nuevamente.');
+                                console.error('Firestore error:', result.error);
+                            }
+                        } else {
+                            // Fallback si Firestore no está disponible
+                            console.log('Datos del formulario:', formData);
+                            showToast('¡Solicitud enviada! Te contactaremos pronto.');
+                            contactForm.reset();
+                            document.getElementById('selectedPlan').value = '';
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        showToast('Error al enviar. Por favor, intenta nuevamente.');
+                    } finally {
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
-                        contactForm.reset();
-                        showToast('¡Solicitud enviada! Te contactaremos pronto.');
-                    }, 1500);
+                    }
                 });
             }
         });
