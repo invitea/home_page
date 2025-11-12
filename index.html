@@ -1,1666 +1,1207 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitea · Invitaciones Digitales</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <style>
-        /* Todos los estilos CSS anteriores se mantienen igual */
-        :root {
-            --azul: #2D68F8;
-            --azul-2: #4C8BFF;
-            --amarillo: #FFC940;
-            --bg: #F8F9FA;
-            --card-bg: #FFFFFF;
-            --text: #0F1724;
-            --muted: #6B7280;
-            --radius: 14px;
-            --shadow-1: 0 8px 30px rgba(17,24,39,0.06);
-            --shadow-2: 0 18px 60px rgba(17,24,39,0.10);
-            --max-width: 1200px;
-            --gap: 20px;
-            --focus: rgba(45,104,248,0.28);
-            --section-vertical: 18px;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        html, body {
-            height: 100%;
-            font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-        
-        img {
-            max-width: 100%;
-            display: block;
-            height: auto;
-        }
-        
-        .container {
-            width: calc(100% - 32px);
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 16px;
-        }
-        
-        .sr-only {
-            position: absolute !important;
-            height: 1px;
-            width: 1px;
-            overflow: hidden;
-            clip: rect(1px, 1px, 1px, 1px);
-            white-space: nowrap;
-            border: 0;
-            padding: 0;
-            margin: -1px;
-        }
-        
-        .muted-small {
-            color: var(--muted);
-            font-size: 13px;
-        }
-        
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 60;
-            background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(248,249,250,0.9));
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border-bottom: 1px solid rgba(16,24,40,0.03);
-        }
-        
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 0;
-            gap: 12px;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .logo-img-wrap {
-            width: 150px;
-            height: 42px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--azul), var(--azul-2));
-            padding: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-1);
-        }
-        
-        .logo-text {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 22px;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-        
-        nav.desktop-nav {
-            display: flex;
-            gap: 18px;
-            align-items: center;
-        }
-        
-        nav.desktop-nav a {
-            color: var(--muted);
-            font-weight: 600;
-            padding: 8px;
-            border-radius: 8px;
-            transition: all .18s ease;
-        }
-        
-        nav.desktop-nav a:hover {
-            color: var(--azul);
-            transform: translateY(-2px);
-        }
-        
-        .mobile-toggle {
-            display: none;
-            background: transparent;
-            border: 0;
-            padding: 10px;
-            border-radius: 12px;
-        }
-        
-        section {
-            padding-top: 24px;
-            padding-bottom: 24px;
-        }
-        
-        h2.section-title {
-            margin-top: 0;
-            margin-bottom: 8px;
-            font-size: 22px;
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-weight: 700;
-            color: var(--text);
-        }
-        
-        .hero {
-            padding-top: 24px;
-            padding-bottom: 24px;
-            display: grid;
-            grid-template-columns: 1fr 420px;
-            gap: 28px;
-            align-items: center;
-            position: relative;
-            overflow: visible;
-        }
-        
-        .hero-left {
-            max-width: 680px;
-        }
-        
-        .hero-left h1 {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: clamp(30px, 4.2vw, 44px);
-            line-height: 1.04;
-            margin: 0 0 12px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        .lead {
-            color: var(--muted);
-            font-size: 16px;
-            margin: 0 0 12px;
-        }
-        
-        .hero-cta {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 18px;
-            border-radius: 12px;
-            font-weight: 700;
-            border: 0;
-            cursor: pointer;
-            transition: transform .18s ease, box-shadow .18s ease;
-            min-height: 44px;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(90deg, var(--amarillo), #FFD96A);
-            color: #0A0A0A;
-            font-weight: 800;
-            padding: 14px 20px;
-            box-shadow: 0 16px 36px rgba(45,104,248,0.08);
-            border-radius: 12px;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 44px rgba(45,104,248,0.10);
-        }
-        
-        .btn-secondary {
-            border: 1px solid rgba(45,104,248,0.12);
-            background: transparent;
-            color: var(--azul);
-            padding: 11px 16px;
-            border-radius: 12px;
-        }
-        
-        .hero-right {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
-        .mockup-frame {
-            width: 360px;
-            border-radius: 18px;
-            padding: 18px;
-            background: linear-gradient(180deg, #fff, #FBFCFF);
-            box-shadow: var(--shadow-2);
-            transform: rotate(-2deg);
-            display: block;
-            transition: transform .28s ease, box-shadow .28s ease;
-        }
-        
-        .mockup-frame:hover {
-            transform: rotate(-1deg) translateY(-6px);
-            box-shadow: 0 26px 70px rgba(17,24,39,0.12);
-        }
-        
-        .mockup-inner {
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fff;
-            padding: 12px;
-        }
-        
-        .mockup-image {
-            aspect-ratio: 3/4;
-            width: 100%;
-            display: block;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-        
-        .gallery {
-            padding-top: 24px;
-            padding-bottom: 20px;
-        }
-        
-        .section-head {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 12px;
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-        
-        .card {
-            position: relative;
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(16,24,40,0.03);
-            transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
-            transform-origin: center;
-            will-change: transform;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card.elev-1 {
-            box-shadow: var(--shadow-1);
-        }
-        
-        .card:hover {
-            transform: translateY(-6px) scale(1.008);
-            box-shadow: var(--shadow-2);
-        }
-        
-        .thumb {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            aspect-ratio: 16/10;
-            background: #eee;
-        }
-        
-        .thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform .36s ease, filter .36s ease;
-        }
-        
-        .card:hover .thumb img {
-            transform: scale(1.04);
-        }
-        
-        .thumb::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 10px;
-            background: linear-gradient(180deg, rgba(255,255,255,0), rgba(4,6,8,0.04));
-            pointer-events: none;
-        }
-        
-        .tag {
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 12px;
-            background: linear-gradient(90deg, rgba(255,201,64,0.95), rgba(255,217,106,0.95));
-            font-weight: 700;
-            border: 1px solid rgba(0,0,0,0.06);
-            color: #111;
-        }
-        
-        .card h3 {
-            margin: 10px 0 6px 0;
-            font-size: 15px;
-            font-family: 'Poppins', 'Inter', sans-serif;
-        }
-        
-        .card p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 13px;
-        }
-        
-        .meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 12px;
-        }
-        
-        .price {
-            font-weight: 800;
-            color: var(--azul);
-        }
-        
-        #precios {
-            padding-top: 18px;
-            padding-bottom: 18px;
-            box-sizing: border-box;
-        }
-        
-        .plans-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            align-items: start;
-            overflow: visible;
-        }
-        
-        .plan-card {
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 12px;
-            box-shadow: var(--shadow-1);
-            border: 1px solid rgba(16,24,40,0.03);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            transition: transform .18s ease, box-shadow .18s ease, opacity .5s ease;
-            min-height: 0;
-            height: 100%;
-            position: relative;
-            overflow: visible;
-            z-index: 0;
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        
-        .plan-card.in {
-            opacity: 1;
-            transform: none;
-        }
-        
-        .plan-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-2);
-        }
-        
-        .plan-card.recommended {
-            box-shadow: var(--shadow-2);
-            border: 1px solid rgba(45,104,248,0.08);
-            background: linear-gradient(180deg, #FFFFFF, #FBFDFF);
-        }
-        
-        .plan-card > * {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .plan-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: linear-gradient(90deg, var(--amarillo), #FFD96A);
-            color: #111;
-            font-weight: 800;
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 12px;
-            box-shadow: 0 10px 30px rgba(45,104,248,0.12);
-            z-index: 9999;
-            pointer-events: none;
-        }
-        
-        .plan-title {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            margin: 8px 0 4px 0;
-        }
-        
-        .plan-sub {
-            color: var(--muted);
-            font-size: 13px;
-            margin: 0 0 8px 0;
-        }
-        
-        .plan-price {
-            font-weight: 800;
-            font-size: 20px;
-            color: var(--azul);
-            margin: 6px 0 10px 0;
-        }
-        
-        .plan-price small {
-            font-weight: 600;
-            font-size: 12px;
-            color: var(--muted);
-        }
-        
-        .plan-features {
-            margin: 0;
-            padding-left: 18px;
-            line-height: 1.6;
-            color: var(--muted);
-            font-size: 13px;
-        }
-        
-        .plan-features li {
-            margin-bottom: 6px;
-        }
-        
-        .plan-cta-row {
-            margin-top: auto;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        
-        .plan-cta {
-            padding: 10px 14px;
-            font-size: 13px;
-            border-radius: 12px;
-            font-weight: 800;
-            background: linear-gradient(90deg, var(--azul), var(--azul-2));
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(45,104,248,0.12);
-        }
-        
-        .compare-panel {
-            margin-top: 12px;
-            padding: 12px;
-            box-shadow: var(--shadow-1);
-            border-radius: 12px;
-            background: var(--card-bg);
-            border: 1px solid rgba(16,24,40,0.03);
-        }
-        
-        .compare-panel table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            color: var(--muted);
-        }
-        
-        .compare-panel th, .compare-panel td {
-            padding: 8px 8px;
-            text-align: left;
-            border-bottom: 1px solid rgba(16,24,40,0.03);
-        }
-        
-        .fade-up {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity .6s ease, transform .48s cubic-bezier(.2,.9,.2,1);
-            will-change: transform, opacity;
-        }
-        
-        .fade-up.in {
-            opacity: 1;
-            transform: none;
-        }
-        
-        .contact-modern {
-            padding-top: 24px;
-            padding-bottom: 24px;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 2fr 360px;
-            gap: 20px;
-            align-items: start;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 16px;
-        }
-        
-        .contact-left {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .contact-form-modern {
-            background: linear-gradient(180deg, #fff, #FBFCFF);
-            border-radius: 14px;
-            padding: 16px;
-            box-shadow: var(--shadow-1);
-            border: 1px solid rgba(16,24,40,0.04);
-        }
-        
-        .contact-form-modern .row {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        
-        .field {
-            position: relative;
-            display: block;
-            flex: 1;
-            min-width: 0;
-            margin-bottom: 0;
-        }
-        
-        .field.full {
-            width: 100%;
-        }
-        
-        .field input, .field textarea, .field select {
-            width: 100%;
-            padding: 14px 12px 12px;
-            border-radius: 10px;
-            border: 1px solid rgba(16,24,40,0.06);
-            background: transparent;
-            font-size: 14px;
-            font-family: inherit;
-            transition: box-shadow .18s ease, border-color .18s ease;
-        }
-        
-        .field textarea {
-            min-height: 110px;
-            resize: vertical;
-            padding-top: 18px;
-        }
-        
-        .field .label {
-            position: absolute;
-            left: 12px;
-            top: 12px;
-            transform-origin: left top;
-            pointer-events: none;
-            transition: all .16s ease;
-            color: var(--muted);
-            font-size: 13px;
-            background: transparent;
-            padding: 0 4px;
-        }
-        
-        .field input:focus + .label,
-        .field input:not(:placeholder-shown) + .label,
-        .field textarea:focus + .label,
-        .field textarea:not(:placeholder-shown) + .label {
-            transform: translateY(-12px) scale(.88);
-            color: var(--azul);
-            background: transparent;
-        }
-        
-        .field input::placeholder, .field textarea::placeholder {
-            color: transparent;
-        }
-        
-        .field select {
-            appearance: none;
-            padding-right: 36px;
-        }
-        
-        .field .assist {
-            display: block;
-            margin-top: 6px;
-            font-size: 12px;
-            color: var(--muted);
-        }
-        
-        .inline-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .btn-outline {
-            border: 1px solid rgba(16,24,40,0.08);
-            background: transparent;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-weight: 700;
-        }
-        
-        .btn {
-            font-weight: 800;
-            border-radius: 10px;
-            padding: 10px 14px;
-            cursor: pointer;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(90deg, var(--azul), var(--azul-2));
-            color: #fff;
-            box-shadow: 0 10px 30px rgba(45,104,248,0.12);
-            border: 0;
-        }
-        
-        .contact-right .aside-card-modern {
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 16px;
-            box-shadow: var(--shadow-1);
-            border: 1px solid rgba(16,24,40,0.03);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            height: 100%;
-        }
-        
-        .aside-top {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        
-        .badge {
-            align-self: flex-start;
-            background: linear-gradient(90deg, var(--amarillo), #FFD96A);
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-weight: 800;
-            font-size: 12px;
-            box-shadow: 0 8px 24px rgba(45,104,248,0.08);
-        }
-        
-        .quick-features {
-            list-style: none;
-            padding: 0;
-            margin: 6px 0 6px;
-            color: var(--muted);
-            font-size: 13px;
-        }
-        
-        .aside-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: auto;
-        }
-        
-        .btn-ghost {
-            background: transparent;
-            border: 1px solid rgba(16,24,40,0.06);
-            padding: 8px 12px;
-            border-radius: 10px;
-        }
-        
-        .contact-card {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px dashed rgba(16,24,40,0.04);
-            color: var(--muted);
-        }
-        
-        #contactToast {
-            position: fixed;
-            right: 18px;
-            bottom: 18px;
-            background: var(--azul);
-            color: #fff;
-            padding: 12px 16px;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(45,104,248,0.15);
-            z-index: 130;
-            display: none;
-        }
-        
-        input[aria-invalid="true"], textarea[aria-invalid="true"], select[aria-invalid="true"] {
-            border-color: #E11D48;
-            box-shadow: 0 6px 18px rgba(225,29,72,0.06);
-        }
-        
-        .form-status {
-            font-size: 13px;
-            color: var(--muted);
-        }
-        
-        footer {
-            padding: 22px 0 36px;
-            color: var(--muted);
-            border-top: 1px solid rgba(16,24,40,0.03);
-            margin-top: 16px;
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-right: 8px;
-        }
-        
-        .footer-social a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 34px;
-            height: 34px;
-            border-radius: 8px;
-            background: transparent;
-            border: 1px solid rgba(16,24,40,0.04);
-            transition: transform .12s ease, box-shadow .12s ease;
-        }
-        
-        .footer-social a:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-1);
-        }
-        
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-        }
-        
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(4,6,8,0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 28px;
-            z-index: 120;
-            backdrop-filter: blur(6px);
-        }
-        
-        .modal.show {
-            display: flex;
-        }
-        
-        .modal-card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 20px;
-            max-width: 880px;
-            width: 100%;
-            box-shadow: var(--shadow-2);
-            transform-origin: center;
-        }
-        
-        .close-btn {
-            position: absolute;
-            right: 22px;
-            top: 22px;
-            background: rgba(255,255,255,0.95);
-            border-radius: 10px;
-            padding: 8px;
-            border: 0;
-            cursor: pointer;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-        }
-        
-        .modal.show .modal-card {
-            animation: popIn .22s cubic-bezier(.2,.9,.2,1);
-        }
-        
-        @keyframes popIn {
-            from {
-                transform: translateY(10px) scale(.995);
-                opacity: 0;
-            }
-            to {
-                transform: none;
-                opacity: 1;
-            }
-        }
-        
-        .toast {
-            position: fixed;
-            right: 18px;
-            bottom: 18px;
-            background: var(--azul);
-            color: white;
-            padding: 12px 16px;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(45,104,248,0.15);
-            display: none;
-            z-index: 130;
-        }
-        
-        .toast.show {
-            display: block;
-            animation: pop .36s ease;
-        }
-        
-        @keyframes pop {
-            from {
-                transform: translateY(10px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        @media (max-width: 980px) {
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 18px;
-                padding: 20px 0;
-            }
-            
-            .hero-right {
-                order: 2;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-                padding: 0 8px;
-            }
-            
-            .contact-right {
-                order: 2;
-            }
-            
-            .grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            nav.desktop-nav {
-                display: none;
-            }
-            
-            .mobile-toggle {
-                display: inline-flex;
-            }
-            
-            .mockup-frame {
-                width: 300px;
-                margin: 0 auto;
-            }
-            
-            .plans-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            
-            .row {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 560px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .logo-img-wrap {
-                width: 120px;
-                height: 36px;
-            }
-            
-            .logo-text {
-                font-size: 18px;
-            }
-            
-            .hero-left h1 {
-                font-size: 28px;
-            }
-            
-            .btn {
-                min-height: 44px;
-            }
-            
-            .plans-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            
-            .footer-social a {
-                width: 30px;
-                height: 30px;
-            }
-            
-            .mockup-frame {
-                width: 280px;
-            }
-        }
-        
-        :focus {
-            outline: none;
-        }
-        
-        :focus-visible {
-            outline: 3px solid var(--focus);
-            outline-offset: 3px;
-            border-radius: 10px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invitea · Invitaciones Digitales</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <meta name="description" content="Invitea — Invitaciones digitales modernas y personalizadas. Diseños elegantes para bodas, cumpleaños y eventos especiales.">
+  <meta property="og:title" content="Invitea · Invitaciones Digitales">
+  <meta property="og:description" content="Invitaciones digitales modernas y personalizadas para bodas, cumpleaños y eventos.">
+  <meta property="og:image" content="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
+  <meta name="theme-color" content="#2D68F8">
+  <link rel="manifest" href="/manifest.json">
+
+  <style>
+    :root{
+      --azul: #2D68F8;
+      --azul-2: #4C8BFF;
+      --amarillo: #FFC940;
+      --bg: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --text: #0F1724;
+      --muted: #6B7280;
+      --radius: 14px;
+      --shadow-1: 0 8px 30px rgba(17,24,39,0.06);
+      --shadow-2: 0 18px 60px rgba(17,24,39,0.10);
+      --max-width: 1200px;
+      --gap: 20px;
+      --focus: rgba(45,104,248,0.28);
+      --section-vertical: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+      -webkit-text-size-adjust:100%;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;height:auto}
+
+    .container{
+      width:calc(100% - 32px);
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:0 16px;
+    }
+
+    .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+    .muted-small{ color:var(--muted); font-size:13px; }
+
+    header{
+      position:sticky;top:0;z-index:60;
+      background:linear-gradient(180deg, rgba(255,255,255,0.88), rgba(248,249,250,0.9));
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(16,24,40,0.03);
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:12px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-img-wrap{
+      width:150px;height:42px;border-radius:10px;
+      background:linear-gradient(135deg,var(--azul),var(--azul-2));
+      padding:4px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-1);
+    }
+    .logo-img-wrap img{width:100%;height:100%;object-fit:contain}
+
+    nav.desktop-nav{display:flex;gap:18px;align-items:center}
+    nav.desktop-nav a{color:var(--muted);font-weight:600;padding:8px;border-radius:8px;transition:all .18s ease}
+    nav.desktop-nav a:hover{color:var(--azul);transform:translateY(-2px)}
+    .mobile-toggle{display:none;background:transparent;border:0;padding:10px;border-radius:12px}
+
+    /* ======= Normalize section spacing ======= */
+    /* Make section spacing consistent across the site */
+    section { padding-top: 24px; padding-bottom: 24px; }
+    h2.section-title { margin-top: 0; margin-bottom: 8px; }
+
+    .hero{
+      /* keep slightly tighter than original */
+      padding-top: 24px;
+      padding-bottom: 24px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+      position:relative;
+      overflow:visible;
+    }
+    .hero-left{max-width:680px}
+    .eyebrow{display:inline-block;background:linear-gradient(90deg,var(--azul-2),var(--azul));color:white;padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;margin-bottom:12px}
+    .hero-left h1{
+      font-family:Poppins, Inter, sans-serif;
+      font-size:clamp(30px,4.2vw,44px);
+      line-height:1.04;margin:0 0 12px;font-weight:700;letter-spacing:-0.02em;
+    }
+    .lead{color:var(--muted);font-size:16px;margin:0 0 12px}
+    .hero-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;border:0;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;min-height:44px}
+    .btn-primary{background: linear-gradient(90deg, var(--amarillo), #FFD96A); color:#0A0A0A; font-weight:800; padding:14px 20px; box-shadow:0 16px 36px rgba(45,104,248,0.08); border-radius:12px;}
+    .btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 20px 44px rgba(45,104,248,0.10); }
+    .btn-secondary{ border:1px solid rgba(45,104,248,0.12); background:transparent; color:var(--azul); padding:11px 16px; border-radius:12px; }
+
+    .hero-right{display:flex;align-items:center;justify-content:center;position:relative}
+    .mockup-frame{
+      width:360px;border-radius:18px;padding:18px;background:linear-gradient(180deg,#fff,#FBFCFF);
+      box-shadow:var(--shadow-2);transform:rotate(-2deg);display:block;transition:transform .28s ease, box-shadow .28s ease;
+    }
+    .mockup-frame:hover{ transform: rotate(-1deg) translateY(-6px); box-shadow: 0 26px 70px rgba(17,24,39,0.12); }
+    .mockup-inner{border-radius:12px;overflow:hidden;background:#fff;padding:12px}
+    .mockup-image{aspect-ratio:3/4;width:100%;display:block;border-radius:10px;object-fit:cover}
+
+    .gallery{padding-top:24px;padding-bottom:20px}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:12px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{position:relative;background:var(--card-bg);border-radius:14px;padding:12px;overflow:hidden;border:1px solid rgba(16,24,40,0.03);transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s; transform-origin:center; will-change:transform; display:flex;flex-direction:column;}
+    .card.elev-1{ box-shadow: var(--shadow-1); }
+    .card:hover{ transform: translateY(-6px) scale(1.008); box-shadow: var(--shadow-2); }
+    .thumb{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:16/10;background:#eee}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .36s ease, filter .36s ease}
+    .card:hover .thumb img{transform:scale(1.04)}
+    .thumb::after{ content:"";position:absolute;inset:0;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0), rgba(4,6,8,0.04)); pointer-events:none; }
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;background:linear-gradient(90deg, rgba(255,201,64,0.95), rgba(255,217,106,0.95));font-weight:700;border:1px solid rgba(0,0,0,0.06);color:#111}
+    .card h3{margin:10px 0 6px 0;font-size:15px;font-family:Poppins, Inter, sans-serif}
+    .card p{margin:0;color:var(--muted);font-size:13px}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .price{font-weight:800;color:var(--azul)}
+
+    /* Contact / Pricing / Footer (original) base */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 340px;
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "contact-header contact-header"
+        "contact-form    contact-aside";
+      gap:20px;
+      padding:0; /* handled by section spacing */
+      align-items:stretch;
+    }
+    .contact-form{ grid-area: contact-form; background:var(--card-bg); padding:16px; border-radius:14px; box-shadow:var(--shadow-1); border:1px solid rgba(16,24,40,0.03); display:flex; flex-direction:column; min-height:220px; }
+    .contact-aside{ grid-area: contact-aside; }
+    .contact-aside .aside-card{ background:var(--card-bg); padding:16px; border-radius:14px; box-shadow:var(--shadow-1); border:1px solid rgba(16,24,40,0.03); display:flex; flex-direction:column; justify-content:space-between; min-height:220px; }
+
+    .field{display:flex;flex-direction:column;margin-bottom:12px}
+    label{font-size:13px;margin-bottom:6px;color:var(--muted)}
+    input,textarea,select{border-radius:10px;border:1px solid rgba(16,24,40,0.06);padding:12px;font-size:14px;background:linear-gradient(180deg,#fff,#FBFCFF);font-family:inherit}
+    textarea{min-height:120px;resize:vertical}
+    .form-actions{display:flex;gap:12px;align-items:center}
+    .form-status{margin-top:10px;font-size:14px;color:var(--muted)}
+
+    footer{padding:22px 0 36px;color:var(--muted);border-top:1px solid rgba(16,24,40,0.03);margin-top:16px}
+
+    .modal{position:fixed;inset:0;background:rgba(4,6,8,0.6);display:none;align-items:center;justify-content:center;padding:28px;z-index:120;backdrop-filter: blur(6px);}    .modal.show{display:flex}
+    .modal-card{background:#fff;border-radius:14px;padding:20px;max-width:880px;width:100%;box-shadow:var(--shadow-2);transform-origin:center}
+    .close-btn{position:absolute;right:22px;top:22px;background:rgba(255,255,255,0.95);border-radius:10px;padding:8px;border:0;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .modal.show .modal-card{ animation: popIn .22s cubic-bezier(.2,.9,.2,1); }
+    @keyframes popIn { from { transform: translateY(10px) scale(.995); opacity:0 } to { transform:none; opacity:1 } }
+
+    .toast{position:fixed;right:18px;bottom:18px;background:var(--azul);color:white;padding:12px 16px;border-radius:10px;box-shadow:0 10px 40px rgba(45,104,248,0.15);display:none;z-index:130}
+    .toast.show{display:block;animation:pop .36s ease}
+    @keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+    #precios { padding-top: 18px; padding-bottom: 18px; box-sizing: border-box; }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-items: start;
+      overflow: visible;
+    }
+
+    .plan-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: var(--shadow-1);
+      border: 1px solid rgba(16,24,40,0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform .18s ease, box-shadow .18s ease, opacity .5s ease;
+      min-height: 0;
+      height: 100%;
+      position: relative;
+      overflow: visible;
+      z-index: 0;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .plan-card.in { opacity: 1; transform: none; }
+    .plan-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-2); }
+
+    .plan-card.recommended {
+      box-shadow: var(--shadow-2);
+      border: 1px solid rgba(45,104,248,0.08);
+      background: linear-gradient(180deg, #FFFFFF, #FBFDFF);
+    }
+
+    .plan-card > * { position: relative; z-index: 1; }
+
+    .plan-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: linear-gradient(90deg,var(--amarillo),#FFD96A);
+      color: #111;
+      font-weight:800;
+      padding:6px 10px;
+      border-radius: 999px;
+      font-size:12px;
+      box-shadow: 0 10px 30px rgba(45,104,248,0.12);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .plan-title{ font-family:Poppins, Inter, sans-serif; font-size:15px; font-weight:700; margin:8px 0 4px 0; }
+    .plan-sub{ color:var(--muted); font-size:13px; margin:0 0 8px 0; }
+    .plan-price{ font-weight:800; font-size:20px; color:var(--azul); margin:6px 0 10px 0; }
+    .plan-price small{ font-weight:600; font-size:12px; color:var(--muted); }
+    .plan-features{ margin:0; padding-left:18px; line-height:1.6; color:var(--muted); font-size:13px; }
+    .plan-features li{ margin-bottom:6px; }
+    .plan-cta-row{ margin-top:auto; display:flex; gap:10px; align-items:center; }
+    .plan-cta{ padding:10px 14px; font-size:13px; border-radius:12px; font-weight:800; background: linear-gradient(90deg,var(--azul),var(--azul-2)); color:#fff; border:none; cursor:pointer; box-shadow:0 10px 30px rgba(45,104,248,0.12); }
+
+    .compare-panel{ margin-top:12px; padding:12px; box-shadow:var(--shadow-1); border-radius:12px; background:var(--card-bg); border:1px solid rgba(16,24,40,0.03); }
+    .compare-panel table{ width:100%; border-collapse:collapse; font-size:13px; color:var(--muted); }
+    .compare-panel th, .compare-panel td{ padding:8px 8px; text-align:left; border-bottom:1px solid rgba(16,24,40,0.03); }
+
+    .fade-up{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .48s cubic-bezier(.2,.9,.2,1);will-change:transform,opacity}
+    .fade-up.in{opacity:1;transform:none}
+
+    h2{ margin:0 0 8px; }
+    h3{ margin:0 0 6px; }
+
+    /* ======= HOMOGENEIZAR TITULOS H2 ======= */
+    .section-title {
+      font-size:22px;
+      margin:0 0 8px;
+      font-family:Poppins, Inter, sans-serif;
+      font-weight:700;
+      color:var(--text);
+    }
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:18px;padding:20px 0}
+      .hero-right{order:2}
+      .contact{ grid-template-columns: 1fr; grid-template-areas: "contact-header" "contact-form" "contact-aside"; }
+      .grid{grid-template-columns:repeat(2,1fr)}
+      nav.desktop-nav{display:none}
+      .mobile-toggle{display:inline-flex}
+      .mockup-frame{ display:none; }
+      .plans-grid{ grid-template-columns: 1fr 1fr; gap:10px; }
+    }
+    @media (max-width:560px){
+      .grid{grid-template-columns:1fr}
+      .logo-img-wrap{width:120px;height:36px}
+      .hero-left h1{font-size:28px}
+      .btn{min-height:44px}
+      .plans-grid{ grid-template-columns:1fr; gap:10px; }
+    }
+
+    :focus{outline:none}
+    :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
+
+    /* =========================
+       Rediseño: sección Contacto
+       ========================= */
+    .contact-modern { /* section spacing handled by section{} */ }
+    .contact-grid { display:grid; grid-template-columns: 2fr 360px; gap:20px; align-items:start; max-width:var(--max-width); margin:0 auto; padding:0 16px; }
+    .contact-left { display:flex; flex-direction:column; gap:10px; }
+    .contact-left h2 { font-size:22px; margin:0 0 6px; font-family:Poppins, Inter, sans-serif; }
+
+    /* Form */
+    .contact-form-modern { background:linear-gradient(180deg,#fff,#FBFCFF); border-radius:14px; padding:16px; box-shadow:var(--shadow-1); border:1px solid rgba(16,24,40,0.04); }
+    .contact-form-modern .row { display:flex; gap:12px; margin-bottom:12px; }
+    .field { position:relative; display:block; flex:1; min-width:0; margin-bottom:0; }
+    .field.full { width:100%; }
+    .field input, .field textarea, .field select {
+      width:100%; padding:14px 12px 12px; border-radius:10px; border:1px solid rgba(16,24,40,0.06);
+      background:transparent; font-size:14px; font-family:inherit;
+      transition: box-shadow .18s ease, border-color .18s ease;
+    }
+    .field textarea { min-height:110px; resize:vertical; padding-top:18px; }
+
+    /* Floating label */
+    .field .label {
+      position:absolute; left:12px; top:12px; transform-origin:left top; pointer-events:none;
+      transition: all .16s ease; color:var(--muted); font-size:13px; background:transparent; padding:0 4px;
+    }
+    .field input:focus + .label,
+    .field input:not(:placeholder-shown) + .label,
+    .field textarea:focus + .label,
+    .field textarea:not(:placeholder-shown) + .label {
+      transform: translateY(-12px) scale(.88); color:var(--azul); background:transparent;
+    }
+
+    /* placeholder trick: keep placeholder empty to allow :placeholder-shown check */
+    .field input::placeholder, .field textarea::placeholder { color:transparent; }
+    .field select { appearance:none; padding-right:36px; }
+
+    /* assist text */
+    .field .assist { display:block; margin-top:6px; font-size:12px; color:var(--muted); }
+
+    /* Controls */
+    .inline-controls { display:flex; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap; }
+    .btn-outline { border:1px solid rgba(16,24,40,0.08); background:transparent; padding:10px 14px; border-radius:10px; font-weight:700; }
+    .btn { font-weight:800; border-radius:10px; padding:10px 14px; cursor:pointer; }
+    .btn-primary { background: linear-gradient(90deg,var(--azul),var(--azul-2)); color:#fff; box-shadow:0 10px 30px rgba(45,104,248,0.12); border:0; }
+
+    /* Aside */
+    .contact-right .aside-card-modern { background:var(--card-bg); border-radius:14px; padding:16px; box-shadow:var(--shadow-1); border:1px solid rgba(16,24,40,0.03); display:flex; flex-direction:column; gap:12px; height:100%; }
+    .aside-top { display:flex; flex-direction:column; gap:6px; }
+    .badge { align-self:flex-start; background:linear-gradient(90deg,var(--amarillo),#FFD96A); padding:6px 10px; border-radius:999px; font-weight:800; font-size:12px; box-shadow:0 8px 24px rgba(45,104,248,0.08); }
+    .quick-features { list-style:none; padding:0; margin:6px 0 6px; color:var(--muted); font-size:13px; }
+    .aside-actions { display:flex; gap:10px; margin-top:auto; }
+    .btn-ghost { background:transparent; border:1px solid rgba(16,24,40,0.06); padding:8px 12px; border-radius:10px; }
+    .contact-card { margin-top:12px; padding-top:12px; border-top:1px dashed rgba(16,24,40,0.04); color:var(--muted); }
+
+    /* toast */
+    #contactToast { position:fixed; right:18px; bottom:18px; background:var(--azul); color:#fff; padding:12px 16px; border-radius:10px; box-shadow:0 10px 40px rgba(45,104,248,0.15); z-index:130; display:none; }
+
+    /* validation visuals */
+    input[aria-invalid="true"], textarea[aria-invalid="true"], select[aria-invalid="true"] { border-color:#E11D48; box-shadow:0 6px 18px rgba(225,29,72,0.06); }
+    .form-status { font-size:13px; color:var(--muted); }
+
+    /* Small screens adjustments */
+    @media (max-width:980px){
+      .contact-grid { grid-template-columns: 1fr; padding:0 8px; }
+      .contact-right { order:2; }
+      .row { flex-direction:column; }
+      .hero{gap:18px}
+    }
+
+    /* ======= Corrección: asegurar mismo ancho para #contacto ======= */
+    /* Esto se añadió para que la sección contacto tenga idéntico comportamiento que las demás secciones */
+    #contacto .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+      box-sizing: border-box;
+    }
+    @media (max-width:980px){
+      #contacto .container { padding: 0 8px; }
+    }
+
+    /* Footer social icons style */
+    .footer-social {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-right:8px;
+    }
+    .footer-social a {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:34px;
+      height:34px;
+      border-radius:8px;
+      background:transparent;
+      border:1px solid rgba(16,24,40,0.04);
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .footer-social a:hover { transform:translateY(-3px); box-shadow:var(--shadow-1); }
+    .footer-brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+    }
+
+    @media (max-width:560px){
+      .footer-social a { width:30px; height:30px; }
+    }
+  </style>
 </head>
 <body>
-    <noscript>
-        <div style="background:#fff;padding:12px;border-bottom:1px solid #eee;text-align:center">
-            JavaScript desactivado. Contacto: <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>
+
+  <noscript>
+    <div style="background:#fff;padding:12px;border-bottom:1px solid #eee;text-align:center">
+      JavaScript desactivado. Contacto: <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>
+    </div>
+  </noscript>
+
+  <a href="#maincontent" class="sr-only" id="skip">Saltar al contenido</a>
+
+  <header>
+    <div class="container header-inner" role="navigation" aria-label="Navegación principal">
+      <div class="logo">
+        <div class="logo-img-wrap">
+          <img id="brandImg" src="https://i.ibb.co/1Qf3kqZ/invitea-logo.png" alt="Invitea" width="150" height="42">
         </div>
-    </noscript>
+      </div>
 
-    <a href="#maincontent" class="sr-only" id="skip">Saltar al contenido</a>
+      <nav class="desktop-nav" aria-label="Enlaces principales">
+        <a href="#galeria">Galería</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
 
-    <header>
-        <div class="container header-inner" role="navigation" aria-label="Navegación principal">
-            <div class="logo">
-                <div class="logo-img-wrap">
-                    <div class="logo-text">Invitea</div>
-                </div>
-            </div>
-
-            <nav class="desktop-nav" aria-label="Enlaces principales">
-                <a href="#galeria">Galería</a>
-                <a href="#precios">Precios</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
-
-            <button class="mobile-toggle" id="btnMobile" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                    <path d="M4 7h16M4 12h16M4 17h16" stroke="#0F1724" stroke-width="1.6" stroke-linecap="round"/>
-                </svg>
-            </button>
-        </div>
-
-        <div id="mobileMenu" role="navigation" aria-label="Menú móvil" aria-hidden="true" style="display:none;padding:10px 16px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(248,249,250,0.98));border-top:1px solid rgba(16,24,40,0.03)">
-            <div style="display:flex;flex-direction:column;gap:8px">
-                <a href="#galeria">Galería</a>
-                <a href="#precios">Precios</a>
-                <a href="#contacto">Contacto</a>
-            </div>
-        </div>
-    </header>
-
-    <main id="maincontent">
-        <div class="container">
-            <section class="hero" aria-labelledby="heroTitle">
-                <div class="hero-left fade-up in">
-                    <h1 id="heroTitle">Invitaciones digitales elegantes que cuentan tu historia</h1>
-                    <p class="lead">Plantillas editables, RSVP integrado y entrega digital inmediata. Perfectas para bodas, cumpleaños y eventos corporativos.</p>
-
-                    <div class="hero-cta" role="region" aria-label="Llamadas a la acción">
-                        <a class="btn btn-primary" href="#contacto" id="ctaPrimary">Personalizar ahora</a>
-                        <a class="btn btn-secondary" href="#galeria">Ver galería</a>
-                    </div>
-                </div>
-
-                <div class="hero-right fade-up in">
-                    <div class="mockup-frame elev-2">
-                        <div class="mockup-inner" role="img" aria-label="Mockup de invitación">
-                            <img class="mockup-image" src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=720&auto=format&fit=crop"
-                                alt="Mockup invitación" width="720" height="960" loading="lazy">
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="galeria" class="gallery" aria-labelledby="galeriaTitle">
-                <div class="section-head">
-                    <h2 id="galeriaTitle" class="section-title">Galería de invitaciones</h2>
-                </div>
-
-                <div class="grid" id="catalog" aria-live="polite">
-                    <article class="card elev-1 fade-up" data-title="Boda minimal" aria-labelledby="card1Title">
-                        <div class="thumb" role="img" aria-label="Invitación boda minimal">
-                            <img loading="lazy" alt="Invitación boda minimal" src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=800&auto=format&fit=crop" width="800" height="500">
-                        </div>
-                        <div style="margin-top:10px">
-                            <h3 id="card1Title">Boda Minimal</h3>
-                            <p>Tipografía elegante, paleta suave y RSVP integrado.</p>
-                            <div class="meta">
-                                <div>
-                                    <button type="button" class="btn btn-secondary previewBtn" data-src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=1200&auto=format&fit=crop" aria-haspopup="dialog" aria-controls="modal">Ver</button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="card elev-1 fade-up" data-title="Cumpleaños color" data-type="cumple">
-                        <div class="thumb">
-                            <img loading="lazy" alt="Invitación cumpleaños color" src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=800&auto=format&fit=crop" width="800" height="500">
-                        </div>
-                        <div style="margin-top:10px">
-                            <h3>Fiesta Color</h3>
-                            <p>Vibrante y alegre, ideal para todas las edades.</p>
-                            <div class="meta">
-                                <div><button type="button" class="btn btn-secondary previewBtn" data-src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=1200&auto=format&fit=crop" aria-haspopup="dialog" aria-controls="modal">Ver</button></div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="card elev-1 fade-up" data-title="Baby shower clásico" data-type="baby">
-                        <div class="thumb">
-                            <img loading="lazy" alt="Invitación baby shower" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop" width="800" height="500">
-                        </div>
-                        <div style="margin-top:10px">
-                            <h3>Baby Clásico</h3>
-                            <p>Diseño tierno con iconografía suave y RSVP.</p>
-                            <div class="meta">
-                                <div><button type="button" class="btn btn-secondary previewBtn" data-src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" aria-haspopup="dialog" aria-controls="modal">Ver</button></div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section id="precios" aria-labelledby="preciosTitle">
-                <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px">
-                    <h2 id="preciosTitle" class="section-title" style="margin:0">Planes y paquetes</h2>
-                </div>
-
-                <div class="plans-grid" role="list" aria-label="Planes y precios">
-                    <article class="plan-card fade-up" role="listitem" aria-labelledby="plan-basic">
-                        <header>
-                            <h3 id="plan-basic" class="plan-title">Básico</h3>
-                            <p class="plan-sub">Perfecto para eventos íntimos</p>
-                        </header>
-
-                        <div class="plan-price" aria-hidden="true">$499 MXN <small>/ pago único</small></div>
-
-                        <ul class="plan-features" aria-hidden="false">
-                            <li>1 diseño editable</li>
-                            <li>Texto y tipografía personalizable</li>
-                            <li>Entrega digital en JPG/PNG</li>
-                        </ul>
-
-                        <div class="plan-cta-row">
-                            <button type="button" class="btn plan-cta" data-plan="Básico" data-price="499 MXN" aria-label="Comprar plan Básico">Comprar</button>
-                        </div>
-                    </article>
-
-                    <article class="plan-card recommended fade-up" role="listitem" aria-labelledby="plan-standard">
-                        <div class="plan-badge" aria-hidden="true">Recomendado</div>
-
-                        <header>
-                            <h3 id="plan-standard" class="plan-title">Estándar</h3>
-                            <p class="plan-sub">Nuestro paquete más elegido</p>
-                        </header>
-
-                        <div class="plan-price" aria-hidden="true">$899 MXN <small>/ pago único</small></div>
-
-                        <ul class="plan-features">
-                            <li>2 diseños + 2 revisiones</li>
-                            <li>RSVP integrado y mapa</li>
-                            <li>Formato optimizado para redes</li>
-                            <li>Entrega en JPG, PNG y PDF</li>
-                        </ul>
-
-                        <div class="plan-cta-row">
-                            <button type="button" class="btn plan-cta" data-plan="Estándar" data-price="899 MXN" aria-label="Comprar plan Estándar">Comprar</button>
-                        </div>
-                    </article>
-
-                    <article class="plan-card fade-up" role="listitem" aria-labelledby="plan-premium">
-                        <header>
-                            <h3 id="plan-premium" class="plan-title">Premium</h3>
-                            <p class="plan-sub">Para eventos con máxima personalización</p>
-                        </header>
-
-                        <div class="plan-price" aria-hidden="true">$1,199 MXN<small>/ pago único</small></div>
-
-                        <ul class="plan-features">
-                            <li>Diseños ilimitados</li>
-                            <li>Integración con e-mail y WhatsApp</li>
-                            <li>Soporte prioritario 24/7</li>
-                            <li>Archivos listos para imprimir</li>
-                        </ul>
-
-                        <div class="plan-cta-row">
-                            <button type="button" class="btn plan-cta" data-plan="Premium" data-price="1,199 MXN" aria-label="Comprar plan Premium">Comprar</button>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="compare-panel" aria-hidden="false">
-                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
-                        <strong style="margin-right:auto">Comparar características</strong>
-                    </div>
-
-                    <table role="table" aria-label="Comparación de planes">
-                        <thead>
-                            <tr>
-                                <th>Características</th>
-                                <th>Básico</th>
-                                <th>Estándar</th>
-                                <th>Premium</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Diseños incluidos</td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>Ilimitado</td>
-                            </tr>
-                            <tr>
-                                <td>RSVP integrado</td>
-                                <td>—</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                            </tr>
-                            <tr>
-                                <td>Formato redes</td>
-                                <td>—</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                            </tr>
-                            <tr>
-                                <td>Soporte prioritario</td>
-                                <td>—</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                            </tr>
-                            <tr>
-                                <td>Entregas imprimibles</td>
-                                <td>—</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </div>
-
-        <section id="contacto" class="contact-modern" aria-labelledby="contactoTitle">
-            <div class="container">
-                <div class="contact-grid">
-                    <div style="grid-column: 1 / -1; margin:0 0 6px 0;">
-                        <h2 id="contactoTitle" class="section-title">Personaliza tu invitación</h2>
-                    </div>
-
-                    <div class="contact-left">
-                        <form id="contactForm" class="contact-form-modern" novalidate aria-describedby="formHelp" autocomplete="on">
-                            <div class="row" style="margin-bottom:12px">
-                                <label class="field">
-                                    <input id="name" name="name" type="text" placeholder=" " required autocomplete="name" />
-                                    <span class="label">Nombre</span>
-                                </label>
-
-                                <label class="field">
-                                    <input id="email" name="email" type="email" placeholder=" " required autocomplete="email" />
-                                    <span class="label">Correo</span>
-                                </label>
-
-                                <label class="field">
-                                    <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="55 1234 5678" required autocomplete="tel" />
-                                    <span class="label">Teléfono</span>
-                                </label>
-                            </div>
-
-                            <div class="row" style="margin-bottom:12px">
-                                <label class="field select-field">
-                                    <select id="type" name="type" required>
-                                        <option value="" disabled selected>Selecciona tipo de evento</option>
-                                        <option value="Boda">Boda</option>
-                                        <option value="Cumpleanios">Cumpleaños</option>
-                                        <option value="BabyShower">Baby shower</option>
-                                        <option value="Corporativo">Corporativo</option>
-                                        <option value="Otro">Otro</option>
-                                    </select>
-                                </label>
-
-                                <label class="field">
-                                    <input id="date" name="date" type="text" placeholder="dd/mm/aaaa" required aria-describedby="dateHelp" />
-                                    <span class="label">Fecha del evento</span>
-                                </label>
-                            </div>
-
-                            <label class="field full" style="margin-bottom:8px">
-                                <textarea id="message" name="message" placeholder=" " required></textarea>
-                                <span class="label">Mensaje / Detalles</span>
-                            </label>
-
-                            <input type="hidden" id="selectedPlan" name="selectedPlan" value="">
-
-                            <div class="inline-controls" role="group" aria-label="Acciones del formulario">
-                                <button class="btn btn-primary" type="submit" id="submitBtn">Enviar solicitud</button>
-
-                                <button type="button" class="btn btn-outline" id="whatsappBtn" data-phone="5215512345678" aria-label="Contactar por WhatsApp">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="margin-right:8px">
-                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.199.297-.768.966-.94 1.163-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.617-.92-2.23-.242-.579-.487-.5-.672-.51l-.573-.01c-.199 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487  .709.306 1.26.489 1.692.626.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="#0F1724"/>
-                                    </svg>
-                                    WhatsApp
-                                </button>
-
-                                <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
-                            </div>
-
-                            <div id="formHelp" class="muted-small" style="margin-top:10px">
-                                Respuesta en <strong>24–48 hrs</strong>. También puedes escribir directamente a <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>.
-                            </div>
-                        </form>
-                    </div>
-
-                    <aside class="contact-right" aria-hidden="false">
-                        <div class="aside-card-modern">
-                            <div class="aside-top">
-                                <h3>¿Listo para empezar?</h3>
-                                <p class="muted-small">Elige un plan en la sección de precios o cuéntanos tu idea y te proponemos 2 opciones en 48 horas.</p>
-                            </div>
-
-                            <div class="aside-actions">
-                                <a class="btn btn-primary" href="#precios" aria-label="Ver planes">Ver planes</a>
-                                <button id="quickSample" class="btn btn-secondary" type="button" aria-label="Solicitar muestra">Solicitar muestra</button>
-                            </div>
-
-                            <div class="contact-card">
-                                <div><strong>Contacto</strong></div>
-                                <div class="muted-small">invitea.design@gmail.com</div>
-                                <div style="margin-top:8px"><a href="tel:+5215512345678" class="muted-small">+52 1 55 1234 5678</a></div>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-
-            <div id="contactToast" role="status" aria-live="polite" aria-atomic="true"></div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-            <div style="display:flex;gap:12px;align-items:center">
-                <div class="footer-brand" style="font-weight:700">Invitea</div>
-                <div class="footer-social" aria-hidden="false">
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Invitea">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <rect x="3" y="3" width="18" height="18" rx="5" stroke="#0F1724" stroke-width="1.2" fill="none"></rect>
-                            <path d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6z" stroke="#0F1724" stroke-width="1.2" fill="none"></path>
-                            <circle cx="17.5" cy="6.5" r="0.6" fill="#0F1724"></circle>
-                        </svg>
-                    </a>
-
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Invitea">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <path d="M15 8.5h1.8V5.8H15c-1.6 0-2.8 1-2.8 2.6v1.1H11v2.3h1.2V20h2.6v-7.5H15z" fill="#0F1724"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div style="text-align:right;color:var(--muted);font-size:14px">
-                <div>© <span id="year"></span> Invitea — Todos los derechos reservados</div>
-                <div><a href="#contacto" style="color:var(--azul)">Contacto</a> · <a href="mailto:invitea.design@gmail.com" style="color:var(--muted)">invitea.design@gmail.com</a></div>
-            </div>
-        </div>
-    </footer>
-
-    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle" tabindex="-1">
-        <div class="modal-card" role="document" aria-label="Vista previa de invitación">
-            <button type="button" class="close-btn" id="modalClose" aria-label="Cerrar vista previa">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M6 6l12 12M6 18L18 6" stroke="#0F1724" stroke-width="1.4"/>
-                </svg>
-            </button>
-            <div class="modal-grid">
-                <div style="min-height:320px;overflow:hidden;border-radius:8px">
-                    <img id="modalImage" alt="Vista previa invitación" src="" width="720" height="480" style="width:100%;height:auto;object-fit:cover;border-radius:8px">
-                </div>
-                <aside style="padding:6px 2px;display:flex;flex-direction:column;gap:12px">
-                    <h3 id="modalTitle">Invitación</h3>
-                    <p id="modalDesc" class="muted-small" style="margin-top:0">Descripción del diseño seleccionado.</p>
-                </aside>
-            </div>
-        </div>
+      <button class="mobile-toggle" id="btnMobile" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" stroke="#0F1724" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
     </div>
 
-    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">Mensaje enviado</div>
+    <div id="mobileMenu" role="navigation" aria-label="Menú móvil" aria-hidden="true" style="display:none;padding:10px 16px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(248,249,250,0.98));border-top:1px solid rgba(16,24,40,0.03)">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <a href="#galeria">Galería</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </header>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
-    <script src="https://unpkg.com/wicg-inert@3.0.0/dist/inert.min.js" defer></script>
+  <main id="maincontent">
+    <div class="container">
 
-    <!-- Firebase SDK -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-left fade-up in">
+          <h1 id="heroTitle">Invitaciones digitales elegantes que cuentan tu historia</h1>
+          <p class="lead">Plantillas editables, RSVP integrado y entrega digital inmediata. Perfectas para bodas, cumpleaños y eventos corporativos.</p>
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCTh8kPdvu-6Z5_cckNts22VrhdUTLVspM",
-            authDomain: "invitea-f7331.firebaseapp.com",
-            projectId: "invitea-f7331",
-            storageBucket: "invitea-f7331.firebasestorage.app",
-            messagingSenderId: "145115727672",
-            appId: "1:145115727672:web:d1d89c20bf946b9e2663cd",
-            measurementId: "G-8JS1MDZVGQ"
-        };
+          <div class="hero-cta" role="region" aria-label="Llamadas a la acción">
+            <a class="btn btn-primary" href="#contacto" id="ctaPrimary">Personalizar ahora</a>
+            <a class="btn btn-secondary" href="#galeria">Ver galería</a>
+          </div>
+        </div>
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        <div class="hero-right fade-up in" aria-hidden="true">
+          <div class="mockup-frame elev-2" aria-hidden="true">
+            <div class="mockup-inner" role="img" aria-label="Mockup de invitación">
+              <img class="mockup-image" src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=720&auto=format&fit=crop"
+                alt="Mockup invitación" width="720" height="960">
+            </div>
+          </div>
+        </div>
+      </section>
 
-        // Función para guardar en Firestore
-        window.saveToFirestore = async function(formData) {
-            try {
-                const docRef = await addDoc(collection(db, "contact_requests"), {
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
-                    type: formData.type,
-                    date: formData.date,
-                    message: formData.message,
-                    selectedPlan: formData.selectedPlan,
-                    timestamp: serverTimestamp(),
-                    userAgent: navigator.userAgent,
-                    source: 'website'
-                });
-                console.log("Document written with ID: ", docRef.id);
-                return { success: true, id: docRef.id };
-            } catch (error) {
-                console.error("Error adding document: ", error);
-                return { success: false, error: error.message };
-            }
-        };
-    </script>
+      <section id="galeria" class="gallery" aria-labelledby="galeriaTitle">
+        <div class="section-head">
+          <h2 id="galeriaTitle" class="section-title">Galería de invitaciones</h2>
+        </div>
 
-    <script>
-        // Año actual en el footer
-        document.getElementById('year').textContent = new Date().getFullYear();
+        <div class="grid" id="catalog" aria-live="polite">
+          <article class="card elev-1 fade-up" data-title="Boda minimal" aria-labelledby="card1Title">
+            <div class="thumb" role="img" aria-label="Invitación boda minimal">
+              <img loading="lazy" alt="Invitación boda minimal" src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=800&auto=format&fit=crop" width="800" height="500">
+            </div>
+            <div style="margin-top:10px">
+              <h3 id="card1Title">Boda Minimal</h3>
+              <p>Tipografía elegante, paleta suave y RSVP integrado.</p>
+              <div class="meta">
+                <div>
+                  <button type="button" class="btn btn-secondary previewBtn" data-src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=1200&auto=format&fit=crop" aria-haspopup="dialog" aria-controls="modal">Ver</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card elev-1 fade-up" data-title="Cumpleaños color" data-type="cumple">
+            <div class="thumb">
+              <img loading="lazy" alt="Invitación cumpleaños color" src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=800&auto=format&fit=crop" width="800" height="500">
+            </div>
+            <div style="margin-top:10px">
+              <h3>Fiesta Color</h3>
+              <p>Vibrante y alegre, ideal para todas las edades.</p>
+              <div class="meta">
+                <div><button type="button" class="btn btn-secondary previewBtn" data-src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=1200&auto=format&fit=crop" aria-haspopup="dialog" aria-controls="modal">Ver</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card elev-1 fade-up" data-title="Baby shower clásico" data-type="baby">
+            <div class="thumb">
+              <img loading="lazy" alt="Invitación baby shower" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop" width="800" height="500">
+            </div>
+            <div style="margin-top:10px">
+              <h3>Baby Clásico</h3>
+              <p>Diseño tierno con iconografía suave y RSVP.</p>
+              <div class="meta">
+                <div><button type="button" class="btn btn-secondary previewBtn" data-src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" aria-haspopup="dialog" aria-controls="modal">Ver</button></div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="precios" aria-labelledby="preciosTitle">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px">
+          <h2 id="preciosTitle" class="section-title" style="margin:0">Planes y paquetes</h2>
+        </div>
+
+        <div class="plans-grid" role="list" aria-label="Planes y precios">
+          <article class="plan-card fade-up" role="listitem" aria-labelledby="plan-basic">
+            <header>
+              <h3 id="plan-basic" class="plan-title">Básico</h3>
+              <p class="plan-sub">Perfecto para eventos íntimos</p>
+            </header>
+
+            <div class="plan-price" aria-hidden="true">$499 MXN <small>/ pago único</small></div>
+
+            <ul class="plan-features" aria-hidden="false">
+              <li>1 diseño editable</li>
+              <li>Texto y tipografía personalizable</li>
+              <li>Entrega digital en JPG/PNG</li>
+            </ul>
+
+            <div class="plan-cta-row">
+              <button type="button" class="btn plan-cta" data-plan="Básico" data-price="499 MXN" aria-label="Comprar plan Básico">Comprar</button>
+            </div>
+          </article>
+
+          <article class="plan-card recommended fade-up" role="listitem" aria-labelledby="plan-standard">
+            <div class="plan-badge" aria-hidden="true">Recomendado</div>
+
+            <header>
+              <h3 id="plan-standard" class="plan-title">Estándar</h3>
+              <p class="plan-sub">Nuestro paquete más elegido</p>
+            </header>
+
+            <div class="plan-price" aria-hidden="true">$899 MXN <small>/ pago único</small></div>
+
+            <ul class="plan-features">
+              <li>2 diseños + 2 revisiones</li>
+              <li>RSVP integrado y mapa</li>
+              <li>Formato optimizado para redes</li>
+              <li>Entrega en JPG, PNG y PDF</li>
+            </ul>
+
+            <div class="plan-cta-row">
+              <button type="button" class="btn plan-cta" data-plan="Estándar" data-price="899 MXN" aria-label="Comprar plan Estándar">Comprar</button>
+            </div>
+          </article>
+
+          <article class="plan-card fade-up" role="listitem" aria-labelledby="plan-premium">
+            <header>
+              <h3 id="plan-premium" class="plan-title">Premium</h3>
+              <p class="plan-sub">Para eventos con máxima personalización</p>
+            </header>
+
+            <div class="plan-price" aria-hidden="true">$1,199 MXN<small>/ pago único</small></div>
+
+            <ul class="plan-features">
+              <li>Diseños ilimitados</li>
+              <li>Integración con e-mail y WhatsApp</li>
+              <li>Soporte prioritario 24/7</li>
+              <li>Archivos listos para imprimir</li>
+            </ul>
+
+            <div class="plan-cta-row">
+              <button type="button" class="btn plan-cta" data-plan="Premium" data-price="1,199 MXN" aria-label="Comprar plan Premium">Comprar</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="compare-panel" aria-hidden="false">
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+            <strong style="margin-right:auto">Comparar características</strong>
+          </div>
+
+          <table role="table" aria-label="Comparación de planes">
+            <thead>
+              <tr>
+                <th>Características</th>
+                <th>Básico</th>
+                <th>Estándar</th>
+                <th>Premium</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Diseños incluidos</td>
+                <td>1</td>
+                <td>2</td>
+                <td>Ilimitado</td>
+              </tr>
+              <tr>
+                <td>RSVP integrado</td>
+                <td>—</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Formato redes</td>
+                <td>—</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Soporte prioritario</td>
+                <td>—</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Entregas imprimibles</td>
+                <td>—</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===============================
+           REDISEÑO: Contacto / Pedir personalización
+           =============================== -->
+    </div>
+
+    <section id="contacto" class="contact-modern" aria-labelledby="contactoTitle">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Título: sin margen extra para homologar -->
+          <div style="grid-column: 1 / -1; margin:0 0 6px 0;">
+            <h2 id="contactoTitle" class="section-title">Personaliza tu invitación</h2>
+          </div>
+
+          <div class="contact-left">
+            <!-- ========================FORMULARIO CONTACTO (REEMPLAZAR)======================== -->
+            <!-- ====== flatpickr (estilos + script) - colocar justo ANTES del <script type="module"> ====== -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
+            <!-- ========================
+              FORMULARIO CONTACTO (con datepicker y máscara de teléfono)
+              ======================== -->
+            <form id="contactForm" class="contact-form-modern" novalidate aria-describedby="formHelp" autocomplete="on">
+              <div class="row" style="margin-bottom:12px">
+                <label class="field">
+                  <input id="name" name="name" type="text" placeholder=" " required autocomplete="name" />
+                  <span class="label">Nombre</span>
+                </label>
+
+                <label class="field">
+                  <input id="email" name="email" type="email" placeholder=" " required autocomplete="email" />
+                  <span class="label">Correo</span>
+                </label>
+
+                <!-- ahora requerido -->
+                <label class="field">
+                  <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="55 1234 5678" required autocomplete="tel" />
+                  <span class="label">Teléfono</span>
+
+                </label>
+              </div>
+
+              <div class="row" style="margin-bottom:12px">
+                <label class="field select-field">
+                  <select id="type" name="type" required>
+                    <option value="" disabled selected>Selecciona tipo de evento</option>
+                    <option value="Boda">Boda</option>
+                    <option value="Cumpleanios">Cumpleaños</option>
+                    <option value="BabyShower">Baby shower</option>
+                    <option value="Corporativo">Corporativo</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </label>
+
+                <!-- Fecha: tipo text con placeholder dd/mm/aaaa, pero inicializado con flatpickr -->
+                <label class="field">
+                  <input id="date" name="date" type="text" placeholder="dd/mm/aaaa" required aria-describedby="dateHelp" />
+                  <span class="label">Fecha del evento</span>
+                </label>
+              </div>
+
+              <label class="field full" style="margin-bottom:8px">
+                <textarea id="message" name="message" placeholder=" " required></textarea>
+                <span class="label">Mensaje / Detalles</span>
+              </label>
+
+              <!-- CAMPO OCULTO para almacenar el plan seleccionado (Opción B) -->
+              <input type="hidden" id="selectedPlan" name="selectedPlan" value="">
+
+              <div class="inline-controls" role="group" aria-label="Acciones del formulario">
+                <button class="btn btn-primary" type="submit" id="submitBtn">Enviar solicitud</button>
+
+                <button type="button" class="btn btn-outline" id="whatsappBtn" data-phone="5215512345678" aria-label="Contactar por WhatsApp">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="margin-right:8px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.199.297-.768.966-.94 1.163-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.617-.92-2.23-.242-.579-.487-.5-.672-.51l-.573-.01c-.199 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487  .709.306 1.26.489 1.692.626.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="#0F1724"/></svg>
+                  WhatsApp
+                </button>
+
+                <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+              </div>
+
+              <div id="formHelp" class="muted-small" style="margin-top:10px">
+                Respuesta en <strong>24–48 hrs</strong>. También puedes escribir directamente a <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>.
+              </div>
+            </form>
+          </div>
+
+          <aside class="contact-right" aria-hidden="false">
+            <div class="aside-card-modern">
+              <div class="aside-top">
+                <h3>¿Listo para empezar?</h3>
+                <p class="muted-small">Elige un plan en la sección de precios o cuéntanos tu idea y te proponemos 2 opciones en 48 horas.</p>
+              </div>
+
+              <div class="aside-actions">
+                <a class="btn btn-primary" href="#precios" aria-label="Ver planes">Ver planes</a>
+                <button id="quickSample" class="btn btn-secondary" type="button" aria-label="Solicitar muestra">Solicitar muestra</button>
+              </div>
+
+              <div class="contact-card">
+                <div><strong>Contacto</strong></div>
+                <div class="muted-small">invitea.design@gmail.com</div>
+                <div style="margin-top:8px"><a href="tel:+5215512345678" class="muted-small">+52 1 55 1234 5678</a></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div id="contactToast" role="status" aria-live="polite" aria-atomic="true"></div>
+    </section>
+    <!-- end redesigned contacto -->
+
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;gap:12px;align-items:center">
+        <!-- Social icons inserted BEFORE the brand name -->
+        <div class="footer-brand" style="font-weight:700">Invitea</div>
+        <div class="footer-social" aria-hidden="false">
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Invitea">
+            <!-- Instagram SVG (simple, readable  --> 
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="#0F1724" stroke-width="1.2" fill="none"></rect>
+              <path d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6z" stroke="#0F1724" stroke-width="1.2" fill="none"></path>
+              <circle cx="17.5" cy="6.5" r="0.6" fill="#0F1724"></circle>
+            </svg>
+          </a>
+
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Invitea">
+            <!-- Facebook SVG -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <path d="M15 8.5h1.8V5.8H15c-1.6 0-2.8 1-2.8 2.6v1.1H11v2.3h1.2V20h2.6v-7.5H15z" fill="#0F1724"></path>
+            </svg>
+          </a>
+        </div>
+
         
-        // Funcionalidad básica del menú móvil
-        document.getElementById('btnMobile').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const isHidden = mobileMenu.style.display === 'none';
-            mobileMenu.style.display = isHidden ? 'block' : 'none';
-            mobileMenu.setAttribute('aria-hidden', String(!isHidden));
-            this.setAttribute('aria-expanded', String(isHidden));
-        });
-        
-        // Animaciones de entrada
-        window.addEventListener('load', function() {
-            document.querySelectorAll('.fade-up').forEach((el, i) => {
-                setTimeout(() => el.classList.add('in'), 100 + i * 80);
-            });
-            
-            const planCards = Array.from(document.querySelectorAll('.plans-grid .plan-card'));
-            planCards.forEach((card, idx) => setTimeout(() => card.classList.add('in'), 220 + idx * 110));
-        });
+      </div>
 
-        // INICIALIZACIÓN DEL CALENDARIO
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar flatpickr para el campo de fecha
-            if (typeof flatpickr !== 'undefined') {
-                try {
-                    if (flatpickr.l10ns && flatpickr.l10ns.es) {
-                        flatpickr.localize(flatpickr.l10ns.es);
-                    }
-                } catch(e) {}
-                
-                flatpickr('#date', {
-                    dateFormat: 'd/m/Y',
-                    altInput: false,
-                    allowInput: true,
-                    clickOpens: true,
-                    disableMobile: true,
-                    locale: 'es'
-                });
-            }
+      <div style="text-align:right;color:var(--muted);font-size:14px">
+        <div>© <span id="year"></span> Invitea — Todos los derechos reservados</div>
+        <div><a href="#contacto" style="color:var(--azul)">Contacto</a> · <a href="mailto:invitea.design@gmail.com" style="color:var(--muted)">invitea.design@gmail.com</a></div>
+      </div>
+    </div>
+  </footer>
 
-            // FUNCIONALIDAD DE BOTONES COMPRAR
-            const planButtons = document.querySelectorAll('.plan-cta');
-            planButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const plan = this.getAttribute('data-plan');
-                    const price = this.getAttribute('data-price');
-                    const selectedPlanField = document.getElementById('selectedPlan');
-                    const messageField = document.getElementById('message');
-                    
-                    // Actualizar campo oculto con el plan seleccionado
-                    if (selectedPlanField) {
-                        selectedPlanField.value = `${plan} — ${price}`;
-                    }
-                    
-                    // Prellenar el campo de mensaje
-                    if (messageField) {
-                        messageField.value = `Hola, estoy interesad@ en el plan ${plan} (${price}). Por favor, envíenme más información.`;
-                    }
-                    
-                    // Desplazar a la sección de contacto
-                    const contactoSection = document.getElementById('contacto');
-                    if (contactoSection) {
-                        contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                    
-                    // Enfocar el campo de nombre después de un breve delay
-                    setTimeout(() => {
-                        const nameField = document.getElementById('name');
-                        if (nameField) {
-                            nameField.focus();
-                        }
-                    }, 600);
-                    
-                    // Mostrar toast de confirmación
-                    showToast(`Plan ${plan} seleccionado`);
-                });
-            });
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle" tabindex="-1">
+    <div class="modal-card" role="document" aria-label="Vista previa de invitación">
+      <button type="button" class="close-btn" id="modalClose" aria-label="Cerrar vista previa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M6 18L18 6" stroke="#0F1724" stroke-width="1.4"/></svg>
+      </button>
+      <div class="modal-grid">
+        <div style="min-height:320px;overflow:hidden;border-radius:8px">
+          <img id="modalImage" alt="Vista previa invitación" src="" width="720" height="480" style="width:100%;height:auto;object-fit:cover;border-radius:8px">
+        </div>
+        <aside style="padding:6px 2px;display:flex;flex-direction:column;gap:12px">
+          <h3 id="modalTitle">Invitación</h3>
+          <p id="modalDesc" class="muted-small" style="margin-top:0">Descripción del diseño seleccionado.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
 
-            // FUNCIONALIDAD BOTÓN WHATSAPP
-            const whatsappBtn = document.getElementById('whatsappBtn');
-            if (whatsappBtn) {
-                whatsappBtn.addEventListener('click', function() {
-                    const phone = this.getAttribute('data-phone') || '5215512345678';
-                    const name = document.getElementById('name')?.value || '';
-                    const plan = document.getElementById('selectedPlan')?.value || '';
-                    
-                    let message = 'Hola, quiero información sobre una invitación digital.';
-                    if (name) {
-                        message += ` Mi nombre es ${name}.`;
-                    }
-                    if (plan) {
-                        message += ` Estoy interesad@ en: ${plan}.`;
-                    }
-                    
-                    const encodedMessage = encodeURIComponent(message);
-                    const url = `https://wa.me/${phone}?text=${encodedMessage}`;
-                    
-                    window.open(url, '_blank', 'noopener,noreferrer');
-                });
-            }
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">Mensaje enviado</div>
 
-            // FUNCIONALIDAD BOTÓN SOLICITAR MUESTRA
-            const quickSampleBtn = document.getElementById('quickSample');
-            if (quickSampleBtn) {
-                quickSampleBtn.addEventListener('click', function() {
-                    const messageField = document.getElementById('message');
-                    if (messageField) {
-                        messageField.value = 'Hola, ¿podrían enviarme una muestra de diseños similares a los que muestran en su galería?';
-                    }
-                    
-                    // Desplazar al formulario
-                    const contactoSection = document.getElementById('contacto');
-                    if (contactoSection) {
-                        contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                    
-                    // Enfocar el campo de mensaje
-                    setTimeout(() => {
-                        if (messageField) {
-                            messageField.focus();
-                        }
-                    }, 600);
-                    
-                    showToast('Formulario prellenado — edita y envía');
-                });
-            }
+   <!-- ========================SCRIPT UNIFICADO (module)======================== -->
+  <script type="module">
+  /* eslint-disable no-console */
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp,
+    enableIndexedDbPersistence
+  } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-            // FUNCIONALIDAD PREVIEW BUTTONS
-            const previewButtons = document.querySelectorAll('.previewBtn');
-            previewButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const src = this.getAttribute('data-src');
-                    const card = this.closest('.card');
-                    const title = card?.querySelector('h3')?.textContent || 'Invitación';
-                    const desc = card?.querySelector('p')?.textContent || 'Vista previa del diseño.';
-                    
-                    openModal(src, title, desc);
-                });
-            });
+  // ---------- Firebase config ----------
+  const firebaseConfig = {
+    apiKey: "AIzaSyCTh8kPdvu-6Z5_cckNts22VrhdUTLVspM",
+    authDomain: "invitea-f7331.firebaseapp.com",
+    projectId: "invitea-f7331",
+    storageBucket: "invitea-f7331.firebasestorage.app",
+    messagingSenderId: "145115727672",
+    appId: "1:145115727672:web:d1d89c20bf946b9e2663cd",
+    measurementId: "G-8JS1MDZVGQ"
+  };
 
-            // FUNCIONALIDAD FORMULARIO CONTACTO CON FIRESTORE
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    // Validación básica
-                    const name = document.getElementById('name').value.trim();
-                    const email = document.getElementById('email').value.trim();
-                    const phone = document.getElementById('phone').value.trim();
-                    const type = document.getElementById('type').value;
-                    const date = document.getElementById('date').value.trim();
-                    const message = document.getElementById('message').value.trim();
-                    const selectedPlan = document.getElementById('selectedPlan').value;
-                    
-                    if (!name || !email || !phone || !type || !date || !message) {
-                        showToast('Por favor, completa todos los campos');
-                        return;
-                    }
-                    
-                    // Validar email
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        showToast('Por favor, ingresa un correo electrónico válido');
-                        return;
-                    }
-                    
-                    // Preparar datos del formulario
-                    const formData = {
-                        name,
-                        email,
-                        phone,
-                        type,
-                        date,
-                        message,
-                        selectedPlan
-                    };
-                    
-                    // Simular envío
-                    const submitBtn = document.getElementById('submitBtn');
-                    const originalText = submitBtn.textContent;
-                    
-                    submitBtn.textContent = 'Enviando...';
-                    submitBtn.disabled = true;
-                    
-                    try {
-                        // Intentar guardar en Firestore
-                        if (typeof window.saveToFirestore === 'function') {
-                            const result = await window.saveToFirestore(formData);
-                            
-                            if (result.success) {
-                                showToast('¡Solicitud enviada! Te contactaremos pronto.');
-                                contactForm.reset();
-                                document.getElementById('selectedPlan').value = '';
-                            } else {
-                                showToast('Error al enviar. Por favor, intenta nuevamente.');
-                                console.error('Firestore error:', result.error);
-                            }
-                        } else {
-                            // Fallback si Firestore no está disponible
-                            console.log('Datos del formulario:', formData);
-                            showToast('¡Solicitud enviada! Te contactaremos pronto.');
-                            contactForm.reset();
-                            document.getElementById('selectedPlan').value = '';
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
-                        showToast('Error al enviar. Por favor, intenta nuevamente.');
-                    } finally {
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                    }
-                });
-            }
-        });
+  const app = initializeApp(firebaseConfig);
+  let db;
+  try {
+    db = getFirestore(app);
+    try { enableIndexedDbPersistence(db).catch(e => console.warn('IndexedDB persistence no disponible:', e && e.code ? e.code : e)); }
+    catch(e){ console.warn('Error al habilitar persistencia:', e); }
+  } catch (e) {
+    console.warn('Firestore no disponible:', e);
+    db = null;
+  }
 
-        // FUNCIONES AUXILIARES
-        function showToast(message) {
-            const toast = document.getElementById('contactToast') || document.getElementById('toast');
-            if (toast) {
-                toast.textContent = message;
-                toast.style.display = 'block';
-                setTimeout(() => {
-                    toast.style.display = 'none';
-                }, 3000);
-            }
+  // ---------- util DOM ----------
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+  const toastEl = document.getElementById('contactToast') || document.getElementById('toast');
+
+  function showToast(msg){
+    if(!toastEl) { console.log('[toast]', msg); return; }
+    toastEl.textContent = msg;
+    toastEl.style.display = 'block';
+    setTimeout(()=> { toastEl.style.display = 'none'; }, 2600);
+  }
+
+  function setFormStatus(msg){
+    const s = document.getElementById('formStatus');
+    if(s) s.textContent = msg;
+  }
+
+  function clearInvalids(form){
+    ['name','email','phone','type','date','message'].forEach(id=>{
+      const el = form[id];
+      if(el) el.removeAttribute('aria-invalid');
+    });
+    setFormStatus('');
+  }
+
+  function markInvalid(el, msg){
+    if(!el) return;
+    el.setAttribute('aria-invalid','true');
+    if(msg) setFormStatus(msg);
+  }
+
+  // ---------- Inicializar flatpickr para #date (d/m/Y) ----------
+  function initDatepicker(){
+    if(typeof flatpickr === 'undefined'){ console.warn('flatpickr no cargado'); return; }
+    // localizar a español si está disponible
+    try { if(flatpickr.l10ns && flatpickr.l10ns.es) flatpickr.localize(flatpickr.l10ns.es); } catch(e){}
+    flatpickr('#date', {
+      dateFormat: 'd/m/Y',        // dd/mm/aaaa
+      altInput: false,
+      allowInput: true,
+      clickOpens: true,
+      // disableMobile false -> on mobile browsers native datepicker may appear; keep flatpickr for consistent format
+      disableMobile: true,
+      // minDate: 'today' // opcional: no permitir fechas pasadas
+    });
+  }
+
+  // ---------- Máscara de teléfono simple (sin librería) ----------
+  // Formatea como: "55 1234 5678" (si digits = 10), o agrupa razonablemente.
+  function formatPhoneDigits(digits){
+    // quitar espacios y +, etc; digits aquí ya debe ser solo números
+    if(!digits) return '';
+    // si empieza con country code 52, sepáralo
+    let prefix = '';
+    let core = digits;
+    if(core.startsWith('52') && core.length > 2){
+      prefix = '+52 ';
+      core = core.slice(2);
+    } else if(core.startsWith('521') && core.length > 3){
+      // por si incluyen 521 (mobile)
+      prefix = '+52 ';
+      core = core.slice(core.startsWith('521') ? 3 : 2);
+    }
+    // formatear core: primer bloque 2 (lada) si longitud>=2, luego 4 y 4
+    if(core.length <= 2) return prefix + core;
+    if(core.length <= 6) {
+      return prefix + core.slice(0,2) + ' ' + core.slice(2);
+    }
+    // core.length >=7
+    const a = core.slice(0,2);         // lada
+    const b = core.slice(2,6);         // primeros 4
+    const c = core.slice(6,10);        // últimos 4 (si existen)
+    if(c) return prefix + `${a} ${b} ${c}`;
+    return prefix + `${a} ${b}`;       // si no hay suficientes para c
+  }
+
+  function wirePhoneMask(){
+    const phoneEl = document.getElementById('phone');
+    if(!phoneEl) return;
+    phoneEl.addEventListener('input', (e) => {
+      const cur = phoneEl.value;
+      const digits = cur.replace(/\D/g,'');
+      const formatted = formatPhoneDigits(digits);
+      // Mantener cursor al final (simple)
+      phoneEl.value = formatted;
+    });
+    // también limpiar al pegar
+    phoneEl.addEventListener('paste', (ev) => {
+      ev.preventDefault();
+      const text = (ev.clipboardData || window.clipboardData).getData('text') || '';
+      const digits = text.replace(/\D/g,'');
+      phoneEl.value = formatPhoneDigits(digits);
+    });
+  }
+
+  // ---------- PLAN CTA: escribir en hidden selectedPlan (Opción B) ----------
+  function wirePlanCTAs(){
+    const planBtns = $$('.plan-cta');
+    planBtns.forEach(b => { b.replaceWith(b.cloneNode(true)); });
+    $$('.plan-cta').forEach(b => b.addEventListener('click', ()=> {
+      const plan = b.dataset.plan || '';
+      const price = b.dataset.price || '';
+      const nameField = $('#name');
+      const messageField = $('#message');
+      const selectedPlanField = $('#selectedPlan');
+
+      if (selectedPlanField) selectedPlanField.value = `${plan} — paquete seleccionado (${price})`;
+      if (messageField) messageField.value = `Estoy interesad@ en el plan "${plan}" (pago único ${price}).`;
+
+      const contacto = $('#contacto');
+      if (contacto) contacto.scrollIntoView({behavior:'smooth', block:'start'});
+      setTimeout(()=>{ if(nameField) nameField.focus(); }, 600);
+    }));
+  }
+
+  // ---------- PREVIEW BUTTONS (modal) ----------
+  function wirePreviewButtonsDynamicImage() {
+    const buttons = Array.from(document.querySelectorAll('.previewBtn'));
+    buttons.forEach(btn => {
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      newBtn.addEventListener('click', () => {
+        const clickedCard = newBtn.closest('.card');
+        const clickedImg = clickedCard ? clickedCard.querySelector('img') : null;
+        const srcFromBtn = newBtn.dataset?.src || '';
+        const src = srcFromBtn || (clickedImg ? clickedImg.src : '');
+        const canonical = getCanonicalTextData();
+        openModal(src, canonical.title, canonical.desc);
+      });
+    });
+  }
+
+  // modal helpers (mismo comportamiento)
+  const modal = $('#modal'), modalImage = $('#modalImage'), modalTitle = $('#modalTitle'), modalDesc = $('#modalDesc'), modalClose = $('#modalClose');
+  let lastFocused = null;
+  function setBackgroundInert(inert){
+    const main = $('main'), head = $('header'), foot = $('footer');
+    [main, head, foot].forEach(el=>{
+      if(!el) return;
+      if('inert' in HTMLElement.prototype) el.inert = inert;
+      else inert ? el.setAttribute('aria-hidden','true') : el.removeAttribute('aria-hidden');
+    });
+  }
+  function getModalFocusables() {
+    return Array.from(modal.querySelectorAll('a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'))
+      .filter(el => el.offsetParent !== null && el.getClientRects().length);
+  }
+  function trapFocus(e){
+    if(e.key !== 'Tab') return;
+    const focusables = getModalFocusables();
+    if (focusables.length === 0) { e.preventDefault(); return; }
+    const first = focusables[0], last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  }
+  function onModalKey(e){ if(e.key === 'Escape'){ closeModal(); return; } trapFocus(e); }
+  function openModal(src, title, desc){
+    if(!modal) return;
+    lastFocused = document.activeElement;
+    if(modalImage) modalImage.src = src || '';
+    if(modalTitle) modalTitle.textContent = title || 'Invitación';
+    if(modalDesc) modalDesc.textContent = desc || 'Vista previa del diseño.';
+    modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+    setBackgroundInert(true);
+    setTimeout(()=>{ if(modalClose) modalClose.focus(); }, 40);
+    document.addEventListener('keydown', onModalKey);
+  }
+  function closeModal(){
+    if(!modal) return;
+    modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); if(modalImage) modalImage.src = '';
+    document.body.style.overflow=''; setBackgroundInert(false);
+    if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    document.removeEventListener('keydown', onModalKey);
+  }
+  if (modal) { modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); }); }
+  if(modalClose) modalClose.addEventListener('click', closeModal);
+
+  function getCanonicalCard() {
+    const byType = document.querySelector('.card[data-type="cumple"]');
+    if(byType) return byType;
+    const all = document.querySelectorAll('.card');
+    return all.length > 1 ? all[1] : all[0] || null;
+  }
+  function getCanonicalTextData() {
+    const card = getCanonicalCard();
+    if(!card) return { title: 'Invitación', desc: '' };
+    const title = card.dataset.title || (card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : 'Invitación');
+    const desc = card.querySelector('p') ? card.querySelector('p').textContent.trim() : '';
+    return { title, desc };
+  }
+
+  // WhatsApp y quick sample
+  function wireWhatsAppAndQuickSample(){
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    if(whatsappBtn){
+      whatsappBtn.addEventListener('click', ()=>{
+        const attrPhone = whatsappBtn.dataset.phone;
+        const PHONE_IN_E164 = (typeof attrPhone === 'string' && attrPhone.trim() !== '') ? attrPhone.replace(/\D/g,'') : '5215512345678';
+        const validPhone = /^[0-9]{7,15}$/.test(PHONE_IN_E164);
+        if(!validPhone){ showToast('WhatsApp no configurado'); return; }
+        const text = encodeURIComponent('Hola, quiero información sobre una invitación digital. ¿Podrían ayudarme?');
+        const url = `https://wa.me/${PHONE_IN_E164}?text=${text}`;
+        const win = window.open(url, '_blank', 'noopener');
+        if(win) try { win.opener = null; } catch(e){ }
+        else { window.location.href = url; }
+      });
+    }
+
+    const quickSample = document.getElementById('quickSample');
+    if(quickSample){
+      quickSample.addEventListener('click', ()=>{
+        const el = document.getElementById('message');
+        if(el) el.value = 'Hola, ¿podrían enviarme una muestra de diseños similares a...';
+        document.getElementById('name')?.focus();
+        showToast('Formulario prellenado — edita y envía');
+      });
+    }
+  }
+
+  // FORM SUBMIT actualizado: teléfono y fecha obligatorios; fecha validada en dd/mm/aaaa y convertida a ISO
+  (function wireContactForm(){
+    const form = document.getElementById('contactForm');
+    if(!form) { console.warn('Contacto: no se encontró #contactForm'); return; }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      clearInvalids(form);
+
+      const submitBtn = document.getElementById('submitBtn');
+      const name = (form.name?.value || '').trim();
+      const email = (form.email?.value || '').trim();
+      const phoneRaw = (form.phone?.value || '').trim();
+      const phoneDigits = phoneRaw.replace(/\D/g,'');
+      const phoneOk = phoneDigits.length >= 7; // criterio mínimo
+      const type = (form.type?.value || '').trim();
+      const message = (form.message?.value || '').trim();
+      const dateVal = (form.date?.value || '').trim(); // esperado dd/mm/aaaa
+      const selectedPlan = (form.selectedPlan && form.selectedPlan.value) ? form.selectedPlan.value : null;
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
+
+      // fecha regex dd/mm/aaaa
+      const dateMatch = dateVal.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+      let dateISO = null;
+      let dateOk = false;
+      if(dateMatch){
+        const d = parseInt(dateMatch[1],10), m = parseInt(dateMatch[2],10), y = parseInt(dateMatch[3],10);
+        const candidate = new Date(y, m - 1, d);
+        if(candidate && candidate.getFullYear() === y && (candidate.getMonth() + 1) === m && candidate.getDate() === d){
+          dateOk = true;
+          const mm = String(m).padStart(2,'0');
+          const dd = String(d).padStart(2,'0');
+          dateISO = `${y}-${mm}-${dd}`;
         }
+      }
 
-        function openModal(src, title, desc) {
-            const modal = document.getElementById('modal');
-            const modalImage = document.getElementById('modalImage');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDesc = document.getElementById('modalDesc');
-            
-            if (modal && modalImage && modalTitle && modalDesc) {
-                modalImage.src = src;
-                modalTitle.textContent = title;
-                modalDesc.textContent = desc;
-                modal.classList.add('show');
-                modal.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-            }
-        }
+      if(!name || !emailOk || !phoneOk || !type || !message || !dateOk){
+        if(!name) markInvalid(form.name);
+        if(!emailOk) markInvalid(form.email, 'Ingresa un correo válido');
+        if(!phoneOk) markInvalid(form.phone, 'Ingresa un teléfono válido (mín. 7 dígitos)');
+        if(!type) markInvalid(form.type);
+        if(!message) markInvalid(form.message);
+        if(!dateOk) markInvalid(form.date, 'Fecha inválida. Usa dd/mm/aaaa');
+        const firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if(firstInvalid && typeof firstInvalid.focus === 'function') firstInvalid.focus();
+        showToast('Completa todos los campos correctamente');
+        return;
+      }
 
-        // Cerrar modal
-        const modalClose = document.getElementById('modalClose');
-        if (modalClose) {
-            modalClose.addEventListener('click', function() {
-                const modal = document.getElementById('modal');
-                if (modal) {
-                    modal.classList.remove('show');
-                    modal.setAttribute('aria-hidden', 'true');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
+      const payloadForServer = {
+        name,
+        email,
+        phone: phoneDigits,
+        type,
+        message,
+        date_ddmmyyyy: dateVal,
+        date_iso: dateISO,
+        selectedPlan: selectedPlan || '',
+        ts: new Date().toISOString()
+      };
 
-        // Cerrar modal al hacer clic fuera
-        const modal = document.getElementById('modal');
-        if (modal) {
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.remove('show');
-                    modal.setAttribute('aria-hidden', 'true');
-                    document.body.style.overflow = '';
-                }
-            });
+      const prevBtnText = submitBtn ? submitBtn.textContent : null;
+      if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
+      form.setAttribute('aria-busy','true');
+      setFormStatus('');
+
+      let firestoreOk = false;
+      if(db){
+        try {
+          const colRef = collection(db, 'contact_requests');
+          await addDoc(colRef, {
+            ...payloadForServer,
+            createdAt: serverTimestamp(),
+            userAgent: navigator.userAgent || null
+          });
+          firestoreOk = true;
+          form.reset();
+          showToast('¡Solicitud enviada!');
+          setFormStatus('¡Gracias! Recibimos tu solicitud. Te contactamos pronto.');
+        } catch (err) {
+          console.error('Error escribiendo en Firestore:', err);
         }
-    </script>
+      }
+
+      if(!firestoreOk){
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(payloadForServer),
+            credentials: 'omit'
+          });
+          if(!res.ok) throw new Error('Error de envío servidor');
+          form.reset();
+          showToast(firestoreOk ? '¡Solicitud registrada!' : '¡Solicitud enviada (vía servidor)!');
+          setFormStatus('¡Gracias! Recibimos tu solicitud. Te contactamos pronto.');
+        } catch (err){
+          console.error('Fallback (POST /api/contact) falló:', err);
+          showToast('Error al enviar. Intenta más tarde.');
+          setFormStatus('Error al enviar. Escríbenos a invitea.design@gmail.com');
+        }
+      }
+
+      if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = prevBtnText || 'Enviar solicitud'; }
+      form.removeAttribute('aria-busy');
+    });
+  })();
+
+  // INIT wiring
+  (function init(){
+    // datepicker primero (flatpickr cargado vía CDN arriba)
+    initDatepicker();
+
+    wirePreviewButtonsDynamicImage();
+    wirePlanCTAs();
+    wireWhatsAppAndQuickSample();
+    wirePhoneMask();
+
+    const yearEl = $('#year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // mobile toggle
+    const btnMobile = $('#btnMobile'), mobileMenu = $('#mobileMenu');
+    let mobileOpen = false;
+    function toggleMobile(open){
+      if(!mobileMenu || !btnMobile) return;
+      mobileOpen = !!open;
+      mobileMenu.style.display = mobileOpen ? 'block' : 'none';
+      mobileMenu.setAttribute('aria-hidden', String(!mobileOpen));
+      btnMobile.setAttribute('aria-expanded', String(mobileOpen));
+      const main = document.querySelector('main');
+      if(main){
+        if('inert' in HTMLElement.prototype){ main.inert = mobileOpen; }
+        else { if(mobileOpen) main.setAttribute('aria-hidden', 'true'); else main.removeAttribute('aria-hidden'); }
+      }
+    }
+    if(btnMobile){ btnMobile.addEventListener('click', ()=> toggleMobile(!mobileOpen)); }
+
+    // smooth anchors
+    $$('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const target = a.getAttribute('href');
+        if(target === '#') return;
+        const el = document.querySelector(target);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); if(mobileOpen && mobileMenu){ toggleMobile(false); } }
+      });
+    });
+
+    // brand image fallback
+    (function ensureBrandImages(){
+      const headerImg = $('#brandImg');
+      if(headerImg) headerImg.addEventListener('error', ()=>{ headerImg.style.display='none'; const wrap = headerImg.closest('.logo-img-wrap'); if(wrap && !wrap.querySelector('.fallback-text')){ const f=document.createElement('div'); f.className='fallback-text'; f.style.color='white'; f.style.fontWeight='700'; f.style.fontSize='18px'; f.textContent='Invitea'; wrap.appendChild(f); }}); 
+    })();
+
+    // small enter animations
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('.fade-up').forEach((el,i)=> setTimeout(()=> el.classList.add('in'), 100 + i*80));
+      const planCards = Array.from(document.querySelectorAll('.plans-grid .plan-card'));
+      planCards.forEach((card, idx)=> setTimeout(()=> card.classList.add('in'), 220 + idx*110));
+    });
+  })();
+
+  </script>
+
+  <script src="https://unpkg.com/wicg-inert@3.0.0/dist/inert.min.js" defer></script>
+
+  
 </body>
 </html>
