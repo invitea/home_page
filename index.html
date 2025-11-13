@@ -229,7 +229,7 @@
     .compare-panel table{ width:100%; border-collapse:collapse; font-size:13px; color:var(--muted); }
     .compare-panel th, .compare-panel td{ padding:8px 8px; text-align:left; border-bottom:1px solid rgba(16,24,40,0.03); }
 
-    /* ========== SECCIÓN DE CONTACTO - CORREGIDA ========== */
+    /* ========== SECCIÓN DE CONTACTO - COMPLETAMENTE HOMOLOGADA ========== */
     .contact-modern { 
       padding-top: 18px;
       padding-bottom: 18px;
@@ -238,7 +238,7 @@
     .contact-grid { 
       display: grid; 
       grid-template-columns: 1fr; 
-      gap: 20px; 
+      gap: 8px; /* Reducido a 8px para igualar otras secciones */
       align-items: start; 
       width: calc(100% - 32px);
       max-width: var(--max-width);
@@ -249,13 +249,13 @@
     .contact-left { 
       display: flex; 
       flex-direction: column; 
-      gap: 10px; 
+      gap: 6px; /* Reducido a 6px */
       width: 100%;
     }
 
     .contact-left h2 { 
       font-size: 22px; 
-      margin: 0 0 6px; 
+      margin: 0 0 2px; /* Reducido a 2px para igualar otras secciones */
       font-family: Poppins, Inter, sans-serif; 
       font-weight: 700;
     }
@@ -263,7 +263,7 @@
     .contact-form-modern { 
       background: linear-gradient(180deg, #fff, #FBFCFF); 
       border-radius: 14px; 
-      padding: 20px;
+      padding: 16px; /* Reducido a 16px para igualar las cards */
       box-shadow: var(--shadow-1); 
       border: 1px solid rgba(16,24,40,0.04); 
       width: 100%;
@@ -272,8 +272,8 @@
 
     .contact-form-modern .row { 
       display: flex; 
-      gap: 12px; 
-      margin-bottom: 12px; 
+      gap: 10px; 
+      margin-bottom: 8px; /* Reducido a 8px */
       width: 100%;
     }
 
@@ -292,7 +292,7 @@
 
     .field input, .field textarea, .field select {
       width: 100%; 
-      padding: 14px 12px 12px; 
+      padding: 10px 8px 8px; /* Reducido para igualar otras secciones */
       border-radius: 10px; 
       border: 1px solid rgba(16,24,40,0.06);
       background: transparent; 
@@ -303,15 +303,15 @@
     }
 
     .field textarea { 
-      min-height:110px; 
+      min-height:90px; /* Reducido */
       resize:vertical; 
-      padding-top:18px; 
+      padding-top:14px; /* Reducido */
     }
 
     .field .label {
       position:absolute; 
-      left:12px; 
-      top:12px; 
+      left:8px; /* Reducido */
+      top:8px; /* Reducido */
       transform-origin:left top; 
       pointer-events:none;
       transition: all .16s ease; 
@@ -325,25 +325,25 @@
     .field input:not(:placeholder-shown) + .label,
     .field textarea:focus + .label,
     .field textarea:not(:placeholder-shown) + .label {
-      transform: translateY(-12px) scale(.88); 
+      transform: translateY(-8px) scale(.88); /* Reducido */
       color:var(--azul); 
       background:transparent;
     }
 
     .field input::placeholder, .field textarea::placeholder { color:transparent; }
     .field select { appearance:none; padding-right:36px; }
-    .field .assist { display:block; margin-top:6px; font-size:12px; color:var(--muted); }
+    .field .assist { display:block; margin-top:4px; font-size:12px; color:var(--muted); }
     .inline-controls { 
       display:flex; 
       align-items:center; 
-      gap:10px; 
-      margin-top:10px; 
+      gap:8px; 
+      margin-top:6px; /* Reducido */
       flex-wrap:wrap; 
     }
     .btn-outline { 
       border:1px solid rgba(16,24,40,0.08); 
       background:transparent; 
-      padding:10px 14px; 
+      padding:8px 12px; 
       border-radius:10px; 
       font-weight:700; 
     }
@@ -715,7 +715,7 @@
     <!-- ========== SECCIÓN DE CONTACTO ========== -->
     <section id="contacto" class="contact-modern" aria-labelledby="contactoTitle">
       <div class="contact-grid">
-        <div style="grid-column: 1 / -1; margin:0 0 6px 0;">
+        <div style="grid-column: 1 / -1; margin:0 0 2px 0;"> <!-- Reducido a 2px -->
           <h2 id="contactoTitle" class="section-title">Personaliza tu invitación</h2>
         </div>
 
@@ -727,7 +727,7 @@
 
           <!-- Formulario de contacto -->
           <form id="contactForm" class="contact-form-modern" novalidate aria-describedby="formHelp" autocomplete="on">
-            <div class="row" style="margin-bottom:12px">
+            <div class="row" style="margin-bottom:8px"> <!-- Reducido a 8px -->
               <label class="field">
                 <input id="name" name="name" type="text" placeholder=" " required autocomplete="name" />
                 <span class="label">Nombre</span>
@@ -744,7 +744,7 @@
               </label>
             </div>
 
-            <div class="row" style="margin-bottom:12px">
+            <div class="row" style="margin-bottom:8px"> <!-- Reducido a 8px -->
               <label class="field select-field">
                 <select id="type" name="type" required>
                   <option value="" disabled selected>Selecciona tipo de evento</option>
@@ -770,7 +770,7 @@
               </label>
             </div>
 
-            <label class="field full" style="margin-bottom:8px">
+            <label class="field full" style="margin-bottom:4px"> <!-- Reducido a 4px -->
               <textarea id="message" name="message" placeholder=" " required></textarea>
               <span class="label">Mensaje / Detalles</span>
             </label>
@@ -788,7 +788,7 @@
               <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
             </div>
 
-            <div id="formHelp" class="muted-small" style="margin-top:10px">
+            <div id="formHelp" class="muted-small" style="margin-top:6px"> <!-- Reducido a 6px -->
               Respuesta en <strong>24–48 hrs</strong>. También puedes escribir directamente a <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>.
             </div>
           </form>
