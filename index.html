@@ -229,42 +229,131 @@
     .compare-panel table{ width:100%; border-collapse:collapse; font-size:13px; color:var(--muted); }
     .compare-panel th, .compare-panel td{ padding:8px 8px; text-align:left; border-bottom:1px solid rgba(16,24,40,0.03); }
 
-    /* Formulario de contacto */
+    /* Formulario de contacto - AJUSTADO PARA HOMOLOGAR CON SECCIONES ANTERIORES */
     .contact-modern { }
-    .contact-grid { display:grid; grid-template-columns: 1fr; gap:20px; align-items:start; max-width:var(--max-width); margin:0 auto; padding:0 16px; }
-    .contact-left { display:flex; flex-direction:column; gap:10px; }
-    .contact-left h2 { font-size:22px; margin:0 0 6px; font-family:Poppins, Inter, sans-serif; }
-    .contact-form-modern { background:linear-gradient(180deg,#fff,#FBFCFF); border-radius:14px; padding:16px; box-shadow:var(--shadow-1); border:1px solid rgba(16,24,40,0.04); }
-    .contact-form-modern .row { display:flex; gap:12px; margin-bottom:12px; }
-    .field { position:relative; display:block; flex:1; min-width:0; margin-bottom:0; }
-    .field.full { width:100%; }
-    .field input, .field textarea, .field select {
-      width:100%; padding:14px 12px 12px; border-radius:10px; border:1px solid rgba(16,24,40,0.06);
-      background:transparent; font-size:14px; font-family:inherit;
-      transition: box-shadow .18s ease, border-color .18s ease;
+    .contact-grid { 
+      display:grid; 
+      grid-template-columns: 1fr; 
+      gap:20px; 
+      align-items:start; 
+      max-width:var(--max-width); 
+      margin:0 auto; 
+      padding:0 16px; 
     }
-    .field textarea { min-height:110px; resize:vertical; padding-top:18px; }
+    .contact-left { 
+      display:flex; 
+      flex-direction:column; 
+      gap:10px; 
+      max-width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    }
+    .contact-left h2 { 
+      font-size:22px; 
+      margin:0 0 6px; 
+      font-family:Poppins, Inter, sans-serif; 
+    }
+    .contact-form-modern { 
+      background:linear-gradient(180deg,#fff,#FBFCFF); 
+      border-radius:14px; 
+      padding:20px; /* Aumentado para mejor espaciado */
+      box-shadow:var(--shadow-1); 
+      border:1px solid rgba(16,24,40,0.04); 
+      width: 100%; /* Ocupa todo el ancho del contenedor */
+      max-width: 100%; /* Evita que sea más ancho que el contenedor */
+      box-sizing: border-box; /* Incluye padding en el cálculo del ancho */
+    }
+    .contact-form-modern .row { 
+      display:flex; 
+      gap:12px; 
+      margin-bottom:12px; 
+    }
+    .field { 
+      position:relative; 
+      display:block; 
+      flex:1; 
+      min-width:0; 
+      margin-bottom:0; 
+    }
+    .field.full { 
+      width:100%; 
+    }
+    .field input, .field textarea, .field select {
+      width:100%; 
+      padding:14px 12px 12px; 
+      border-radius:10px; 
+      border:1px solid rgba(16,24,40,0.06);
+      background:transparent; 
+      font-size:14px; 
+      font-family:inherit;
+      transition: box-shadow .18s ease, border-color .18s ease;
+      box-sizing: border-box; /* Asegura que padding no afecte el ancho */
+    }
+    .field textarea { 
+      min-height:110px; 
+      resize:vertical; 
+      padding-top:18px; 
+    }
     .field .label {
-      position:absolute; left:12px; top:12px; transform-origin:left top; pointer-events:none;
-      transition: all .16s ease; color:var(--muted); font-size:13px; background:transparent; padding:0 4px;
+      position:absolute; 
+      left:12px; 
+      top:12px; 
+      transform-origin:left top; 
+      pointer-events:none;
+      transition: all .16s ease; 
+      color:var(--muted); 
+      font-size:13px; 
+      background:transparent; 
+      padding:0 4px;
     }
     .field input:focus + .label,
     .field input:not(:placeholder-shown) + .label,
     .field textarea:focus + .label,
     .field textarea:not(:placeholder-shown) + .label {
-      transform: translateY(-12px) scale(.88); color:var(--azul); background:transparent;
+      transform: translateY(-12px) scale(.88); 
+      color:var(--azul); 
+      background:transparent;
     }
     .field input::placeholder, .field textarea::placeholder { color:transparent; }
     .field select { appearance:none; padding-right:36px; }
     .field .assist { display:block; margin-top:6px; font-size:12px; color:var(--muted); }
-    .inline-controls { display:flex; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap; }
-    .btn-outline { border:1px solid rgba(16,24,40,0.08); background:transparent; padding:10px 14px; border-radius:10px; font-weight:700; }
-    #contactToast { position:fixed; right:18px; bottom:18px; background:var(--azul); color:#fff; padding:12px 16px; border-radius:10px; box-shadow:0 10px 40px rgba(45,104,248,0.15); z-index:130; display:none; }
-    input[aria-invalid="true"], textarea[aria-invalid="true"], select[aria-invalid="true"] { border-color:#E11D48; box-shadow:0 6px 18px rgba(225,29,72,0.06); }
+    .inline-controls { 
+      display:flex; 
+      align-items:center; 
+      gap:10px; 
+      margin-top:10px; 
+      flex-wrap:wrap; 
+    }
+    .btn-outline { 
+      border:1px solid rgba(16,24,40,0.08); 
+      background:transparent; 
+      padding:10px 14px; 
+      border-radius:10px; 
+      font-weight:700; 
+    }
+    #contactToast { 
+      position:fixed; 
+      right:18px; 
+      bottom:18px; 
+      background:var(--azul); 
+      color:#fff; 
+      padding:12px 16px; 
+      border-radius:10px; 
+      box-shadow:0 10px 40px rgba(45,104,248,0.15); 
+      z-index:130; 
+      display:none; 
+    }
+    input[aria-invalid="true"], textarea[aria-invalid="true"], select[aria-invalid="true"] { 
+      border-color:#E11D48; 
+      box-shadow:0 6px 18px rgba(225,29,72,0.06); 
+    }
     .form-status { font-size:13px; color:var(--muted); }
 
     /* Footer */
-    footer{padding:22px 0 36px;color:var(--muted);border-top:1px solid rgba(16,24,40,0.03);margin-top:16px}
+    footer{
+      padding:22px 0 36px;
+      color:var(--muted);
+      border-top:1px solid rgba(16,24,40,0.03);
+      margin-top:16px
+    }
     .footer-social {
       display:flex;
       gap:10px;
@@ -523,7 +612,7 @@
               <li>2 diseños + 2 revisiones</li>
               <li>RSVP integrado y mapa</li>
               <li>Formato optimizado para redes</li>
-              <li>Entrega en JPG, PNG и PDF</li>
+              <li>Entrega en JPG, PNG y PDF</li>
             </ul>
 
             <div class="plan-cta-row">
