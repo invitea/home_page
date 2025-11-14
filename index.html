@@ -225,9 +225,13 @@
     .plan-features li{ margin-bottom:6px; }
     .plan-cta-row{ margin-top:auto; display:flex; gap:10px; align-items:center; }
     .plan-cta{ padding:10px 14px; font-size:13px; border-radius:12px; font-weight:800; background: linear-gradient(90deg,var(--azul),var(--azul-2)); color:#fff; border:none; cursor:pointer; box-shadow:0 10px 30px rgba(45,104,248,0.12); }
+    
+    /* Tabla comparativa actualizada */
     .compare-panel{ margin-top:12px; padding:12px; box-shadow:var(--shadow-1); border-radius:12px; background:var(--card-bg); border:1px solid rgba(16,24,40,0.03); }
     .compare-panel table{ width:100%; border-collapse:collapse; font-size:13px; color:var(--muted); }
     .compare-panel th, .compare-panel td{ padding:8px 8px; text-align:left; border-bottom:1px solid rgba(16,24,40,0.03); }
+    .compare-panel th:first-child, .compare-panel td:first-child { width: 40%; }
+    .compare-panel th:not(:first-child), .compare-panel td:not(:first-child) { width: 20%; text-align: center; }
 
     /* ========== SECCIÓN DE CONTACTO - COMPLETAMENTE HOMOLOGADA ========== */
     .contact-modern { 
@@ -659,7 +663,7 @@
           </article>
         </div>
 
-        <!-- Tabla comparativa de planes -->
+        <!-- Tabla comparativa de planes ACTUALIZADA Y REORDENADA -->
         <div class="compare-panel" aria-hidden="false">
           <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
             <strong style="margin-right:auto">Comparar características</strong>
@@ -676,33 +680,69 @@
             </thead>
             <tbody>
               <tr>
-                <td>Diseños incluidos</td>
-                <td>1</td>
-                <td>2</td>
-                <td>Ilimitado</td>
+                <td>Portada</td>
+                <td>✓</td>
+                <td>✓</td>
+                <td>✓</td>
               </tr>
               <tr>
-                <td>RSVP integrado</td>
+                <td>Lugar del Evento (Ceremonia)</td>
+                <td>✓</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Lugar del Evento (Recepción)</td>
+                <td>✓</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Mesa de Regalos</td>
+                <td>✓</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Confirmación de Asistencia</td>
                 <td>—</td>
                 <td>✓</td>
                 <td>✓</td>
               </tr>
               <tr>
-                <td>Formato redes</td>
+                <td>Panel de Confirmaciones en Tiempo Real</td>
                 <td>—</td>
                 <td>✓</td>
                 <td>✓</td>
               </tr>
               <tr>
-                <td>Soporte prioritario</td>
+                <td>Cuenta Regresiva</td>
                 <td>—</td>
-                <td>✓</td>
+                <td>—</td>
                 <td>✓</td>
               </tr>
               <tr>
-                <td>Entregas imprimibles</td>
+                <td>Galería Multimedia</td>
+                <td>—</td>
                 <td>—</td>
                 <td>✓</td>
+              </tr>
+              <tr>
+                <td>Itinerario</td>
+                <td>—</td>
+                <td>—</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Código de Vestimenta</td>
+                <td>—</td>
+                <td>—</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Recomendación de Hospedaje</td>
+                <td>—</td>
+                <td>—</td>
                 <td>✓</td>
               </tr>
             </tbody>
