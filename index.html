@@ -16,11 +16,527 @@
   <meta property="og:description" content="Invitaciones digitales modernas y personalizadas para bodas, cumpleaños y eventos.">
   <meta property="og:image" content="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
   <meta name="theme-color" content="#2D68F8">
+  <link rel="manifest" href="/manifest.json">
 
-  <!-- Estilos CSS externos -->
-  <link rel="stylesheet" href="styles.css">
-  <!-- Flatpickr para fechas -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <!-- ========== ESTILOS CSS ========== -->
+  <style>
+    /* Variables CSS */
+    :root{
+      --azul: #2D68F8;
+      --azul-2: #4C8BFF;
+      --amarillo: #FFC940;
+      --bg: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --text: #0F1724;
+      --muted: #6B7280;
+      --radius: 14px;
+      --shadow-1: 0 8px 30px rgba(17,24,39,0.06);
+      --shadow-2: 0 18px 60px rgba(17,24,39,0.10);
+      --max-width: 1200px;
+      --gap: 20px;
+      --focus: rgba(45,104,248,0.28);
+      --section-vertical: 18px;
+    }
+
+    /* Reset y estilos base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+      -webkit-text-size-adjust:100%;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;height:auto}
+
+    /* Utilidades */
+    .container{
+      width:calc(100% - 32px);
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:0 16px;
+    }
+    .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+    .muted-small{ color:var(--muted); font-size:13px; }
+    .fade-up{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .48s cubic-bezier(.2,.9,.2,1);will-change:transform,opacity}
+    .fade-up.in{opacity:1;transform:none}
+    .section-title {
+      font-size:22px;
+      margin:0 0 8px;
+      font-family:Poppins, Inter, sans-serif;
+      font-weight:700;
+      color:var(--text);
+    }
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:60;
+      background:linear-gradient(180deg, rgba(255,255,255,0.88), rgba(248,249,250,0.9));
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(16,24,40,0.03);
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:12px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-img-wrap{
+      width:150px;height:42px;border-radius:10px;
+      background:linear-gradient(135deg,var(--azul),var(--azul-2));
+      padding:4px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-1);
+    }
+    .logo-text {
+      color: white;
+      font-family: Poppins, Inter, sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav.desktop-nav{display:flex;gap:18px;align-items:center}
+    nav.desktop-nav a{color:var(--muted);font-weight:600;padding:8px;border-radius:8px;transition:all .18s ease}
+    nav.desktop-nav a:hover{color:var(--azul);transform:translateY(-2px)}
+    .mobile-toggle{display:none;background:transparent;border:0;padding:10px;border-radius:12px}
+
+    /* Sección Hero */
+    .hero{
+      padding-top: 24px;
+      padding-bottom: 24px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+      position:relative;
+      overflow:visible;
+    }
+    .hero-left{max-width:680px}
+    .eyebrow{display:inline-block;background:linear-gradient(90deg,var(--azul-2),var(--azul));color:white;padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;margin-bottom:12px}
+    .hero-left h1{
+      font-family:Poppins, Inter, sans-serif;
+      font-size:clamp(30px,4.2vw,44px);
+      line-height:1.04;margin:0 0 12px;font-weight:700;letter-spacing:-0.02em;
+    }
+    .lead{color:var(--muted);font-size:16px;margin:0 0 12px}
+    .hero-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;border:0;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;min-height:44px}
+    .btn-primary{background: linear-gradient(90deg, var(--azul), var(--azul-2)); color:white; font-weight:800; padding:14px 20px; box-shadow:0 16px 36px rgba(45,104,248,0.08); border-radius:12px;}
+    .btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 20px 44px rgba(45,104,248,0.10); }
+    .btn-secondary{ border:1px solid rgba(45,104,248,0.12); background:transparent; color:var(--azul); padding:11px 16px; border-radius:12px; }
+    .hero-right{display:flex;align-items:center;justify-content:center;position:relative;}
+    .mockup-frame{
+      width:360px;
+      border-radius:18px;
+      padding:18px;
+      background:linear-gradient(180deg,#fff,#FBFCFF);
+      box-shadow:var(--shadow-2);
+      transform:rotate(-2deg);
+      display:block;
+      transition:transform .28s ease, box-shadow .28s ease;
+    }
+    .mockup-frame:hover{ 
+      transform: rotate(-1deg) translateY(-6px); 
+      box-shadow: 0 26px 70px rgba(17,24,39,0.12); 
+    }
+    .mockup-inner{border-radius:12px;overflow:hidden;background:#fff;padding:12px;}
+    .mockup-image{
+      aspect-ratio:3/4;
+      width:100%;
+      display:block;
+      border-radius:10px;
+      object-fit:cover;
+      background:#f0f0f0;
+    }
+
+    /* Galería de invitaciones */
+    .gallery{padding-top:24px;padding-bottom:20px}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:12px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{position:relative;background:var(--card-bg);border-radius:14px;padding:12px;overflow:hidden;border:1px solid rgba(16,24,40,0.03);transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s; transform-origin:center; will-change:transform; display:flex;flex-direction:column;}
+    .card.elev-1{ box-shadow: var(--shadow-1); }
+    .card:hover{ transform: translateY(-6px) scale(1.008); box-shadow: var(--shadow-2); }
+    .thumb{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:16/10;background:#eee}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .36s ease, filter .36s ease}
+    .card:hover .thumb img{transform:scale(1.04)}
+    .thumb::after{ content:"";position:absolute;inset:0;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0), rgba(4,6,8,0.04)); pointer-events:none; }
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;background:linear-gradient(90deg, rgba(255,201,64,0.95), rgba(255,217,106,0.95));font-weight:700;border:1px solid rgba(0,0,0,0.06);color:#111}
+    .card h3{margin:10px 0 6px 0;font-size:15px;font-family:Poppins, Inter, sans-serif}
+    .card p{margin:0;color:var(--muted);font-size:13px}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .price{font-weight:800;color:var(--azul)}
+
+    /* Sección de Funciones */
+    .funciones {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+    
+    .funciones-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    
+    .funcion-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: var(--shadow-1);
+      border: 1px solid rgba(16,24,40,0.03);
+      transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+    
+    .funcion-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .funcion-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--azul), var(--azul-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    
+    .funcion-icon svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+    
+    .funcion-card h3 {
+      font-family: Poppins, Inter, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text);
+    }
+    
+    .funcion-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Sección de precios */
+    #precios { padding-top: 18px; padding-bottom: 18px; box-sizing: border-box; }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-items: start;
+      overflow: visible;
+    }
+    .plan-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: var(--shadow-1);
+      border: 1px solid rgba(16,24,40,0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform .18s ease, box-shadow .18s ease, opacity .5s ease;
+      min-height: 0;
+      height: 100%;
+      position: relative;
+      overflow: visible;
+      z-index: 0;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .plan-card.in { opacity: 1; transform: none; }
+    .plan-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-2); }
+    .plan-card.recommended {
+      box-shadow: var(--shadow-2);
+      border: 1px solid rgba(45,104,248,0.08);
+      background: linear-gradient(180deg, #FFFFFF, #FBFDFF);
+    }
+    .plan-card > * { position: relative; z-index: 1; }
+    .plan-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: linear-gradient(90deg,var(--amarillo),#FFD96A);
+      color: #111;
+      font-weight:800;
+      padding:6px 10px;
+      border-radius: 999px;
+      font-size:12px;
+      box-shadow: 0 10px 30px rgba(45,104,248,0.12);
+      z-index: 9999;
+      pointer-events: none;
+    }
+    .plan-title{ font-family:Poppins, Inter, sans-serif; font-size:15px; font-weight:700; margin:8px 0 4px 0; }
+    .plan-sub{ color:var(--muted); font-size:13px; margin:0 0 8px 0; }
+    .plan-price{ font-weight:800; font-size:20px; color:var(--azul); margin:6px 0 10px 0; }
+    .plan-price small{ font-weight:600; font-size:12px; color:var(--muted); }
+    .plan-features{ margin:0; padding-left:18px; line-height:1.6; color:var(--muted); font-size:13px; }
+    .plan-features li{ margin-bottom:6px; }
+    .plan-cta-row{ margin-top:auto; display:flex; gap:10px; align-items:center; }
+    .plan-cta{ padding:10px 14px; font-size:13px; border-radius:12px; font-weight:800; background: linear-gradient(90deg,var(--azul),var(--azul-2)); color:#fff; border:none; cursor:pointer; box-shadow:0 10px 30px rgba(45,104,248,0.12); }
+    
+    /* Tabla comparativa actualizada */
+    .compare-panel{ margin-top:12px; padding:12px; box-shadow:var(--shadow-1); border-radius:12px; background:var(--card-bg); border:1px solid rgba(16,24,40,0.03); }
+    .compare-panel table{ width:100%; border-collapse:collapse; font-size:13px; color:var(--muted); }
+    .compare-panel th, .compare-panel td{ padding:8px 8px; text-align:left; border-bottom:1px solid rgba(16,24,40,0.03); }
+    .compare-panel th:first-child, .compare-panel td:first-child { width: 40%; }
+    .compare-panel th:not(:first-child), .compare-panel td:not(:first-child) { width: 20%; text-align: center; }
+
+    /* ========== SECCIÓN DE CONTACTO - COMPLETAMENTE HOMOLOGADA ========== */
+    .contact-modern { 
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    .contact-grid { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 8px; /* Reducido a 8px para igualar otras secciones */
+      align-items: start; 
+      width: calc(100% - 32px);
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .contact-left { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 6px; /* Reducido a 6px */
+      width: 100%;
+    }
+
+    .contact-left h2 { 
+      font-size: 22px; 
+      margin: 0 0 2px; /* Reducido a 2px para igualar otras secciones */
+      font-family: Poppins, Intersans-serif; 
+      font-weight: 700;
+    }
+
+    .contact-form-modern { 
+      background: linear-gradient(180deg, #fff, #FBFCFF); 
+      border-radius: 14px; 
+      padding: 16px; /* Reducido a 16px para igualar las cards */
+      box-shadow: var(--shadow-1); 
+      border: 1px solid rgba(16,24,40,0.04); 
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .contact-form-modern .row { 
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 8px; /* Reducido a 8px */
+      width: 100%;
+    }
+
+    .field { 
+      position: relative; 
+      display: block; 
+      flex: 1; 
+      min-width: 0; 
+      margin-bottom: 0; 
+      width: 100%;
+    }
+
+    .field.full { 
+      width: 100%; 
+    }
+
+    .field input, .field textarea, .field select {
+      width: 100%; 
+      padding: 10px 8px 8px; /* Reducido para igualar otras secciones */
+      border-radius: 10px; 
+      border: 1px solid rgba(16,24,40,0.06);
+      background: transparent; 
+      font-size: 14px; 
+      font-family: inherit;
+      transition: box-shadow .18s ease, border-color .18s ease;
+      box-sizing: border-box;
+    }
+
+    .field textarea { 
+      min-height:90px; /* Reducido */
+      resize:vertical; 
+      padding-top:14px; /* Reducido */
+    }
+
+    .field .label {
+      position:absolute; 
+      left:8px; /* Reducido */
+      top:8px; /* Reducido */
+      transform-origin:left top; 
+      pointer-events:none;
+      transition: all .16s ease; 
+      color:var(--muted); 
+      font-size:13px; 
+      background:transparent; 
+      padding:0 4px;
+    }
+
+    .field input:focus + .label,
+    .field input:not(:placeholder-shown) + .label,
+    .field textarea:focus + .label,
+    .field textarea:not(:placeholder-shown) + .label {
+      transform: translateY(-8px) scale(.88); /* Reducido */
+      color:var(--azul); 
+      background:transparent;
+    }
+
+    .field input::placeholder, .field textarea::placeholder { color:transparent; }
+    .field select { appearance:none; padding-right:36px; }
+    .field .assist { display:block; margin-top:4px; font-size:12px; color:var(--muted); }
+    .inline-controls { 
+      display:flex; 
+      align-items:center; 
+      gap:8px; 
+      margin-top:6px; /* Reducido */
+      flex-wrap:wrap; 
+    }
+    .btn-outline { 
+      border:1px solid rgba(16,24,40,0.08); 
+      background:transparent; 
+      padding:8px 12px; 
+      border-radius:10px; 
+      font-weight:700; 
+    }
+    #contactToast { 
+      position:fixed; 
+      right:18px; 
+      bottom:18px; 
+      background:var(--azul); 
+      color:#fff; 
+      padding:12px 16px; 
+      border-radius:10px; 
+      box-shadow:0 10px 40px rgba(45,104,248,0.15); 
+      z-index:130; 
+      display:none; 
+    }
+    input[aria-invalid="true"], textarea[aria-invalid="true"], select[aria-invalid="true"] { 
+      border-color:#E11D48; 
+      box-shadow:0 6px 18px rgba(225,29,72,0.06); 
+    }
+    .form-status { font-size:13px; color:var(--muted); }
+
+    /* Footer */
+    footer{
+      padding:22px 0 36px;
+      color:var(--muted);
+      border-top:1px solid rgba(16,24,40,0.03);
+      margin-top:16px
+    }
+    .footer-social {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-right:8px;
+    }
+    .footer-social a {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:34px;
+      height:34px;
+      border-radius:8px;
+      background:transparent;
+      border:1px solid rgba(16,24,40,0.04);
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .footer-social a:hover { transform:translateY(-3px); box-shadow:var(--shadow-1); }
+    .footer-brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+    }
+
+    /* Modal y toast */
+    .modal{position:fixed;inset:0;background:rgba(4,6,8,0.6);display:none;align-items:center;justify-content:center;padding:28px;z-index:120;backdrop-filter: blur(6px);}
+    .modal.show{display:flex}
+    .modal-card{background:#fff;border-radius:14px;padding:20px;max-width:880px;width:100%;box-shadow:var(--shadow-2);transform-origin:center}
+    .close-btn{position:absolute;right:22px;top:22px;background:rgba(255,255,255,0.95);border-radius:10px;padding:8px;border:0;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .modal.show .modal-card{ animation: popIn .22s cubic-bezier(.2,.9,.2,1); }
+    @keyframes popIn { from { transform: translateY(10px) scale(.995); opacity:0 } to { transform:none; opacity:1 } }
+    .toast{position:fixed;right:18px;bottom:18px;background:var(--azul);color:white;padding:12px 16px;border-radius:10px;box-shadow:0 10px 40px rgba(45,104,248,0.15);display:none;z-index:130}
+    .toast.show{display:block;animation:pop .36s ease}
+    @keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+    /* Estados de botones */
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    /* Accesibilidad */
+    :focus{outline:none}
+    :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
+    .btn:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+
+    /* Optimizaciones de rendimiento */
+    .thumb img[loading="lazy"] {
+      background: #f8f9fa;
+    }
+    .card, .btn, .plan-card {
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    /* Media queries para responsividad */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:18px;padding:20px 0}
+      .hero-right{order:2}
+      .contact-grid { grid-template-columns: 1fr; padding:0 8px; }
+      .row { flex-direction:column; }
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .funciones-grid { grid-template-columns: repeat(2, 1fr); }
+      nav.desktop-nav{display:none}
+      .mobile-toggle{display:inline-flex}
+      .mockup-frame{ 
+        display: block !important; 
+        width: 300px;
+        margin: 0 auto;
+      }
+      .plans-grid{ grid-template-columns: 1fr 1fr; gap:10px; }
+    }
+    @media (max-width:560px){
+      .grid{grid-template-columns:1fr}
+      .funciones-grid { grid-template-columns: 1fr; }
+      .logo-img-wrap{width:120px;height:36px}
+      .hero-left h1{font-size:28px}
+      .btn{min-height:44px}
+      .plans-grid{ grid-template-columns:1fr; gap:10px; }
+      .mockup-frame{ width: 280px; }
+      .footer-social a { width:30px; height:30px; }
+      .btn { min-height: 48px; padding: 14px 20px; }
+    }
+
+    /* Deshabilitar efectos hover en dispositivos táctiles */
+    @media (hover: none) {
+      .card:hover { transform: none; }
+      .btn:hover { transform: none; }
+      .plan-card:hover { transform: none; }
+      .funcion-card:hover { transform: none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -45,6 +561,7 @@
 
       <nav class="desktop-nav" aria-label="Enlaces principales">
         <a href="#galeria">Galería</a>
+        <a href="#funciones">Funciones</a>
         <a href="#precios">Precios</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -58,6 +575,7 @@
     <div id="mobileMenu" role="navigation" aria-label="Menú móvil" aria-hidden="true" style="display:none;padding:10px 16px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(248,249,250,0.98));border-top:1px solid rgba(16,24,40,0.03)">
       <div style="display:flex;flex-direction:column;gap:8px">
         <a href="#galeria">Galería</a>
+        <a href="#funciones">Funciones</a>
         <a href="#precios">Precios</a>
         <a href="#contacto">Contacto</a>
       </div>
@@ -71,7 +589,6 @@
       <!-- Sección Hero -->
       <section class="hero" aria-labelledby="heroTitle">
         <div class="hero-left fade-up in">
-          <span class="eyebrow">✨ Invitaciones Digitales</span>
           <h1 id="heroTitle">Invitaciones digitales elegantes que cuentan tu historia</h1>
           <p class="lead">Nuestras invitaciones son geniales para bodas, XV años, bautizos, cumpleaños, baby shower ¡y más!. Creamos invitaciones interactivas en formato de página web, con un diseño increíble personalizado completamente a tu gusto, contiene toda la información de tu evento disponible siempre.</p>
 
@@ -106,6 +623,17 @@
         </div>
       </section>
 
+      <!-- Sección de Funciones -->
+      <section id="funciones" class="funciones" aria-labelledby="funcionesTitle">
+        <div class="section-head">
+          <h2 id="funcionesTitle" class="section-title">Funciones de tus invitaciones</h2>
+        </div>
+
+        <div class="funciones-grid" id="funcionesContainer" role="list" aria-label="Lista de funciones disponibles">
+          <!-- Se llenará dinámicamente -->
+        </div>
+      </section>
+
       <!-- Sección de precios -->
       <section id="precios" aria-labelledby="preciosTitle">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px">
@@ -116,7 +644,7 @@
           <!-- Se llenará dinámicamente con cache optimizado -->
         </div>
 
-        <!-- Tabla comparativa de planes -->
+        <!-- Tabla comparativa de planes ACTUALIZADA Y REORDENADA -->
         <div class="compare-panel" aria-hidden="false">
           <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
             <strong style="margin-right:auto">Comparar Funciones</strong>
@@ -208,14 +736,19 @@
     <!-- ========== SECCIÓN DE CONTACTO ========== -->
     <section id="contacto" class="contact-modern" aria-labelledby="contactoTitle">
       <div class="contact-grid">
-        <div style="grid-column: 1 / -1; margin:0 0 2px 0;">
+        <div style="grid-column: 1 / -1; margin:0 0 2px 0;"> <!-- Reducido a 2px -->
           <h2 id="contactoTitle" class="section-title">Personaliza tu invitación</h2>
         </div>
 
         <div class="contact-left">
+          <!-- Dependencias externas para el calendario -->
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+          <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+          <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
           <!-- Formulario de contacto -->
           <form id="contactForm" class="contact-form-modern" novalidate aria-describedby="formHelp" autocomplete="on">
-            <div class="row" style="margin-bottom:8px">
+            <div class="row" style="margin-bottom:8px"> <!-- Reducido a 8px -->
               <label class="field">
                 <input id="name" name="name" type="text" placeholder=" " required autocomplete="name" />
                 <span class="label">Nombre</span>
@@ -232,7 +765,7 @@
               </label>
             </div>
 
-            <div class="row" style="margin-bottom:8px">
+            <div class="row" style="margin-bottom:8px"> <!-- Reducido a 8px -->
               <label class="field select-field">
                 <select id="type" name="type" required>
                   <option value="" disabled selected>Selecciona tipo de evento</option>
@@ -258,7 +791,7 @@
               </label>
             </div>
 
-            <label class="field full" style="margin-bottom:4px">
+            <label class="field full" style="margin-bottom:4px"> <!-- Reducido a 4px -->
               <textarea id="message" name="message" placeholder=" " required></textarea>
               <span class="label">Mensaje / Detalles</span>
             </label>
@@ -276,7 +809,7 @@
               <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
             </div>
 
-            <div id="formHelp" class="muted-small" style="margin-top:6px">
+            <div id="formHelp" class="muted-small" style="margin-top:6px"> <!-- Reducido a 6px -->
               Respuesta en <strong>24–48 hrs</strong>. También puedes escribir directamente a <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>.
             </div>
           </form>
@@ -339,10 +872,889 @@
   <!-- Toast para mensajes del sistema -->
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">Mensaje enviado</div>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
-  <script src="app.js"></script>
+  <!-- ========== JAVASCRIPT ========== -->
+  <script type="module">
+  /* eslint-disable no-console */
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp,
+    enableIndexedDbPersistence
+  } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
+  // ---------- Configuración de Firebase ----------
+  const firebaseConfig = {
+    apiKey: "AIzaSyCTh8kPdvu-6Z5_cckNts22VrhdUTLVspM",
+    authDomain: "invitea-f7331.firebaseapp.com",
+    projectId: "invitea-f7331",
+    storageBucket: "invitea-f7331.firebasestorage.app",
+    messagingSenderId: "145115727672",
+    appId: "1:145115727672:web:d1d89c20bf946b9e2663cd",
+    measurementId: "G-8JS1MDZVGQ"
+  };
+
+  // Inicialización de Firebase
+  const app = initializeApp(firebaseConfig);
+  let db;
+  try {
+    db = getFirestore(app);
+    try { enableIndexedDbPersistence(db).catch(e => console.warn('IndexedDB persistence no disponible:', e && e.code ? e.code : e)); }
+    catch(e){ console.warn('Error al habilitar persistencia:', e); }
+  } catch (e) {
+    console.warn('Firestore no disponible:', e);
+    db = null;
+  }
+
+  // ---------- Sistema de Cache Optimizado ----------
+  const CACHE_KEYS = {
+    GALLERY: 'invitea_gallery_data',
+    PLANS: 'invitea_plans_data',
+    FUNCIONES: 'invitea_funciones_data',
+    TIMESTAMP: 'invitea_cache_timestamp'
+  };
+
+  // Función para guardar en cache
+  function saveToCache(key, data) {
+    try {
+      const cacheData = {
+        data: data,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(key, JSON.stringify(cacheData));
+      return true;
+    } catch (e) {
+      console.warn('Error guardando en cache:', e);
+      return false;
+    }
+  }
+
+  // Función para leer del cache
+  function getFromCache(key, maxAge = 24 * 60 * 60 * 1000) { // 24 horas por defecto
+    try {
+      const cached = localStorage.getItem(key);
+      if (!cached) return null;
+      
+      const { data, timestamp } = JSON.parse(cached);
+      
+      // Verificar si el cache está expirado
+      if (Date.now() - timestamp > maxAge) {
+        localStorage.removeItem(key);
+        return null;
+      }
+      
+      return data;
+    } catch (e) {
+      console.warn('Error leyendo cache:', e);
+      return null;
+    }
+  }
+
+  // ---------- Datos Optimizados ----------
+  const GALLERY_DATA = [
+    {
+      id: 1,
+      title: "Basico (Cumpleaños)",
+      description: "Diseño festivo y colorido para celebrar.",
+      image: "https://i.ibb.co/wFVHyPtL/04476d50-b059-4919-b8dc-81ac6d097f40.jpg",
+      demoUrl: "https://invitea.github.io/JulianYEliasFEST/",
+      type: "cumple"
+    },
+    {
+      id: 2,
+      title: "Estándar (Primera Comunión)",
+      description: "Diseño festivo y elegante para celebrar.",
+      image: "https://i.ibb.co/MyswS4v6/image.jpg",
+      demoUrl: "https://invitea.github.io/JimenaLopezGaona/",
+      confirmUrl: "https://invitea.github.io/JimenaLopezGaona_PanelControl/",
+      type: "comunion"
+    },
+    {
+      id: 3,
+      title: "Premium (Boda)",
+      description: "Diseño elegante para celebrar.",
+      image: "https://i.ibb.co/fzTcNfzT/Maria-YJose.png",
+      demoUrl: "https://invitea.github.io/NuestraBoda_Jose_Y_Maria/",
+      confirmUrl: "https://invitea.github.io/Confirmaciones_Boda_Maria_Y_Jose/",
+      type: "boda"
+    }
+  ];
+
+  const FUNCIONES_DATA = [
+    {
+      id: 1,
+      title: "Portada",
+      description: "Diseño elegante y personalizado que presenta tu evento de manera impactante.",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+              </svg>`
+    },
+    {
+      id: 2,
+      title: "Ubicaciones",
+      description: "Mapas interactivos para la ceremonia y recepción con direcciones precisas.",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>`
+    },
+    {
+      id: 3,
+      title: "Mesa de Regalos",
+      description: "Integración con tus tiendas preferidas para facilitar los regalos a tus invitados.",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20,12 20,22 4,22 4,12"></polyline>
+                <rect x="2" y="7" width="20" height="5"></rect>
+                <line x1="12" y1="22" x2="12" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+              </svg>`
+    },
+    {
+      id: 4,
+      title: "Cuenta Regresiva",
+      description: "Agrega emoción con un contador que muestra el tiempo restante para tu evento.",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12,6 12,12 16,14"></polyline>
+              </svg>`
+    },
+    {
+      id: 5,
+      title: "Galería Multimedia",
+      description: "Comparte fotos y videos especiales de la pareja con tus invitados.",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21,15 16,10 5,21"></polyline>
+              </svg>`
+    },
+    {
+      id: 6,
+      title: "Itinerario",
+      description: "Programa detallado del evento con horarios y actividades planificadas.",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>`
+    },
+    {
+      id: 7,
+      title: "Código de Vestimenta",
+      description: "Indica el estilo de vestuario apropiado para que todos luzcan perfectos.",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path>
+              </svg>`
+    },
+    {
+      id: 8,
+      title: "RSVP",
+      description: "Sistema de confirmación de asistencia con panel de control en tiempo real.",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <polyline points="17,11 19,13 23,9"></polyline>
+              </svg>`
+    }
+  ];
+
+  const PLANS_DATA = [
+    {
+      id: "basic",
+      title: "Básico",
+      subtitle: "Perfecto para eventos pequeños",
+      price: "$499 MXN",
+      features: [
+        "Portada (texto y tipografía personalizable)",
+        "2 funciones a elegir",
+        "2 actualizaciones"
+      ],
+      recommended: false
+    },
+    {
+      id: "standard", 
+      title: "Estándar",
+      subtitle: "Nuestro paquete más elegido",
+      price: "$899 MXN",
+      features: [
+        "Portada (texto y tipografía personalizable)",
+        "3 funciones o las que elijas usar", 
+        "Confirmación de asistencia",
+        "Panel de confirmaciones en tiempo real",
+        "Actualizaciones ilimitadas"
+      ],
+      recommended: true
+    },
+    {
+      id: "premium",
+      title: "Premium", 
+      subtitle: "Para eventos con máxima personalización",
+      price: "$1,199 MXN",
+      features: [
+        "Portada (texto y tipografía personalizable)",
+        "8 funciones o las que elijas usar",
+        "Confirmación de asistencia",
+        "Panel de confirmaciones en tiempo real", 
+        "Actualizaciones ilimitadas"
+      ],
+      recommended: false
+    }
+  ];
+
+  // ---------- Utilidades DOM ----------
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+  const toastEl = document.getElementById('contactToast') || document.getElementById('toast');
+
+  // Mostrar notificaciones toast
+  function showToast(msg){
+    if(!toastEl) { console.log('[toast]', msg); return; }
+    toastEl.textContent = msg;
+    toastEl.style.display = 'block';
+    setTimeout(()=> { toastEl.style.display = 'none'; }, 2600);
+  }
+
+  // Actualizar estado del formulario
+  function setFormStatus(msg){
+    const s = document.getElementById('formStatus');
+    if(s) s.textContent = msg;
+  }
+
+  // Limpiar estados de error en formulario
+  function clearInvalids(form){
+    ['name','email','phone','type','date','message'].forEach(id=>{
+      const el = form[id];
+      if(el) el.removeAttribute('aria-invalid');
+    });
+    setFormStatus('');
+  }
+
+  // Marcar campo como inválido
+  function markInvalid(el, msg){
+    if(!el) return;
+    el.setAttribute('aria-invalid','true');
+    if(msg) setFormStatus(msg);
+  }
+
+  // ---------- Renderizado Optimizado de Galería ----------
+  function renderGallery() {
+    const galleryContainer = document.getElementById('catalog');
+    if (!galleryContainer) return;
+    
+    // Intentar obtener del cache primero
+    const cachedHTML = getFromCache(CACHE_KEYS.GALLERY);
+    if (cachedHTML) {
+      galleryContainer.innerHTML = cachedHTML;
+      initGalleryInteractions();
+      animateGalleryItems();
+      return;
+    }
+    
+    // Si no hay cache, renderizar desde datos
+    const galleryHTML = GALLERY_DATA.map(item => `
+      <article class="card elev-1 fade-up" data-title="${item.title}" data-type="${item.type}">
+        <div class="thumb" role="img" aria-label="${item.title}">
+          <img loading="lazy" alt="Invitación ${item.title}" 
+               src="${item.image}" 
+               width="800" height="500"
+               onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDgwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjRjhGOUZBIi8+CjxwYXRoIGQ9Ik0zMjAgMjUwTDM4MCAyNzBNNDIwIDIzMEw0NDAgMjUwTTM2MCAyMTBMMzQwIDE5ME0yODAgMjcwTDMwMCAyNTBNNDYwIDIxMEw0ODAgMTkwTTI0MCAyMzBMMjYwIDIxME01MDAgMjUwTDUyMCAyNzBNNTQwIDIzMEw1NjAgMjEwIiBzdHJva2U9IiNENkQ4REQiIHN0cm9rZS13aWR0aD0iMiIvPgo8Y2lyY2xlIGN4PSI0MDAiIGN5PSIyNTAiIHI9IjQwIiBmaWxsPSIjRDZEOEREIi8+Cjwvc3ZnPgo='">
+        </div>
+        <div style="margin-top:10px">
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <div class="meta">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <a class="btn btn-secondary" href="${item.demoUrl}" target="_blank" rel="noopener noreferrer">Demo</a>
+              ${item.confirmUrl ? `<a class="btn btn-secondary" href="${item.confirmUrl}" target="_blank" rel="noopener noreferrer">Demo Confirmaciones</a>` : ''}
+            </div>
+          </div>
+        </div>
+      </article>
+    `).join('');
+    
+    galleryContainer.innerHTML = galleryHTML;
+    
+    // Guardar en cache para próximas cargas
+    saveToCache(CACHE_KEYS.GALLERY, galleryHTML);
+    
+    initGalleryInteractions();
+    animateGalleryItems();
+  }
+
+  // ---------- Renderizado Optimizado de Funciones ----------
+  function renderFunciones() {
+    const funcionesContainer = document.getElementById('funcionesContainer');
+    if (!funcionesContainer) return;
+    
+    // Intentar obtener del cache primero
+    const cachedHTML = getFromCache(CACHE_KEYS.FUNCIONES);
+    if (cachedHTML) {
+      funcionesContainer.innerHTML = cachedHTML;
+      animateFuncionesItems();
+      return;
+    }
+    
+    // Si no hay cache, renderizar desde datos
+    const funcionesHTML = FUNCIONES_DATA.map(funcion => `
+      <div class="funcion-card fade-up">
+        <div class="funcion-icon">
+          ${funcion.icon}
+        </div>
+        <h3>${funcion.title}</h3>
+        <p>${funcion.description}</p>
+      </div>
+    `).join('');
+    
+    funcionesContainer.innerHTML = funcionesHTML;
+    
+    // Guardar en cache para próximas cargas
+    saveToCache(CACHE_KEYS.FUNCIONES, funcionesHTML);
+    
+    animateFuncionesItems();
+  }
+
+  // Animación de items de funciones
+  function animateFuncionesItems() {
+    const items = document.querySelectorAll('#funcionesContainer .fade-up');
+    items.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.add('in');
+      }, 100 + index * 80);
+    });
+  }
+
+  // Animación de items de galería
+  function animateGalleryItems() {
+    const items = document.querySelectorAll('#catalog .fade-up');
+    items.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.add('in');
+      }, 100 + index * 80);
+    });
+  }
+
+  // Función para inicializar interacciones de galería
+  function initGalleryInteractions() {
+    // Reinicializar event listeners para las cards
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('a')) {
+          const img = card.querySelector('img');
+          if (img) {
+            openModal(img.src, card.dataset.title, card.querySelector('p').textContent);
+          }
+        }
+      });
+    });
+  }
+
+  // ---------- Renderizado Optimizado de Planes ----------
+  function renderPlans() {
+    const plansContainer = document.querySelector('.plans-grid');
+    if (!plansContainer) return;
+    
+    // Intentar obtener del cache primero
+    const cachedHTML = getFromCache(CACHE_KEYS.PLANS);
+    if (cachedHTML) {
+      plansContainer.innerHTML = cachedHTML;
+      initPlanInteractions();
+      animatePlanItems();
+      return;
+    }
+    
+    // Si no hay cache, renderizar desde datos
+    const plansHTML = PLANS_DATA.map(plan => `
+      <article class="plan-card fade-up ${plan.recommended ? 'recommended' : ''}" 
+               role="listitem" aria-labelledby="plan-${plan.id}">
+        ${plan.recommended ? '<div class="plan-badge" aria-hidden="true">Recomendado</div>' : ''}
+        
+        <header>
+          <h3 id="plan-${plan.id}" class="plan-title">${plan.title}</h3>
+          <p class="plan-sub">${plan.subtitle}</p>
+        </header>
+
+        <div class="plan-price" aria-hidden="true">${plan.price} <small>/ pago único</small></div>
+
+        <ul class="plan-features">
+          ${plan.features.map(feature => `<li>${feature}</li>`).join('')}
+        </ul>
+
+        <div class="plan-cta-row">
+          <button type="button" class="btn plan-cta" 
+                  data-plan="${plan.title}" 
+                  data-price="${plan.price}" 
+                  aria-label="Comprar plan ${plan.title}">
+            Comprar
+          </button>
+        </div>
+      </article>
+    `).join('');
+    
+    plansContainer.innerHTML = plansHTML;
+    
+    // Guardar en cache para próximas cargas
+    saveToCache(CACHE_KEYS.PLANS, plansHTML);
+    
+    initPlanInteractions();
+    animatePlanItems();
+  }
+
+  // Animación de items de planes
+  function animatePlanItems() {
+    const items = document.querySelectorAll('.plans-grid .plan-card');
+    items.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.add('in');
+      }, 220 + index * 110);
+    });
+  }
+
+  // Función para inicializar interacciones de planes
+  function initPlanInteractions() {
+    // Reinicializar event listeners para botones de planes
+    wirePlanCTAs();
+  }
+
+  // ---------- Carga Diferida con Intersection Observer ----------
+  function initLazyLoading() {
+    const sections = [
+      { id: 'galeria', loader: renderGallery },
+      { id: 'funciones', loader: renderFunciones },
+      { id: 'precios', loader: renderPlans }
+    ];
+
+    const observers = [];
+
+    sections.forEach(({ id, loader }) => {
+      const section = document.getElementById(id);
+      if (!section) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            loader();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { 
+        rootMargin: '100px', // Carga 100px antes de que sea visible
+        threshold: 0.1 
+      });
+
+      observer.observe(section);
+      observers.push(observer);
+    });
+
+    return observers;
+  }
+
+  // ---------- Inicialización del selector de fecha ----------
+  function initDatepicker(){
+    if(typeof flatpickr === 'undefined'){ console.warn('flatpickr no cargado'); return; }
+    // Localizar a español si está disponible
+    try { if(flatpickr.l10ns && flatpickr.l10ns.es) flatpickr.localize(flatpickr.l10ns.es); } catch(e){}
+    flatpickr('#date', {
+      dateFormat: 'd/m/Y',        // Formato dd/mm/aaaa
+      altInput: false,
+      allowInput: true,
+      clickOpens: true,
+      disableMobile: true,        // Usar flatpickr en móviles para formato consistente
+      minDate: 'today'            // Bloquear fechas anteriores al día actual
+    });
+  }
+
+  // ---------- Formateo de teléfono ----------
+  function formatPhoneDigits(digits){
+    if(!digits) return '';
+    let prefix = '';
+    let core = digits;
+    
+    // Manejar código de país
+    if(core.startsWith('52') && core.length > 2){
+      prefix = '+52 ';
+      core = core.slice(2);
+    } else if(core.startsWith('521') && core.length > 3){
+      prefix = '+52 ';
+      core = core.slice(3);
+    }
+    
+    // Formatear número según longitud
+    if(core.length <= 2) return prefix + core;
+    if(core.length <= 6) {
+      return prefix + core.slice(0,2) + ' ' + core.slice(2);
+    }
+    
+    const a = core.slice(0,2);         // Lada
+    const b = core.slice(2,6);         // Primeros 4 dígitos
+    const c = core.slice(6,10);        // Últimos 4 dígitos
+    if(c) return prefix + `${a} ${b} ${c}`;
+    return prefix + `${a} ${b}`;
+  }
+
+  // Aplicar máscara de teléfono
+  function wirePhoneMask(){
+    const phoneEl = document.getElementById('phone');
+    if(!phoneEl) return;
+    
+    phoneEl.addEventListener('input', (e) => {
+      const digits = phoneEl.value.replace(/\D/g,'');
+      const formatted = formatPhoneDigits(digits);
+      phoneEl.value = formatted;
+    });
+    
+    phoneEl.addEventListener('paste', (ev) => {
+      ev.preventDefault();
+      const text = (ev.clipboardData || window.clipboardData).getData('text') || '';
+      const digits = text.replace(/\D/g,'');
+      phoneEl.value = formatPhoneDigits(digits);
+    });
+  }
+
+  // ---------- Botones de planes ----------
+  function wirePlanCTAs(){
+    const planBtns = $$('.plan-cta');
+    planBtns.forEach(b => { b.replaceWith(b.cloneNode(true)); });
+    
+    $$('.plan-cta').forEach(b => b.addEventListener('click', ()=> {
+      const plan = b.dataset.plan || '';
+      const price = b.dataset.price || '';
+      const nameField = $('#name');
+      const messageField = $('#message');
+      const selectedPlanField = $('#selectedPlan');
+
+      if (selectedPlanField) selectedPlanField.value = `${plan} — paquete seleccionado (${price})`;
+      if (messageField) messageField.value = `Estoy interesad@ en el plan "${plan}" (pago único ${price}).`;
+
+      const contacto = $('#contacto');
+      if (contacto) contacto.scrollIntoView({behavior:'smooth', block:'start'});
+      setTimeout(()=>{ if(nameField) nameField.focus(); }, 600);
+    }));
+  }
+
+  // ---------- Modal de vista previa ----------
+  function wirePreviewButtonsDynamicImage() {
+    const buttons = Array.from(document.querySelectorAll('.previewBtn'));
+    buttons.forEach(btn => {
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      newBtn.addEventListener('click', () => {
+        const clickedCard = newBtn.closest('.card');
+        const clickedImg = clickedCard ? clickedCard.querySelector('img') : null;
+        const srcFromBtn = newBtn.dataset?.src || '';
+        const src = srcFromBtn || (clickedImg ? clickedImg.src : '');
+        const canonical = getCanonicalTextData();
+        openModal(src, canonical.title, canonical.desc);
+      });
+    });
+  }
+
+  // Funcionalidad del modal
+  const modal = $('#modal'), 
+        modalImage = $('#modalImage'), 
+        modalTitle = $('#modalTitle'), 
+        modalDesc = $('#modalDesc'), 
+        modalClose = $('#modalClose');
+        
+  let lastFocused = null;
+
+  function setBackgroundInert(inert){
+    const main = $('main'), head = $('header'), foot = $('footer');
+    [main, head, foot].forEach(el=>{
+      if(!el) return;
+      if('inert' in HTMLElement.prototype) el.inert = inert;
+      else inert ? el.setAttribute('aria-hidden','true') : el.removeAttribute('aria-hidden');
+    });
+  }
+
+  function getModalFocusables() {
+    return Array.from(modal.querySelectorAll('a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'))
+      .filter(el => el.offsetParent !== null && el.getClientRects().length);
+  }
+
+  function trapFocus(e){
+    if(e.key !== 'Tab') return;
+    const focusables = getModalFocusables();
+    if (focusables.length === 0) { e.preventDefault(); return; }
+    const first = focusables[0], last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  }
+
+  function onModalKey(e){ 
+    if(e.key === 'Escape'){ closeModal(); return; } 
+    trapFocus(e); 
+  }
+
+  function openModal(src, title, desc){
+    if(!modal) return;
+    lastFocused = document.activeElement;
+    if(modalImage) modalImage.src = src || '';
+    if(modalTitle) modalTitle.textContent = title || 'Invitación';
+    if(modalDesc) modalDesc.textContent = desc || 'Vista previa del diseño.';
+    modal.classList.add('show'); 
+    modal.setAttribute('aria-hidden','false'); 
+    document.body.style.overflow='hidden';
+    setBackgroundInert(true);
+    setTimeout(()=>{ if(modalClose) modalClose.focus(); }, 40);
+    document.addEventListener('keydown', onModalKey);
+  }
+
+  function closeModal(){
+    if(!modal) return;
+    modal.classList.remove('show'); 
+    modal.setAttribute('aria-hidden','true'); 
+    if(modalImage) modalImage.src = '';
+    document.body.style.overflow=''; 
+    setBackgroundInert(false);
+    if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    document.removeEventListener('keydown', onModalKey);
+  }
+
+  if (modal) { 
+    modal.addEventListener('click', (e) => { 
+      if (e.target === modal) closeModal(); 
+    }); 
+  }
+  
+  if(modalClose) modalClose.addEventListener('click', closeModal);
+
+  function getCanonicalCard() {
+    const byType = document.querySelector('.card[data-type="cumple"]');
+    if(byType) return byType;
+    const all = document.querySelectorAll('.card');
+    return all.length > 1 ? all[1] : all[0] || null;
+  }
+
+  function getCanonicalTextData() {
+    const card = getCanonicalCard();
+    if(!card) return { title: 'Invitación', desc: '' };
+    const title = card.dataset.title || (card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : 'Invitación');
+    const desc = card.querySelector('p') ? card.querySelector('p').textContent.trim() : '';
+    return { title, desc };
+  }
+
+  // ---------- WhatsApp y muestra rápida ----------
+  function wireWhatsAppAndQuickSample(){
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    if(whatsappBtn){
+      whatsappBtn.addEventListener('click', ()=>{
+        const attrPhone = whatsappBtn.dataset.phone;
+        const PHONE_IN_E164 = (typeof attrPhone === 'string' && attrPhone.trim() !== '') ? attrPhone.replace(/\D/g,'') : '5215512345678';
+        const validPhone = /^[0-9]{7,15}$/.test(PHONE_IN_E164);
+        if(!validPhone){ showToast('WhatsApp no configurado'); return; }
+        const text = encodeURIComponent('Hola, quiero información sobre una invitación digital. ¿Podrían ayudarme?');
+        const url = `https://wa.me/${PHONE_IN_E164}?text=${text}`;
+        const win = window.open(url, '_blank', 'noopener');
+        if(win) try { win.opener = null; } catch(e){ }
+        else { window.location.href = url; }
+      });
+    }
+
+    const quickSample = document.getElementById('quickSample');
+    if(quickSample){
+      quickSample.addEventListener('click', ()=>{
+        const el = document.getElementById('message');
+        if(el) el.value = 'Hola, ¿podrían enviarme una muestra de diseños similares a...';
+        document.getElementById('name')?.focus();
+        showToast('Formulario prellenado — edita y envía');
+      });
+    }
+  }
+
+  // ---------- Manejo del formulario de contacto ----------
+  (function wireContactForm(){
+    const form = document.getElementById('contactForm');
+    if(!form) { console.warn('Contacto: no se encontró #contactForm'); return; }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      clearInvalids(form);
+
+      const submitBtn = document.getElementById('submitBtn');
+      const name = (form.name?.value || '').trim();
+      const email = (form.email?.value || '').trim();
+      const phoneRaw = (form.phone?.value || '').trim();
+      const phoneDigits = phoneRaw.replace(/\D/g,'');
+      const phoneOk = phoneDigits.length >= 7; // Mínimo 7 dígitos
+      const type = (form.type?.value || '').trim();
+      const message = (form.message?.value || '').trim();
+      const dateVal = (form.date?.value || '').trim();
+      const selectedPlan = (form.selectedPlan && form.selectedPlan.value) ? form.selectedPlan.value : null;
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
+
+      // Validación de fecha (dd/mm/aaaa)
+      const dateMatch = dateVal.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+      let dateISO = null;
+      let dateOk = false;
+      if(dateMatch){
+        const d = parseInt(dateMatch[1],10), m = parseInt(dateMatch[2],10), y = parseInt(dateMatch[3],10);
+        const candidate = new Date(y, m - 1, d);
+        if(candidate && candidate.getFullYear() === y && (candidate.getMonth() + 1) === m && candidate.getDate() === d){
+          dateOk = true;
+          const mm = String(m).padStart(2,'0');
+          const dd = String(d).padStart(2,'0');
+          dateISO = `${y}-${mm}-${dd}`;
+        }
+      }
+
+      // Validación de campos
+      if(!name || !emailOk || !phoneOk || !type || !message || !dateOk){
+        if(!name) markInvalid(form.name);
+        if(!emailOk) markInvalid(form.email, 'Ingresa un correo válido');
+        if(!phoneOk) markInvalid(form.phone, 'Ingresa un teléfono válido (mín. 7 dígitos)');
+        if(!type) markInvalid(form.type);
+        if(!message) markInvalid(form.message);
+        if(!dateOk) markInvalid(form.date, 'Fecha inválida. Usa dd/mm/aaaa');
+        const firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if(firstInvalid && typeof firstInvalid.focus === 'function') firstInvalid.focus();
+        showToast('Completa todos los campos correctamente');
+        return;
+      }
+
+      const payloadForServer = {
+        name,
+        email,
+        phone: phoneDigits,
+        type,
+        message,
+        date_ddmmyyyy: dateVal,
+        date_iso: dateISO,
+        selectedPlan: selectedPlan || '',
+        ts: new Date().toISOString()
+      };
+
+      // Estado de envío
+      const prevBtnText = submitBtn ? submitBtn.textContent : null;
+      if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
+      form.setAttribute('aria-busy','true');
+      setFormStatus('');
+
+      // Envío a Firestore
+      let firestoreOk = false;
+      if(db){
+        try {
+          const colRef = collection(db, 'contact_requests');
+          await addDoc(colRef, {
+            ...payloadForServer,
+            createdAt: serverTimestamp(),
+            userAgent: navigator.userAgent || null
+          });
+          firestoreOk = true;
+          form.reset();
+          showToast('¡Solicitud enviada!');
+          setFormStatus('¡Gracias! Recibimos tu solicitud. Te contactamos pronto.');
+        } catch (err) {
+          console.error('Error escribiendo en Firestore:', err);
+        }
+      }
+
+      // Fallback a API propia si Firestore falla
+      if(!firestoreOk){
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(payloadForServer),
+            credentials: 'omit'
+          });
+          if(!res.ok) throw new Error('Error de envío servidor');
+          form.reset();
+          showToast(firestoreOk ? '¡Solicitud registrada!' : '¡Solicitud enviada (vía servidor)!');
+          setFormStatus('¡Gracias! Recibimos tu solicitud. Te contactamos pronto.');
+        } catch (err){
+          console.error('Fallback (POST /api/contact) falló:', err);
+          showToast('Error al enviar. Intenta más tarde.');
+          setFormStatus('Error al enviar. Escríbenos a invitea.design@gmail.com');
+        }
+      }
+
+      // Restaurar estado del botón
+      if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = prevBtnText || 'Enviar solicitud'; }
+      form.removeAttribute('aria-busy');
+    });
+  })();
+
+  // ---------- Inicialización Optimizada de la Aplicación ----------
+  (function init(){
+    // Precarga de imágenes críticas
+    const criticalImages = [
+      'https://i.ibb.co/1Qf3kqZ/invitea-logo.png',
+      'https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=720&auto=format&fit=crop'
+    ];
+    
+    criticalImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    // Inicializar componentes básicos
+    initDatepicker();
+    wirePreviewButtonsDynamicImage();
+    wireWhatsAppAndQuickSample();
+    wirePhoneMask();
+
+    // Carga diferida de secciones pesadas
+    initLazyLoading();
+
+    // Año actual en footer
+    const yearEl = $('#year'); 
+    if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Menú móvil
+    const btnMobile = $('#btnMobile'), mobileMenu = $('#mobileMenu');
+    let mobileOpen = false;
+    
+    function toggleMobile(open){
+      if(!mobileMenu || !btnMobile) return;
+      mobileOpen = !!open;
+      mobileMenu.style.display = mobileOpen ? 'block' : 'none';
+      mobileMenu.setAttribute('aria-hidden', String(!mobileOpen));
+      btnMobile.setAttribute('aria-expanded', String(mobileOpen));
+      const main = document.querySelector('main');
+      if(main){
+        if('inert' in HTMLElement.prototype){ main.inert = mobileOpen; }
+        else { if(mobileOpen) main.setAttribute('aria-hidden', 'true'); else main.removeAttribute('aria-hidden'); }
+      }
+    }
+    
+    if(btnMobile){ 
+      btnMobile.addEventListener('click', ()=> toggleMobile(!mobileOpen)); 
+    }
+
+    // Navegación suave
+    $$('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const target = a.getAttribute('href');
+        if(target === '#') return;
+        const el = document.querySelector(target);
+        if(el){ 
+          e.preventDefault(); 
+          el.scrollIntoView({behavior:'smooth', block:'start'}); 
+          if(mobileOpen && mobileMenu){ toggleMobile(false); } 
+        }
+      });
+    });
+
+    // Animaciones de entrada básicas (solo para elementos visibles inicialmente)
+    window.addEventListener('load', ()=>{
+      // Solo animar elementos del hero inicialmente
+      document.querySelectorAll('.hero .fade-up').forEach((el, i) => 
+        setTimeout(() => el.classList.add('in'), 100 + i * 80)
+      );
+    });
+  })();
+
+  </script>
+
+  <!-- Polyfill para accesibilidad -->
+  <script src="https://unpkg.com/wicg-inert@3.0.0/dist/inert.min.js" defer></script>
 
 </body>
 </html>
