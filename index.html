@@ -102,7 +102,7 @@
     nav.desktop-nav a:hover{color:var(--azul);transform:translateY(-2px)}
     .mobile-toggle{display:none;background:transparent;border:0;padding:10px;border-radius:12px}
 
-    /* Sección Hero */
+    /* Sección Hero MEJORADA */
     .hero{
       padding-top: 24px;
       padding-bottom: 24px;
@@ -136,6 +136,7 @@
       transform:rotate(-2deg);
       display:block;
       transition:transform .28s ease, box-shadow .28s ease;
+      position: relative;
     }
     .mockup-frame:hover{ 
       transform: rotate(-1deg) translateY(-6px); 
@@ -149,6 +150,99 @@
       border-radius:10px;
       object-fit:cover;
       background:#f0f0f0;
+    }
+    
+    /* Hotspots para mockup - ELIMINADOS según solicitud */
+
+    /* Social proof - ELIMINADO según solicitud */
+
+    /* NUEVA SECCIÓN: Demo Interactivo */
+    .demo-section {
+      padding:40px 0;
+      background:linear-gradient(180deg, var(--bg) 0%, #fff 100%);
+    }
+    .demo-card {
+      background:var(--card-bg);
+      border-radius:16px;
+      padding:24px;
+      box-shadow:var(--shadow-1);
+      text-align:center;
+    }
+    .demo-preview {
+      max-width:500px;
+      margin:0 auto;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:var(--shadow-2);
+    }
+    .demo-header {
+      background:#f8f9fa;
+      padding:40px 20px;
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+    .demo-features {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:24px;
+    }
+    .demo-feature {
+      text-align:center;
+      padding:16px;
+    }
+    .demo-icon {
+      width:40px;
+      height:40px;
+      background:var(--azul);
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 8px;
+    }
+    
+    /* Botones de demo */
+    .demo-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Sección de testimonios */
+    .testimonials {
+      padding:40px 0;
+      background:var(--card-bg);
+    }
+    .testimonial-card {
+      background:white;
+      padding:24px;
+      border-radius:12px;
+      box-shadow:var(--shadow-1);
+    }
+    .testimonial-header {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:16px;
+    }
+    .testimonial-avatar {
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      background:#e2e8f0;
+    }
+
+    /* CTA estratégico */
+    .strategic-cta {
+      background:linear-gradient(135deg, var(--azul), var(--azul-2));
+      color:white;
+      padding:32px;
+      border-radius:16px;
+      box-shadow:var(--shadow-2);
+      text-align:center;
+      margin:40px auto;
     }
 
     /* Galería de invitaciones */
@@ -359,7 +453,7 @@
     .compare-panel th:first-child, .compare-panel td:first-child { width: 40%; }
     .compare-panel th:not(:first-child), .compare-panel td:not(:first-child) { width: 20%; text-align: center; }
 
-    /* ========== SECCIÓN DE CONTACTO - COMPLETAMENTE HOMOLOGADA ========== */
+    /* ========== SECCIÓN DE CONTACTO ========== */
     .contact-modern { 
       padding-top: 18px;
       padding-bottom: 18px;
@@ -368,7 +462,7 @@
     .contact-grid { 
       display: grid; 
       grid-template-columns: 1fr; 
-      gap: 8px; /* Reducido a 8px para igualar otras secciones */
+      gap: 8px;
       align-items: start; 
       width: calc(100% - 32px);
       max-width: var(--max-width);
@@ -379,13 +473,13 @@
     .contact-left { 
       display: flex; 
       flex-direction: column; 
-      gap: 6px; /* Reducido a 6px */
+      gap: 6px;
       width: 100%;
     }
 
     .contact-left h2 { 
       font-size: 22px; 
-      margin: 0 0 2px; /* Reducido a 2px para igualar otras secciones */
+      margin: 0 0 2px;
       font-family: Poppins, Intersans-serif; 
       font-weight: 700;
     }
@@ -393,7 +487,7 @@
     .contact-form-modern { 
       background: linear-gradient(180deg, #fff, #FBFCFF); 
       border-radius: 14px; 
-      padding: 16px; /* Reducido a 16px para igualar las cards */
+      padding: 16px;
       box-shadow: var(--shadow-1); 
       border: 1px solid rgba(16,24,40,0.04); 
       width: 100%;
@@ -403,7 +497,7 @@
     .contact-form-modern .row { 
       display: flex; 
       gap: 10px; 
-      margin-bottom: 8px; /* Reducido a 8px */
+      margin-bottom: 8px;
       width: 100%;
     }
 
@@ -422,7 +516,7 @@
 
     .field input, .field textarea, .field select {
       width: 100%; 
-      padding: 10px 8px 8px; /* Reducido para igualar otras secciones */
+      padding: 10px 8px 8px;
       border-radius: 10px; 
       border: 1px solid rgba(16,24,40,0.06);
       background: transparent; 
@@ -433,15 +527,15 @@
     }
 
     .field textarea { 
-      min-height:90px; /* Reducido */
+      min-height:90px;
       resize:vertical; 
-      padding-top:14px; /* Reducido */
+      padding-top:14px;
     }
 
     .field .label {
       position:absolute; 
-      left:8px; /* Reducido */
-      top:8px; /* Reducido */
+      left:8px;
+      top:8px;
       transform-origin:left top; 
       pointer-events:none;
       transition: all .16s ease; 
@@ -455,7 +549,7 @@
     .field input:not(:placeholder-shown) + .label,
     .field textarea:focus + .label,
     .field textarea:not(:placeholder-shown) + .label {
-      transform: translateY(-8px) scale(.88); /* Reducido */
+      transform: translateY(-8px) scale(.88);
       color:var(--azul); 
       background:transparent;
     }
@@ -467,7 +561,7 @@
       display:flex; 
       align-items:center; 
       gap:8px; 
-      margin-top:6px; /* Reducido */
+      margin-top:6px;
       flex-wrap:wrap; 
     }
     .btn-outline { 
@@ -566,6 +660,7 @@
       .grid{grid-template-columns:repeat(2,1fr)}
       .why-grid { grid-template-columns: repeat(2, 1fr); }
       .funciones-grid { grid-template-columns: repeat(2, 1fr); }
+      .demo-features { grid-template-columns: repeat(2, 1fr); }
       nav.desktop-nav{display:none}
       .mobile-toggle{display:inline-flex}
       .mockup-frame{ 
@@ -579,6 +674,8 @@
       .grid{grid-template-columns:1fr}
       .why-grid { grid-template-columns: 1fr; }
       .funciones-grid { grid-template-columns: 1fr; }
+      .demo-features { grid-template-columns: 1fr; }
+      .demo-buttons { flex-direction: column; align-items: center; }
       .logo-img-wrap{width:120px;height:36px}
       .hero-left h1{font-size:28px}
       .btn{min-height:44px}
@@ -646,15 +743,20 @@
   <main id="maincontent">
     <div class="container">
 
-      <!-- Sección Hero -->
+      <!-- Sección Hero MEJORADA -->
       <section class="hero" aria-labelledby="heroTitle">
         <div class="hero-left fade-up in">
-          <h1 id="heroTitle">Invitaciones digitales elegantes que cuentan tu historia</h1>
-          <p class="lead">Nuestras invitaciones son geniales para bodas, XV años, bautizos, cumpleaños, baby shower ¡y más!. Creamos invitaciones interactivas en formato de página web, con un diseño increíble personalizado completamente a tu gusto, contiene toda la información de tu evento disponible siempre.</p>
+          <!-- ELIMINADO: El eyebrow "Invitaciones que tus invitados AMARÁN" -->
+          <h1 id="heroTitle">Invitaciones que tus invitados AMARÁN</h1>
+          <p class="lead">Diseños interactivos personalizados para bodas, XV años, cumpleaños y eventos especiales. 90% más económico que las invitaciones tradicionales.</p>
+
+          <!-- ELIMINADO: Social proof con avatares y +500 clientes satisfechos -->
 
           <div class="hero-cta" role="region" aria-label="Llamadas a la acción">
-            <a class="btn btn-primary" href="#contacto" id="ctaPrimary">Personalizar ahora</a>
-            <a class="btn btn-secondary" href="#galeria">Ver galería</a>
+            <a class="btn btn-primary" href="#precios" id="ctaPrimary" style="display: inline-flex; align-items: center; gap: 8px;">
+              <span>Ver Planes Desde $499 MXN</span>
+            </a>
+            <a class="btn btn-secondary" href="#demo">Ver demo en vivo</a>
           </div>
         </div>
 
@@ -663,10 +765,180 @@
             <div class="mockup-inner">
               <img class="mockup-image" 
                    src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=720&auto=format&fit=crop"
-                   alt="Mockup de invitación digital elegante"
+                   alt="Mockup de invitación digital elegante con funciones interactivas"
                    width="720" 
                    height="960"
                    loading="eager">
+            </div>
+            <!-- ELIMINADOS: Puntos interactivos en el mockup (RSVP y Mapa interactivo) -->
+          </div>
+        </div>
+      </section>
+
+      <!-- NUEVA SECCIÓN: Demo Interactivo -->
+      <section id="demo" class="demo-section">
+        <div class="container">
+          <div class="section-head" style="text-align:center; margin-bottom:32px;">
+            <h2 class="section-title">Experimenta una invitación real</h2>
+            <!-- ELIMINADO: "Interactúa con nuestra demo para ver todas las funciones en acción" -->
+          </div>
+          
+          <div class="demo-card">
+            <div class="demo-preview">
+              <div class="demo-header">
+                <h3 style="margin:0 0 8px 0; font-family:Poppins;">Demo Interactiva</h3>
+                <p style="margin:0; color:var(--muted); font-size:14px;">Explora todas las funciones</p>
+              </div>
+              <div style="padding:20px; background:white;">
+                <div class="demo-buttons" style="display: flex; gap: 12px; justify-content: center; flex-wrap: nowrap;">
+                  <a href="https://invitea.github.io/NuestraBoda_Jose_Y_Maria/" 
+                     target="_blank" 
+                     class="btn btn-primary"
+                     style="display:inline-flex; align-items:center; gap:8px; flex: 1;">
+                    <span>Demo completa invitación</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M14 4h6m0 0v6m0-6L10 14" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </a>
+                  
+                  <a href="https://invitea.github.io/Confirmaciones_Boda_Maria_Y_Jose/" 
+                     target="_blank" 
+                     class="btn btn-secondary"
+                     style="display:inline-flex; align-items:center; gap:8px; flex: 1;">
+                    <span>Demo completa RSVP</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M14 4h6m0 0v6m0-6L10 14" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="demo-features">
+              <div class="demo-feature">
+                <div class="demo-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <h4 style="margin:0 0 4px 0; font-size:14px;">Confirmación RSVP</h4>
+                <p style="margin:0; font-size:12px; color:var(--muted);">Sistema integrado</p>
+              </div>
+              
+              <div class="demo-feature">
+                <div class="demo-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <h4 style="margin:0 0 4px 0; font-size:14px;">Mapa interactivo</h4>
+                <p style="margin:0; font-size:12px; color:var(--muted);">Ubicación precisa</p>
+              </div>
+              
+              <div class="demo-feature">
+                <div class="demo-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                    <line x1="9" y1="21" x2="9" y2="9"></line>
+                  </svg>
+                </div>
+                <h4 style="margin:0 0 4px 0; font-size:14px;">Diseño responsive</h4>
+                <p style="margin:0; font-size:12px; color:var(--muted);">En todos dispositivos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección ¿Por qué elegir invitación digital? - REORDENADA -->
+      <section id="why-digital" class="why-digital" aria-labelledby="whyDigitalTitle">
+        <div class="section-head">
+          <h2 id="whyDigitalTitle" class="section-title">¿Por qué el 95% de nuestros clientes eligen invitaciones digitales?</h2>
+        </div>
+
+        <div class="why-grid" role="list" aria-label="Ventajas de las invitaciones digitales">
+          <div class="why-card fade-up">
+            <div class="why-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
+                <polyline points="17,6 23,6 23,12"></polyline>
+              </svg>
+            </div>
+            <h3>Envío en 24h</h3>
+            <p>Tu invitación lista en máximo 24 horas después de aprobar el diseño</p>
+          </div>
+
+          <div class="why-card fade-up">
+            <div class="why-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3>Ahorra hasta $3,000 MXN</h3>
+            <p>Comparado con invitaciones físicas de similar calidad</p>
+          </div>
+
+          <div class="why-card fade-up">
+            <div class="why-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <h3>Impacto ecológico cero</h3>
+            <p>Sin papel, sin impresión, sin huella de carbono por envíos</p>
+          </div>
+
+          <div class="why-card fade-up">
+            <div class="why-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+            </div>
+            <h3>Compartir ilimitado</h3>
+            <p>Envía por WhatsApp, Instagram, email... sin límite de invitados</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- NUEVA SECCIÓN: Testimonios -->
+      <section class="testimonials">
+        <div class="container">
+          <div class="section-head" style="text-align:center; margin-bottom:32px;">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <p style="color:var(--muted);">Más de 500 eventos exitosos con nuestras invitaciones</p>
+          </div>
+          
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
+            <div class="testimonial-card">
+              <div class="testimonial-header">
+                <div class="testimonial-avatar"></div>
+                <div>
+                  <h4 style="margin:0; font-size:16px;">Ana y Roberto</h4>
+                  <p style="margin:0; color:var(--muted); font-size:14px;">Boda en Cancún</p>
+                </div>
+              </div>
+              <p style="margin:0; color:var(--text); font-style:italic;">"Nuestros invitados no paraban de decirnos lo hermosa que estaba la invitación. El RSVP nos ayudó a organizar todo perfectamente."</p>
+              <div style="display:flex; margin-top:12px; color:var(--amarillo);">
+                ★★★★★
+              </div>
+            </div>
+            
+            <div class="testimonial-card">
+              <div class="testimonial-header">
+                <div class="testimonial-avatar"></div>
+                <div>
+                  <h4 style="margin:0; font-size:16px;">Familia González</h4>
+                  <p style="margin:0; color:var(--muted); font-size:14px;">XV Años de Sofia</h4>
+                </div>
+              </div>
+              <p style="margin:0; color:var(--text); font-style:italic;">"Ahorramos más de $2,500 comparado con invitaciones físicas. Todos los detalles personalizados quedaron perfectos."</p>
+              <div style="display:flex; margin-top:12px; color:var(--amarillo);">
+                ★★★★★
+              </div>
             </div>
           </div>
         </div>
@@ -683,60 +955,14 @@
         </div>
       </section>
 
-      <!-- Sección ¿Por qué elegir invitación digital? - OPTIMIZADA -->
-      <section id="why-digital" class="why-digital" aria-labelledby="whyDigitalTitle">
-        <div class="section-head">
-          <h2 id="whyDigitalTitle" class="section-title">¿Por qué elegir una invitación digital?</h2>
-        </div>
-
-        <div class="why-grid" role="list" aria-label="Ventajas de las invitaciones digitales">
-          <div class="why-card fade-up">
-            <div class="why-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
-                <polyline points="17,6 23,6 23,12"></polyline>
-              </svg>
-            </div>
-            <h3>Envío Express</h3>
-            <p>Crea y envía en minutos. Entrega instantánea a todos tus invitados.</p>
-          </div>
-
-          <div class="why-card fade-up">
-            <div class="why-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3>90% más económico</h3>
-            <p>Ahorra en impresión, sobres y envíos postales. Máxima calidad a menor costo.</p>
-          </div>
-
-          <div class="why-card fade-up">
-            <div class="why-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
-            </div>
-            <h3>100% Sustentable</h3>
-            <p>Ecológica y sin desperdicios. Reduce tu huella ambiental eliminando papel.</p>
-          </div>
-
-          <div class="why-card fade-up">
-            <div class="why-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
-            </div>
-            <h3>Envíos Ilimitados</h3>
-            <p>Comparte con todos sin límites. Comparte por WhatsApp, email o redes.</p>
-          </div>
-        </div>
-
-        <div style="text-align:center;margin-top:24px">
-          <a class="btn btn-primary" href="#contacto">¡Quiero mi invitación digital!</a>
-        </div>
-      </section>
+      <!-- CTA ESTRATÉGICO DESPUÉS DE GALERÍA -->
+      <div class="strategic-cta">
+        <h3 style="margin:0 0 12px 0; font-family:Poppins; font-size:24px;">¿Listo para tu invitación perfecta?</h3>
+        <p style="margin:0 0 24px 0; opacity:0.9;">Personaliza completamente tu diseño sin costo adicional</p>
+        <a href="#contacto" class="btn" style="background:white; color:var(--azul); font-weight:700; padding:14px 28px;">
+          Comenzar mi diseño
+        </a>
+      </div>
 
       <!-- Sección de Funciones -->
       <section id="funciones" class="funciones" aria-labelledby="funcionesTitle">
@@ -749,15 +975,18 @@
         </div>
       </section>
 
-      <!-- Sección de precios -->
+      <!-- Sección de precios - MEJORADA -->
       <section id="precios" aria-labelledby="preciosTitle">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px">
-          <h2 id="preciosTitle" class="section-title" style="margin:0">Planes y paquetes</h2>
+        <div style="text-align:center; margin-bottom:40px;">
+          <h2 id="preciosTitle" class="section-title">Elige el plan perfecto para tu evento</h2>
+          <p style="color:var(--muted); max-width:600px; margin:0 auto;">Todos los planes incluyen diseño personalizado y soporte prioritario</p>
         </div>
 
         <div class="plans-grid" role="list" aria-label="Planes y precios">
           <!-- Se llenará dinámicamente con cache optimizado -->
         </div>
+
+        <!-- ELIMINADO: Garantía de satisfacción 100% -->
 
         <!-- Tabla comparativa de planes ACTUALIZADA Y REORDENADA -->
         <div class="compare-panel" aria-hidden="false">
@@ -851,7 +1080,7 @@
     <!-- ========== SECCIÓN DE CONTACTO ========== -->
     <section id="contacto" class="contact-modern" aria-labelledby="contactoTitle">
       <div class="contact-grid">
-        <div style="grid-column: 1 / -1; margin:0 0 2px 0;"> <!-- Reducido a 2px -->
+        <div style="grid-column: 1 / -1; margin:0 0 2px 0;">
           <h2 id="contactoTitle" class="section-title">Personaliza tu invitación</h2>
         </div>
 
@@ -863,7 +1092,7 @@
 
           <!-- Formulario de contacto -->
           <form id="contactForm" class="contact-form-modern" novalidate aria-describedby="formHelp" autocomplete="on">
-            <div class="row" style="margin-bottom:8px"> <!-- Reducido a 8px -->
+            <div class="row" style="margin-bottom:8px">
               <label class="field">
                 <input id="name" name="name" type="text" placeholder=" " required autocomplete="name" />
                 <span class="label">Nombre</span>
@@ -880,7 +1109,7 @@
               </label>
             </div>
 
-            <div class="row" style="margin-bottom:8px"> <!-- Reducido a 8px -->
+            <div class="row" style="margin-bottom:8px">
               <label class="field select-field">
                 <select id="type" name="type" required>
                   <option value="" disabled selected>Selecciona tipo de evento</option>
@@ -906,7 +1135,7 @@
               </label>
             </div>
 
-            <label class="field full" style="margin-bottom:4px"> <!-- Reducido a 4px -->
+            <label class="field full" style="margin-bottom:4px">
               <textarea id="message" name="message" placeholder=" " required></textarea>
               <span class="label">Mensaje / Detalles</span>
             </label>
@@ -924,7 +1153,7 @@
               <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
             </div>
 
-            <div id="formHelp" class="muted-small" style="margin-top:6px"> <!-- Reducido a 6px -->
+            <div id="formHelp" class="muted-small" style="margin-top:6px">
               Respuesta en <strong>24–48 hrs</strong>. También puedes escribir directamente a <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>.
             </div>
           </form>
@@ -1082,8 +1311,8 @@
   const WHY_DIGITAL_DATA = [
     {
       id: 1,
-      title: "Envío Express",
-      description: "Crea y envía en minutos. Entrega instantánea a todos tus invitados.",
+      title: "Envío en 24h",
+      description: "Tu invitación lista en máximo 24 horas después de aprobar el diseño",
       icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
                 <polyline points="17,6 23,6 23,12"></polyline>
@@ -1091,8 +1320,8 @@
     },
     {
       id: 2,
-      title: "90% más económico",
-      description: "Ahorra en impresión, sobres y envíos postales. Máxima calidad a menor costo.",
+      title: "Ahorra hasta $3,000 MXN",
+      description: "Comparado con invitaciones físicas de similar calidad",
       icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="1" x2="12" y2="23"></line>
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
@@ -1100,16 +1329,16 @@
     },
     {
       id: 3,
-      title: "100% Sustentable",
-      description: "Ecológica y sin desperdicios. Reduce tu huella ambiental eliminando papel.",
+      title: "Impacto ecológico cero",
+      description: "Sin papel, sin impresión, sin huella de carbono por envíos",
       icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
               </svg>`
     },
     {
       id: 4,
-      title: "Envíos Ilimitados",
-      description: "Comparte con todos sin límites. Comparte por WhatsApp, email o redes.",
+      title: "Compartir ilimitado",
+      description: "Envía por WhatsApp, Instagram, email... sin límite de invitados",
       icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
               </svg>`
