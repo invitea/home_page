@@ -70,6 +70,59 @@
       contain: content;
     }
 
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      background: white;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      font-size: 20px;
+      font-weight: bold;
+      z-index: 1001;
+    }
+
     /* Utilidades */
     .container{
       width:calc(100% - 32px);
@@ -152,6 +205,7 @@
       display:block;
       transition:transform .28s ease, box-shadow .28s ease;
       position: relative;
+      cursor: pointer;
     }
     .mockup-frame:hover{ 
       transform: rotate(-1deg) translateY(-6px); 
@@ -165,6 +219,7 @@
       border-radius:10px;
       object-fit:cover;
       background:#f0f0f0;
+      cursor: pointer;
     }
     
     /* SECCIÓN DEMO SIMPLIFICADA */
@@ -767,6 +822,16 @@
 
   <a href="#maincontent" class="sr-only" id="skip">Saltar al contenido</a>
 
+  <!-- Modal para la imagen del mockup -->
+  <div id="mockupModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+    <button class="modal-close" aria-label="Cerrar modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.ibb.co/gM5pbNfG/Screenshot-2025-11-23-10-02-48-PM.png" 
+           alt="Vista ampliada de la invitación digital" 
+           id="modalImage">
+    </div>
+  </div>
+
   <header>
     <div class="container header-inner" role="navigation" aria-label="Navegación principal">
       <div class="logo">
@@ -818,11 +883,11 @@
         </div>
 
         <div class="hero-right fade-up in">
-          <div class="mockup-frame">
+          <div class="mockup-frame" id="mockupTrigger">
             <div class="mockup-inner">
               <img class="mockup-image" 
                    src="https://i.ibb.co/gM5pbNfG/Screenshot-2025-11-23-10-02-48-PM.png"
-                   alt="Mockup de invitación digital"
+                   alt="Mockup de invitación digital - Haz clic para ampliar"
                    width="720" 
                    height="960"
                    loading="eager"
@@ -1047,7 +1112,7 @@
             <div class="inline-controls" role="group" aria-label="Acciones del formulario">
               <button class="btn btn-primary" type="submit" id="submitBtn">Enviar solicitud</button>
 
-              <button type="button" class="btn btn-outline" id="whatsappBtn" data-phone="5215512345678" aria-label="Contactar por WhatsApp">
+              <button type="button" class="btn btn-outline" id="whatsappBtn" data-phone="5215612676844" aria-label="Contactar por WhatsApp">
                 <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="margin-right:8px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.199.297-.768.966-.94 1.163-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.617-.92-2.23-.242-.579-.487-.5-.672-.51l-.573-.01c-.199 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487  .709.306 1.26.489 1.692.626.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="#0F1724"/></svg>
                 WhatsApp
               </button>
@@ -1126,6 +1191,50 @@
   } catch (e) {
     console.warn('Firestore no disponible:', e);
     db = null;
+  }
+
+  // Modal functionality
+  function initModal() {
+    const modal = document.getElementById('mockupModal');
+    const modalImage = document.getElementById('modalImage');
+    const mockupTrigger = document.getElementById('mockupTrigger');
+    const closeBtn = document.querySelector('.modal-close');
+
+    if (!modal || !mockupTrigger) return;
+
+    function openModal() {
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Open modal on mockup click
+    mockupTrigger.addEventListener('click', openModal);
+    
+    // Close modal on close button click
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+
+    // Close modal on background click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('show')) {
+        closeModal();
+      }
+    });
   }
 
   // Cache System
@@ -1475,7 +1584,7 @@
     const whatsappFloat = $('#whatsappFloat');
     
     function openWhatsApp() {
-      const PHONE_IN_E164 = '5215512345678';
+      const PHONE_IN_E164 = '5215612676844'; // Número actualizado
       if(!/^[0-9]{7,15}$/.test(PHONE_IN_E164)){ showToast('WhatsApp no configurado'); return; }
       const text = encodeURIComponent('Hola, quiero información sobre una invitación digital. ¿Podrían ayudarme?');
       const url = `https://wa.me/${PHONE_IN_E164}?text=${text}`;
@@ -1568,6 +1677,7 @@
     const criticalImages = ['https://i.ibb.co/1Qf3kqZ/invitea-logo.png', 'https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=720&auto=format&fit=crop'];
     criticalImages.forEach(src => { (new Image()).src = src; });
 
+    initModal(); // Inicializar modal
     initDatepicker();
     wireWhatsAppAndQuickSample();
     wirePhoneMask();
@@ -1616,5 +1726,3 @@
   <script src="https://unpkg.com/wicg-inert@3.0.0/dist/inert.min.js" defer></script>
 </body>
 </html>
-
-
