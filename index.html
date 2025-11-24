@@ -5,20 +5,30 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Invitea · Invitaciones Digitales</title>
 
-  <!-- Fuentes -->
+  <link rel="preload" as="image" href="https://i.ibb.co/whbSZvqg/invitacion-Muck-UP.png">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+  <link rel="dns-prefetch" href="https://www.gstatic.com">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- Metadatos SEO -->
+  <link rel="icon" type="image/png" href="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
   <meta name="description" content="Invitea — Invitaciones digitales modernas y personalizadas. Diseños elegantes para bodas, cumpleaños y eventos especiales.">
+  
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Invitea · Invitaciones Digitales">
   <meta property="og:description" content="Invitaciones digitales modernas y personalizadas para bodas, cumpleaños y eventos.">
   <meta property="og:image" content="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
-  <meta name="theme-color" content="#2D68F8">
-  <link rel="manifest" href="/manifest.json">
 
-  <!-- ========== ESTILOS CSS ========== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Invitea · Invitaciones Digitales">
+  <meta name="twitter:description" content="Invitaciones digitales modernas y personalizadas.">
+  <meta name="twitter:image" content="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
+
+  <meta name="theme-color" content="#2D68F8">
+
   <style>
     /* Variables CSS */
     :root{
@@ -54,6 +64,11 @@
     }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block;height:auto}
+
+    /* OPTIMIZACIÓN CSS: Containment para renderizado rápido */
+    footer, .contact-modern, .testimonials, .why-digital, .funciones {
+      contain: content;
+    }
 
     /* Utilidades */
     .container{
@@ -102,7 +117,7 @@
     nav.desktop-nav a:hover{color:var(--azul);transform:translateY(-2px)}
     .mobile-toggle{display:none;background:transparent;border:0;padding:10px;border-radius:12px}
 
-    /* Sección Hero MEJORADA */
+    /* Sección Hero */
     .hero{
       padding-top: 24px;
       padding-bottom: 24px;
@@ -152,65 +167,51 @@
       background:#f0f0f0;
     }
     
-    /* Hotspots para mockup - ELIMINADOS según solicitud */
+    /* SECCIÓN DEMO SIMPLIFICADA */
+    .demo-immersive {
+      padding: 60px 0;
+      background: radial-gradient(circle at 50% 50%, #F0F6FF 0%, #F8F9FA 100%);
+      border-top: 1px solid rgba(16,24,40,0.03);
+      border-bottom: 1px solid rgba(16,24,40,0.03);
+    }
 
-    /* Social proof - ELIMINADO según solicitud */
+    .demo-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-    /* NUEVA SECCIÓN: Demo Interactivo */
-    .demo-section {
-      padding:40px 0;
-      background:linear-gradient(180deg, var(--bg) 0%, #fff 100%);
-    }
-    .demo-card {
-      background:var(--card-bg);
-      border-radius:16px;
-      padding:24px;
-      box-shadow:var(--shadow-1);
-      text-align:center;
-    }
-    .demo-preview {
-      max-width:500px;
-      margin:0 auto;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:var(--shadow-2);
-    }
-    .demo-header {
-      background:#f8f9fa;
-      padding:40px 20px;
-      border-bottom:1px solid rgba(0,0,0,0.05);
-    }
-    .demo-features {
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-      margin-top:24px;
-    }
-    .demo-feature {
-      text-align:center;
-      padding:16px;
-    }
-    .demo-icon {
-      width:40px;
-      height:40px;
-      background:var(--azul);
-      border-radius:10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin:0 auto 8px;
+    .demo-text h2 {
+      font-family: Poppins, Inter, sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      margin: 0 0 16px 0;
+      line-height: 1.2;
+      color: var(--text);
     }
     
-    /* Botones de demo */
-    .demo-buttons {
+    .demo-text p {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .demo-actions {
       display: flex;
-      gap: 12px;
+      gap: 16px;
       justify-content: center;
-      margin-top: 20px;
       flex-wrap: wrap;
     }
 
-    /* Sección de testimonios */
+
+    /* Testimonios */
     .testimonials {
       padding:40px 0;
       background:var(--card-bg);
@@ -232,6 +233,16 @@
       height:50px;
       border-radius:50%;
       background:#e2e8f0;
+      background-size: cover;
+      background-position: center;
+    }
+    .testimonial-source {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
     }
 
     /* CTA estratégico */
@@ -245,7 +256,7 @@
       margin:40px auto;
     }
 
-    /* Galería de invitaciones */
+    /* Galería */
     .gallery{padding-top:24px;padding-bottom:20px}
     .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:12px}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -262,7 +273,7 @@
     .meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
     .price{font-weight:800;color:var(--azul)}
 
-    /* Sección ¿Por qué elegir invitación digital? - OPTIMIZADA */
+    /* Why Digital */
     .why-digital {
       padding-top: 24px;
       padding-bottom: 24px;
@@ -325,7 +336,7 @@
       margin: 0;
     }
 
-    /* Sección de Funciones */
+    /* Funciones */
     .funciones {
       padding-top: 24px;
       padding-bottom: 24px;
@@ -388,7 +399,7 @@
       margin: 0;
     }
 
-    /* Sección de precios */
+    /* Precios */
     #precios { padding-top: 18px; padding-bottom: 18px; box-sizing: border-box; }
     .plans-grid {
       display: grid;
@@ -446,14 +457,14 @@
     .plan-cta-row{ margin-top:auto; display:flex; gap:10px; align-items:center; }
     .plan-cta{ padding:10px 14px; font-size:13px; border-radius:12px; font-weight:800; background: linear-gradient(90deg,var(--azul),var(--azul-2)); color:#fff; border:none; cursor:pointer; box-shadow:0 10px 30px rgba(45,104,248,0.12); }
     
-    /* Tabla comparativa actualizada */
+    /* Tabla comparativa */
     .compare-panel{ margin-top:12px; padding:12px; box-shadow:var(--shadow-1); border-radius:12px; background:var(--card-bg); border:1px solid rgba(16,24,40,0.03); }
     .compare-panel table{ width:100%; border-collapse:collapse; font-size:13px; color:var(--muted); }
     .compare-panel th, .compare-panel td{ padding:8px 8px; text-align:left; border-bottom:1px solid rgba(16,24,40,0.03); }
     .compare-panel th:first-child, .compare-panel td:first-child { width: 40%; }
     .compare-panel th:not(:first-child), .compare-panel td:not(:first-child) { width: 20%; text-align: center; }
 
-    /* ========== SECCIÓN DE CONTACTO ========== */
+    /* Contacto */
     .contact-modern { 
       padding-top: 18px;
       padding-bottom: 18px;
@@ -621,7 +632,7 @@
       font-weight:700;
     }
 
-    /* Toast para mensajes del sistema */
+    /* Toast */
     .toast{position:fixed;right:18px;bottom:18px;background:var(--azul);color:white;padding:12px 16px;border-radius:10px;box-shadow:0 10px 40px rgba(45,104,248,0.15);display:none;z-index:130}
     .toast.show{display:block;animation:pop .36s ease}
     @keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
@@ -642,6 +653,42 @@
       border-radius: 12px;
     }
 
+    /* Botón flotante de WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #25D366, #25D366);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+      z-index: 100;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+    
+    .whatsapp-float:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
+    }
+    
+    .whatsapp-float svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4); }
+      50% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.7); }
+      100% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4); }
+    }
+
     /* Optimizaciones de rendimiento */
     .thumb img[loading="lazy"] {
       background: #f8f9fa;
@@ -651,7 +698,7 @@
       backface-visibility: hidden;
     }
 
-    /* Media queries para responsividad */
+    /* Media queries */
     @media (max-width:980px){
       .hero{grid-template-columns:1fr;gap:18px;padding:20px 0}
       .hero-right{order:2}
@@ -660,7 +707,7 @@
       .grid{grid-template-columns:repeat(2,1fr)}
       .why-grid { grid-template-columns: repeat(2, 1fr); }
       .funciones-grid { grid-template-columns: repeat(2, 1fr); }
-      .demo-features { grid-template-columns: repeat(2, 1fr); }
+      
       nav.desktop-nav{display:none}
       .mobile-toggle{display:inline-flex}
       .mockup-frame{ 
@@ -669,13 +716,17 @@
         margin: 0 auto;
       }
       .plans-grid{ grid-template-columns: 1fr 1fr; gap:10px; }
+      .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 52px;
+        height: 52px;
+      }
     }
     @media (max-width:560px){
       .grid{grid-template-columns:1fr}
       .why-grid { grid-template-columns: 1fr; }
       .funciones-grid { grid-template-columns: 1fr; }
-      .demo-features { grid-template-columns: 1fr; }
-      .demo-buttons { flex-direction: column; align-items: center; }
       .logo-img-wrap{width:120px;height:36px}
       .hero-left h1{font-size:28px}
       .btn{min-height:44px}
@@ -683,31 +734,39 @@
       .mockup-frame{ width: 280px; }
       .footer-social a { width:30px; height:30px; }
       .btn { min-height: 48px; padding: 14px 20px; }
+      .whatsapp-float {
+        bottom: 16px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+      }
+      .whatsapp-float svg {
+        width: 24px;
+        height: 24px;
+      }
     }
 
-    /* Deshabilitar efectos hover en dispositivos táctiles */
+    /* Deshabilitar hover táctil */
     @media (hover: none) {
       .card:hover { transform: none; }
       .btn:hover { transform: none; }
       .plan-card:hover { transform: none; }
       .funcion-card:hover { transform: none; }
       .why-card:hover { transform: none; }
+      .whatsapp-float:hover { transform: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Mensaje para usuarios sin JavaScript -->
   <noscript>
     <div style="background:#fff;padding:12px;border-bottom:1px solid #eee;text-align:center">
       JavaScript desactivado. Contacto: <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>
     </div>
   </noscript>
 
-  <!-- Enlace de accesibilidad para saltar al contenido -->
   <a href="#maincontent" class="sr-only" id="skip">Saltar al contenido</a>
 
-  <!-- ========== HEADER ========== -->
   <header>
     <div class="container header-inner" role="navigation" aria-label="Navegación principal">
       <div class="logo">
@@ -728,7 +787,6 @@
       </button>
     </div>
 
-    <!-- Menú móvil -->
     <div id="mobileMenu" role="navigation" aria-label="Menú móvil" aria-hidden="true" style="display:none;padding:10px 16px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(248,249,250,0.98));border-top:1px solid rgba(16,24,40,0.03)">
       <div style="display:flex;flex-direction:column;gap:8px">
         <a href="#galeria">Galería</a>
@@ -739,24 +797,23 @@
     </div>
   </header>
 
-  <!-- ========== CONTENIDO PRINCIPAL ========== -->
   <main id="maincontent">
     <div class="container">
 
-      <!-- Sección Hero MEJORADA -->
       <section class="hero" aria-labelledby="heroTitle">
         <div class="hero-left fade-up in">
-          <!-- ELIMINADO: El eyebrow "Invitaciones que tus invitados AMARÁN" -->
           <h1 id="heroTitle">Invitaciones que tus invitados AMARÁN</h1>
           <p class="lead">Diseños interactivos personalizados para bodas, XV años, cumpleaños y eventos especiales. 90% más económico que las invitaciones tradicionales.</p>
 
-          <!-- ELIMINADO: Social proof con avatares y +500 clientes satisfechos -->
-
           <div class="hero-cta" role="region" aria-label="Llamadas a la acción">
-            <a class="btn btn-primary" href="#precios" id="ctaPrimary" style="display: inline-flex; align-items: center; gap: 8px;">
-              <span>Ver Planes Desde $499 MXN</span>
+            <a class="btn btn-primary" href="#demo" id="ctaPrimary" style="display: inline-flex; align-items: center; gap: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>Ver Demo en Vivo</span>
             </a>
-            <a class="btn btn-secondary" href="#demo">Ver demo en vivo</a>
+            <a class="btn btn-secondary" href="#precios">Ver Planes Desde $499 MXN</a>
           </div>
         </div>
 
@@ -764,147 +821,44 @@
           <div class="mockup-frame">
             <div class="mockup-inner">
               <img class="mockup-image" 
-                   src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=720&auto=format&fit=crop"
-                   alt="Mockup de invitación digital elegante con funciones interactivas"
+                   src="https://i.ibb.co/gM5pbNfG/Screenshot-2025-11-23-10-02-48-PM.png"
+                   alt="Mockup de invitación digital"
                    width="720" 
                    height="960"
-                   loading="eager">
+                   loading="eager"
+                   style="object-fit: contain; background: transparent;">
             </div>
-            <!-- ELIMINADOS: Puntos interactivos en el mockup (RSVP y Mapa interactivo) -->
           </div>
         </div>
       </section>
 
-      <!-- NUEVA SECCIÓN: Demo Interactivo -->
-      <section id="demo" class="demo-section">
+      <section id="demo" class="demo-immersive">
         <div class="container">
-          <div class="section-head" style="text-align:center; margin-bottom:32px;">
-            <h2 class="section-title">Experimenta una invitación real</h2>
-            <!-- ELIMINADO: "Interactúa con nuestra demo para ver todas las funciones en acción" -->
-          </div>
-          
-          <div class="demo-card">
-            <div class="demo-preview">
-              <div class="demo-header">
-                <h3 style="margin:0 0 8px 0; font-family:Poppins;">Demo Interactiva</h3>
-                <p style="margin:0; color:var(--muted); font-size:14px;">Explora todas las funciones</p>
-              </div>
-              <div style="padding:20px; background:white;">
-                <div class="demo-buttons" style="display: flex; gap: 12px; justify-content: center; flex-wrap: nowrap;">
-                  <a href="https://invitea.github.io/NuestraBoda_Jose_Y_Maria/" 
-                     target="_blank" 
-                     class="btn btn-primary"
-                     style="display:inline-flex; align-items:center; gap:8px; flex: 1;">
-                    <span>Demo completa invitación</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M14 4h6m0 0v6m0-6L10 14" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                  </a>
-                  
-                  <a href="https://invitea.github.io/Confirmaciones_Boda_Maria_Y_Jose/" 
-                     target="_blank" 
-                     class="btn btn-secondary"
-                     style="display:inline-flex; align-items:center; gap:8px; flex: 1;">
-                    <span>Demo completa RSVP</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M14 4h6m0 0v6m0-6L10 14" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="demo-features">
-              <div class="demo-feature">
-                <div class="demo-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                  </svg>
-                </div>
-                <h4 style="margin:0 0 4px 0; font-size:14px;">Confirmación RSVP</h4>
-                <p style="margin:0; font-size:12px; color:var(--muted);">Sistema integrado</p>
-              </div>
+          <div class="demo-content">
+            <div class="demo-text">
+              <h2>Pruébalo en tu celular ahora mismo</h2>
+              <p>Haz clic en los botones de abajo para explorar la invitación y el panel de administración.</p>
               
-              <div class="demo-feature">
-                <div class="demo-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                </div>
-                <h4 style="margin:0 0 4px 0; font-size:14px;">Mapa interactivo</h4>
-                <p style="margin:0; font-size:12px; color:var(--muted);">Ubicación precisa</p>
-              </div>
-              
-              <div class="demo-feature">
-                <div class="demo-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="3" y1="9" x2="21" y2="9"></line>
-                    <line x1="9" y1="21" x2="9" y2="9"></line>
-                  </svg>
-                </div>
-                <h4 style="margin:0 0 4px 0; font-size:14px;">Diseño responsive</h4>
-                <p style="margin:0; font-size:12px; color:var(--muted);">En todos dispositivos</p>
+              <div class="demo-actions">
+                 <a href="https://invitea.github.io/NuestraBoda_Jose_Y_Maria/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                   Abrir Invitación de Boda
+                 </a>
+                 <a href="https://invitea.github.io/Confirmaciones_Boda_Maria_Y_Jose/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                   Ver Panel de Confirmaciones (RSVP)
+                 </a>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      <!-- Sección ¿Por qué elegir invitación digital? - REORDENADA -->
       <section id="why-digital" class="why-digital" aria-labelledby="whyDigitalTitle">
         <div class="section-head">
           <h2 id="whyDigitalTitle" class="section-title">¿Por qué el 95% de nuestros clientes eligen invitaciones digitales?</h2>
         </div>
-
         <div class="why-grid" role="list" aria-label="Ventajas de las invitaciones digitales">
-          <div class="why-card fade-up">
-            <div class="why-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
-                <polyline points="17,6 23,6 23,12"></polyline>
-              </svg>
-            </div>
-            <h3>Envío en 24h</h3>
-            <p>Tu invitación lista en máximo 24 horas después de aprobar el diseño</p>
           </div>
-
-          <div class="why-card fade-up">
-            <div class="why-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3>Ahorra hasta $3,000 MXN</h3>
-            <p>Comparado con invitaciones físicas de similar calidad</p>
-          </div>
-
-          <div class="why-card fade-up">
-            <div class="why-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
-            </div>
-            <h3>Impacto ecológico cero</h3>
-            <p>Sin papel, sin impresión, sin huella de carbono por envíos</p>
-          </div>
-
-          <div class="why-card fade-up">
-            <div class="why-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
-            </div>
-            <h3>Compartir ilimitado</h3>
-            <p>Envía por WhatsApp, Instagram, email... sin límite de invitados</p>
-          </div>
-        </div>
       </section>
 
-      <!-- NUEVA SECCIÓN: Testimonios -->
       <section class="testimonials">
         <div class="container">
           <div class="section-head" style="text-align:center; margin-bottom:32px;">
@@ -915,47 +869,51 @@
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
             <div class="testimonial-card">
               <div class="testimonial-header">
-                <div class="testimonial-avatar"></div>
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=100&h=100&fit=crop&crop=face')"></div>
                 <div>
                   <h4 style="margin:0; font-size:16px;">Ana y Roberto</h4>
                   <p style="margin:0; color:var(--muted); font-size:14px;">Boda en Cancún</p>
                 </div>
               </div>
               <p style="margin:0; color:var(--text); font-style:italic;">"Nuestros invitados no paraban de decirnos lo hermosa que estaba la invitación. El RSVP nos ayudó a organizar todo perfectamente."</p>
-              <div style="display:flex; margin-top:12px; color:var(--amarillo);">
-                ★★★★★
+              <div style="display:flex; margin-top:12px; color:var(--amarillo);">★★★★★</div>
+              <div class="testimonial-source">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+                <span>Fuente: Facebook</span>
               </div>
             </div>
             
             <div class="testimonial-card">
               <div class="testimonial-header">
-                <div class="testimonial-avatar"></div>
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&h=100&fit=crop&crop=face')"></div>
                 <div>
                   <h4 style="margin:0; font-size:16px;">Familia González</h4>
                   <p style="margin:0; color:var(--muted); font-size:14px;">XV Años de Sofia</h4>
                 </div>
               </div>
               <p style="margin:0; color:var(--text); font-style:italic;">"Ahorramos más de $2,500 comparado con invitaciones físicas. Todos los detalles personalizados quedaron perfectos."</p>
-              <div style="display:flex; margin-top:12px; color:var(--amarillo);">
-                ★★★★★
+              <div style="display:flex; margin-top:12px; color:var(--amarillo);">★★★★★</div>
+              <div class="testimonial-source">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                </svg>
+                <span>Fuente: Twitter</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Galería de invitaciones -->
       <section id="galeria" class="gallery" aria-labelledby="galeriaTitle">
         <div class="section-head">
           <h2 id="galeriaTitle" class="section-title">Galería de invitaciones</h2>
         </div>
-
         <div class="grid" id="catalog" aria-live="polite">
-          <!-- Se llenará dinámicamente con cache optimizado -->
-        </div>
+          </div>
       </section>
 
-      <!-- CTA ESTRATÉGICO DESPUÉS DE GALERÍA -->
       <div class="strategic-cta">
         <h3 style="margin:0 0 12px 0; font-family:Poppins; font-size:24px;">¿Listo para tu invitación perfecta?</h3>
         <p style="margin:0 0 24px 0; opacity:0.9;">Personaliza completamente tu diseño sin costo adicional</p>
@@ -964,18 +922,14 @@
         </a>
       </div>
 
-      <!-- Sección de Funciones -->
       <section id="funciones" class="funciones" aria-labelledby="funcionesTitle">
         <div class="section-head">
           <h2 id="funcionesTitle" class="section-title">Funciones de tus invitaciones</h2>
         </div>
-
         <div class="funciones-grid" id="funcionesContainer" role="list" aria-label="Lista de funciones disponibles">
-          <!-- Se llenará dinámicamente -->
-        </div>
+          </div>
       </section>
 
-      <!-- Sección de precios - MEJORADA -->
       <section id="precios" aria-labelledby="preciosTitle">
         <div style="text-align:center; margin-bottom:40px;">
           <h2 id="preciosTitle" class="section-title">Elige el plan perfecto para tu evento</h2>
@@ -983,17 +937,12 @@
         </div>
 
         <div class="plans-grid" role="list" aria-label="Planes y precios">
-          <!-- Se llenará dinámicamente con cache optimizado -->
-        </div>
+          </div>
 
-        <!-- ELIMINADO: Garantía de satisfacción 100% -->
-
-        <!-- Tabla comparativa de planes ACTUALIZADA Y REORDENADA -->
         <div class="compare-panel" aria-hidden="false">
           <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
             <strong style="margin-right:auto">Comparar Funciones</strong>
           </div>
-
           <table role="table" aria-label="Comparación de planes">
             <thead>
               <tr>
@@ -1004,72 +953,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Portada</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Lugar del Evento (Ceremonia)</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Lugar del Evento (Recepción)</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Mesa de Regalos</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Confirmación de Asistencia</td>
-                <td>—</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Panel de Confirmaciones en Tiempo Real</td>
-                <td>—</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Cuenta Regresiva</td>
-                <td>—</td>
-                <td>—</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Galería Multimedia</td>
-                <td>—</td>
-                <td>—</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Itinerario</td>
-                <td>—</td>
-                <td>—</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Código de Vestimenta</td>
-                <td>—</td>
-                <td>—</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Recomendación de Hospedaje</td>
-                <td>—</td>
-                <td>—</td>
-                <td>✓</td>
-              </tr>
+              <tr><td>Portada</td><td>✓</td><td>✓</td><td>✓</td></tr>
+              <tr><td>Lugar del Evento (Ceremonia)</td><td>✓</td><td>✓</td><td>✓</td></tr>
+              <tr><td>Lugar del Evento (Recepción)</td><td>✓</td><td>✓</td><td>✓</td></tr>
+              <tr><td>Mesa de Regalos</td><td>✓</td><td>✓</td><td>✓</td></tr>
+              <tr><td>Confirmación de Asistencia</td><td>—</td><td>✓</td><td>✓</td></tr>
+              <tr><td>Panel de Confirmaciones</td><td>—</td><td>✓</td><td>✓</td></tr>
+              <tr><td>Cuenta Regresiva</td><td>—</td><td>—</td><td>✓</td></tr>
+              <tr><td>Galería Multimedia</td><td>—</td><td>—</td><td>✓</td></tr>
+              <tr><td>Itinerario</td><td>—</td><td>—</td><td>✓</td></tr>
+              <tr><td>Código de Vestimenta</td><td>—</td><td>—</td><td>✓</td></tr>
+              <tr><td>Recomendación de Hospedaje</td><td>—</td><td>—</td><td>✓</td></tr>
             </tbody>
           </table>
         </div>
@@ -1077,7 +971,6 @@
 
     </div>
 
-    <!-- ========== SECCIÓN DE CONTACTO ========== -->
     <section id="contacto" class="contact-modern" aria-labelledby="contactoTitle">
       <div class="contact-grid">
         <div style="grid-column: 1 / -1; margin:0 0 2px 0;">
@@ -1085,12 +978,10 @@
         </div>
 
         <div class="contact-left">
-          <!-- Dependencias externas para el calendario -->
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
           <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
           <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 
-          <!-- Formulario de contacto -->
           <form id="contactForm" class="contact-form-modern" novalidate aria-describedby="formHelp" autocomplete="on">
             <div class="row" style="margin-bottom:8px">
               <label class="field">
@@ -1129,7 +1020,18 @@
                 </select>
               </label>
 
-              <label class="field">
+              <label class="field select-field">
+                <select id="plan" name="plan" required>
+                  <option value="" disabled selected>Selecciona tu plan</option>
+                  <option value="Básico">Plan Básico ($499)</option>
+                  <option value="Estándar">Plan Estándar ($899)</option>
+                  <option value="Premium">Plan Premium ($1,199)</option>
+                </select>
+              </label>
+            </div>
+            
+            <div class="row" style="margin-bottom:8px">
+               <label class="field">
                 <input id="date" name="date" type="text" placeholder="dd/mm/aaaa" required aria-describedby="dateHelp" />
                 <span class="label">Fecha del evento</span>
               </label>
@@ -1159,14 +1061,17 @@
           </form>
         </div>
       </div>
-
-      <!-- Toast para notificaciones -->
       <div id="contactToast" role="status" aria-live="polite" aria-atomic="true"></div>
     </section>
 
   </main>
 
-  <!-- ========== FOOTER ========== -->
+  <div class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.199.297-.768.966-.94 1.163-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.617-.92-2.23-.242-.579-.487-.5-.672-.51l-.573-.01c-.199 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487  .709.306 1.26.489 1.692.626.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z"/>
+    </svg>
+  </div>
+
   <footer>
     <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
       <div style="display:flex;gap:12px;align-items:center">
@@ -1195,22 +1100,13 @@
     </div>
   </footer>
 
-  <!-- Toast para mensajes del sistema -->
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">Mensaje enviado</div>
 
-  <!-- ========== JAVASCRIPT ========== -->
   <script type="module">
-  /* eslint-disable no-console */
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-  import {
-    getFirestore,
-    collection,
-    addDoc,
-    serverTimestamp,
-    enableIndexedDbPersistence
-  } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, serverTimestamp, enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-  // ---------- Configuración de Firebase ----------
+  // Configuración Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyCTh8kPdvu-6Z5_cckNts22VrhdUTLVspM",
     authDomain: "invitea-f7331.firebaseapp.com",
@@ -1221,261 +1117,80 @@
     measurementId: "G-8JS1MDZVGQ"
   };
 
-  // Inicialización de Firebase
   const app = initializeApp(firebaseConfig);
   let db;
   try {
     db = getFirestore(app);
-    try { enableIndexedDbPersistence(db).catch(e => console.warn('IndexedDB persistence no disponible:', e && e.code ? e.code : e)); }
-    catch(e){ console.warn('Error al habilitar persistencia:', e); }
+    try { enableIndexedDbPersistence(db).catch(e => console.warn('Persistence error:', e?.code || e)); }
+    catch(e){ console.warn('Persistence init error:', e); }
   } catch (e) {
     console.warn('Firestore no disponible:', e);
     db = null;
   }
 
-  // ---------- Sistema de Cache Optimizado ----------
+  // Cache System
   const CACHE_KEYS = {
     GALLERY: 'invitea_gallery_data',
     PLANS: 'invitea_plans_data',
     FUNCIONES: 'invitea_funciones_data',
-    WHY_DIGITAL: 'invitea_why_digital_data',
-    TIMESTAMP: 'invitea_cache_timestamp'
+    WHY_DIGITAL: 'invitea_why_digital_data'
   };
 
-  // Función para guardar en cache
   function saveToCache(key, data) {
     try {
-      const cacheData = {
-        data: data,
-        timestamp: Date.now()
-      };
-      localStorage.setItem(key, JSON.stringify(cacheData));
+      localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
       return true;
-    } catch (e) {
-      console.warn('Error guardando en cache:', e);
-      return false;
-    }
+    } catch (e) { return false; }
   }
 
-  // Función para leer del cache
-  function getFromCache(key, maxAge = 24 * 60 * 60 * 1000) { // 24 horas por defecto
+  function getFromCache(key, maxAge = 86400000) {
     try {
       const cached = localStorage.getItem(key);
       if (!cached) return null;
-      
       const { data, timestamp } = JSON.parse(cached);
-      
-      // Verificar si el cache está expirado
       if (Date.now() - timestamp > maxAge) {
         localStorage.removeItem(key);
         return null;
       }
-      
       return data;
-    } catch (e) {
-      console.warn('Error leyendo cache:', e);
-      return null;
-    }
+    } catch (e) { return null; }
   }
 
-  // ---------- Datos Optimizados ----------
-  const GALLERY_DATA = [
-    {
-      id: 1,
-      title: "Basico (Cumpleaños)",
-      description: "Diseño festivo y colorido para celebrar.",
-      image: "https://i.ibb.co/wFVHyPtL/04476d50-b059-4919-b8dc-81ac6d097f40.jpg",
-      demoUrl: "https://invitea.github.io/JulianYEliasFEST/",
-      type: "cumple"
-    },
-    {
-      id: 2,
-      title: "Estándar (Primera Comunión)",
-      description: "Diseño festivo y elegante para celebrar.",
-      image: "https://i.ibb.co/MyswS4v6/image.jpg",
-      demoUrl: "https://invitea.github.io/JimenaLopezGaona/",
-      confirmUrl: "https://invitea.github.io/JimenaLopezGaona_PanelControl/",
-      type: "comunion"
-    },
-    {
-      id: 3,
-      title: "Premium (Boda)",
-      description: "Diseño elegante para celebrar.",
-      image: "https://i.ibb.co/fzTcNfzT/Maria-YJose.png",
-      demoUrl: "https://invitea.github.io/NuestraBoda_Jose_Y_Maria/",
-      confirmUrl: "https://invitea.github.io/Confirmaciones_Boda_Maria_Y_Jose/",
-      type: "boda"
-    }
-  ];
+  // Datos optimizados
+  const DATA = {
+    GALLERY: [
+      { id: 1, title: "Basico (Cumpleaños)", description: "Diseño festivo y colorido para celebrar.", image: "https://i.ibb.co/wFVHyPtL/04476d50-b059-4919-b8dc-81ac6d097f40.jpg", demoUrl: "https://invitea.github.io/JulianYEliasFEST/", type: "cumple" },
+      { id: 2, title: "Estándar (Primera Comunión)", description: "Diseño festivo y elegante para celebrar.", image: "https://i.ibb.co/MyswS4v6/image.jpg", demoUrl: "https://invitea.github.io/JimenaLopezGaona/", confirmUrl: "https://invitea.github.io/JimenaLopezGaona_PanelControl/", type: "comunion" },
+      { id: 3, title: "Premium (Boda)", description: "Diseño elegante para celebrar.", image: "https://i.ibb.co/fzTcNfzT/Maria-YJose.png", demoUrl: "https://invitea.github.io/NuestraBoda_Jose_Y_Maria/", confirmUrl: "https://invitea.github.io/Confirmaciones_Boda_Maria_Y_Jose/", type: "boda" }
+    ],
+    WHY_DIGITAL: [
+      { id: 1, title: "Envío en 24h", description: "Tu invitación lista en máximo 24 horas después de aprobar el diseño", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline><polyline points="17,6 23,6 23,12"></polyline></svg>` },
+      { id: 2, title: "Ahorra hasta $3,000 MXN", description: "Comparado con invitaciones físicas de similar calidad", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>` },
+      { id: 3, title: "Impacto ecológico cero", description: "Sin papel, sin impresión, sin huella de carbono por envíos", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>` },
+      { id: 4, title: "Compartir ilimitado", description: "Envía por WhatsApp, Instagram, email... sin límite de invitados", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>` }
+    ],
+    FUNCIONES: [
+      { id: 1, title: "Portada", description: "Diseño elegante y personalizado que presenta tu evento de manera impactante.", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>` },
+      { id: 2, title: "Ubicaciones", description: "Mapas interactivos para la ceremonia y recepción con direcciones precisas.", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>` },
+      { id: 3, title: "Mesa de Regalos", description: "Integración con tus tiendas preferidas para facilitar los regalos a tus invitados.", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,12 20,22 4,22 4,12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>` },
+      { id: 4, title: "Cuenta Regresiva", description: "Agrega emoción con un contador que muestra el tiempo restante para tu evento.", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>` },
+      { id: 5, title: "Galería Multimedia", description: "Comparte fotos y videos especiales de la pareja con tus invitados.", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21,15 16,10 5,21"></polyline></svg>` },
+      { id: 6, title: "Itinerario", description: "Programa detallado del evento con horarios y actividades planificadas.", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>` },
+      { id: 7, title: "Código de Vestimenta", description: "Indica el estilo de vestuario apropiado para que todos luzcan perfectos.", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg>` },
+      { id: 8, title: "RSVP", description: "Sistema de confirmación de asistencia con panel de control en tiempo real.", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17,11 19,13 23,9"></polyline></svg>` }
+    ],
+    PLANS: [
+      { id: "basic", title: "Básico", subtitle: "Perfecto para eventos pequeños", price: "$499 MXN", features: ["Portada (texto y tipografía personalizable)", "2 funciones a elegir", "2 actualizaciones"], recommended: false },
+      { id: "standard", title: "Estándar", subtitle: "Nuestro paquete más elegido", price: "$899 MXN", features: ["Portada (texto y tipografía personalizable)", "3 funciones o las que elijas usar", "Confirmación de asistencia", "Panel de confirmaciones en tiempo real", "Actualizaciones ilimitadas"], recommended: true },
+      { id: "premium", title: "Premium", subtitle: "Para eventos con máxima personalización", price: "$1,199 MXN", features: ["Portada (texto y tipografía personalizable)", "8 funciones o las que elijas usar", "Confirmación de asistencia", "Panel de confirmaciones en tiempo real", "Actualizaciones ilimitadas"], recommended: false }
+    ]
+  };
 
-  const WHY_DIGITAL_DATA = [
-    {
-      id: 1,
-      title: "Envío en 24h",
-      description: "Tu invitación lista en máximo 24 horas después de aprobar el diseño",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
-                <polyline points="17,6 23,6 23,12"></polyline>
-              </svg>`
-    },
-    {
-      id: 2,
-      title: "Ahorra hasta $3,000 MXN",
-      description: "Comparado con invitaciones físicas de similar calidad",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>`
-    },
-    {
-      id: 3,
-      title: "Impacto ecológico cero",
-      description: "Sin papel, sin impresión, sin huella de carbono por envíos",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>`
-    },
-    {
-      id: 4,
-      title: "Compartir ilimitado",
-      description: "Envía por WhatsApp, Instagram, email... sin límite de invitados",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>`
-    }
-  ];
-
-  const FUNCIONES_DATA = [
-    {
-      id: 1,
-      title: "Portada",
-      description: "Diseño elegante y personalizado que presenta tu evento de manera impactante.",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="3" y1="9" x2="21" y2="9"></line>
-                <line x1="9" y1="21" x2="9" y2="9"></line>
-              </svg>`
-    },
-    {
-      id: 2,
-      title: "Ubicaciones",
-      description: "Mapas interactivos para la ceremonia y recepción con direcciones precisas.",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>`
-    },
-    {
-      id: 3,
-      title: "Mesa de Regalos",
-      description: "Integración con tus tiendas preferidas para facilitar los regalos a tus invitados.",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20,12 20,22 4,22 4,12"></polyline>
-                <rect x="2" y="7" width="20" height="5"></rect>
-                <line x1="12" y1="22" x2="12" y2="7"></line>
-                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
-                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
-              </svg>`
-    },
-    {
-      id: 4,
-      title: "Cuenta Regresiva",
-      description: "Agrega emoción con un contador que muestra el tiempo restante para tu evento.",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12,6 12,12 16,14"></polyline>
-              </svg>`
-    },
-    {
-      id: 5,
-      title: "Galería Multimedia",
-      description: "Comparte fotos y videos especiales de la pareja con tus invitados.",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21,15 16,10 5,21"></polyline>
-              </svg>`
-    },
-    {
-      id: 6,
-      title: "Itinerario",
-      description: "Programa detallado del evento con horarios y actividades planificadas.",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>`
-    },
-    {
-      id: 7,
-      title: "Código de Vestimenta",
-      description: "Indica el estilo de vestuario apropiado para que todos luzcan perfectos.",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path>
-              </svg>`
-    },
-    {
-      id: 8,
-      title: "RSVP",
-      description: "Sistema de confirmación de asistencia con panel de control en tiempo real.",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="8.5" cy="7" r="4"></circle>
-                <polyline points="17,11 19,13 23,9"></polyline>
-              </svg>`
-    }
-  ];
-
-  const PLANS_DATA = [
-    {
-      id: "basic",
-      title: "Básico",
-      subtitle: "Perfecto para eventos pequeños",
-      price: "$499 MXN",
-      features: [
-        "Portada (texto y tipografía personalizable)",
-        "2 funciones a elegir",
-        "2 actualizaciones"
-      ],
-      recommended: false
-    },
-    {
-      id: "standard", 
-      title: "Estándar",
-      subtitle: "Nuestro paquete más elegido",
-      price: "$899 MXN",
-      features: [
-        "Portada (texto y tipografía personalizable)",
-        "3 funciones o las que elijas usar", 
-        "Confirmación de asistencia",
-        "Panel de confirmaciones en tiempo real",
-        "Actualizaciones ilimitadas"
-      ],
-      recommended: true
-    },
-    {
-      id: "premium",
-      title: "Premium", 
-      subtitle: "Para eventos con máxima personalización",
-      price: "$1,199 MXN",
-      features: [
-        "Portada (texto y tipografía personalizable)",
-        "8 funciones o las que elijas usar",
-        "Confirmación de asistencia",
-        "Panel de confirmaciones en tiempo real", 
-        "Actualizaciones ilimitadas"
-      ],
-      recommended: false
-    }
-  ];
-
-  // ---------- Utilidades DOM ----------
+  // DOM Utils optimizados
   const $ = sel => document.querySelector(sel);
   const $$ = sel => Array.from(document.querySelectorAll(sel));
-  const toastEl = document.getElementById('contactToast') || document.getElementById('toast');
+  const toastEl = $('#contactToast') || $('#toast');
 
-  // Mostrar notificaciones toast
   function showToast(msg){
     if(!toastEl) { console.log('[toast]', msg); return; }
     toastEl.textContent = msg;
@@ -1483,13 +1198,11 @@
     setTimeout(()=> { toastEl.style.display = 'none'; }, 2600);
   }
 
-  // Actualizar estado del formulario
   function setFormStatus(msg){
-    const s = document.getElementById('formStatus');
+    const s = $('#formStatus');
     if(s) s.textContent = msg;
   }
 
-  // Limpiar estados de error en formulario
   function clearInvalids(form){
     ['name','email','phone','type','date','message'].forEach(id=>{
       const el = form[id];
@@ -1498,35 +1211,38 @@
     setFormStatus('');
   }
 
-  // Marcar campo como inválido
   function markInvalid(el, msg){
     if(!el) return;
     el.setAttribute('aria-invalid','true');
     if(msg) setFormStatus(msg);
   }
 
-  // ---------- Renderizado Optimizado de Galería ----------
+  // Función de animación genérica
+  function animateItems(selector, initialDelay = 100, stepDelay = 80) {
+    $$(selector).forEach((item, index) => {
+      setTimeout(() => item.classList.add('in'), initialDelay + index * stepDelay);
+    });
+  }
+
+  // Render Functions optimizadas
   function renderGallery() {
-    const galleryContainer = document.getElementById('catalog');
+    const galleryContainer = $('#catalog');
     if (!galleryContainer) return;
     
-    // Intentar obtener del cache primero
     const cachedHTML = getFromCache(CACHE_KEYS.GALLERY);
     if (cachedHTML) {
       galleryContainer.innerHTML = cachedHTML;
-      initGalleryInteractions();
-      animateGalleryItems();
+      animateItems('#catalog .fade-up');
       return;
     }
     
-    // Si no hay cache, renderizar desde datos
-    const galleryHTML = GALLERY_DATA.map(item => `
+    const galleryHTML = DATA.GALLERY.map(item => `
       <article class="card elev-1 fade-up" data-title="${item.title}" data-type="${item.type}">
         <div class="thumb" role="img" aria-label="${item.title}">
-          <img loading="lazy" alt="Invitación ${item.title}" 
+          <img loading="lazy" decoding="async" alt="Invitación ${item.title}" 
                src="${item.image}" 
                width="800" height="500"
-               onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDgwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjRjhGOUZBIi8+CjxwYXRoIGQ9Ik0zMjAgMjUwTDM4MCAyNzBNNDIwIDIzMEw0NDAgMjUwTTM2MCAyMTBMMzQwIDE5ME0yODAgMjcwTDMwMCAyNTBNNDYwIDIxMEw0ODAgMTkwTTI0MCAyMzBMMjYwIDIxME01MDAgMjUwTDUyMCAyNzBNNTQwIDIzMEw1NjAgMjEwIiBzdHJva2U9IiNENkQ4REQiIHN0cm9rZS13aWR0aD0iMiIvPgo8Y2lyY2xlIGN4PSI0MDAiIGN5PSIyNTAiIHI9IjQwIiBmaWxsPSIjRDZEOEREIi8+Cjwvc3ZnPgo='">
+               onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDgwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjRjhGOUZBIi8+Cjwvc3ZnPgo='">
         </div>
         <div style="margin-top:10px">
           <h3>${item.title}</h3>
@@ -1534,7 +1250,7 @@
           <div class="meta">
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
               <a class="btn btn-secondary" href="${item.demoUrl}" target="_blank" rel="noopener noreferrer">Demo</a>
-              ${item.confirmUrl ? `<a class="btn btn-secondary" href="${item.confirmUrl}" target="_blank" rel="noopener noreferrer">Demo Confirmaciones</a>` : ''}
+              ${item.confirmUrl ? `<a class="btn btn-secondary" href="${item.confirmUrl}" target="_blank" rel="noopener noreferrer">Demo Panel Confirmaciones</a>` : ''}
             </div>
           </div>
         </div>
@@ -1542,144 +1258,82 @@
     `).join('');
     
     galleryContainer.innerHTML = galleryHTML;
-    
-    // Guardar en cache para próximas cargas
     saveToCache(CACHE_KEYS.GALLERY, galleryHTML);
-    
-    initGalleryInteractions();
-    animateGalleryItems();
+    animateItems('#catalog .fade-up');
   }
 
-  // ---------- Renderizado Optimizado de ¿Por qué digital? ----------
   function renderWhyDigital() {
-    const whyContainer = document.querySelector('.why-grid');
+    const whyContainer = $('.why-grid');
     if (!whyContainer) return;
     
-    // Intentar obtener del cache primero
     const cachedHTML = getFromCache(CACHE_KEYS.WHY_DIGITAL);
     if (cachedHTML) {
       whyContainer.innerHTML = cachedHTML;
-      animateWhyItems();
+      animateItems('.why-grid .fade-up');
       return;
     }
     
-    // Si no hay cache, renderizar desde datos
-    const whyHTML = WHY_DIGITAL_DATA.map(item => `
+    const whyHTML = DATA.WHY_DIGITAL.map(item => `
       <div class="why-card fade-up">
-        <div class="why-icon">
-          ${item.icon}
-        </div>
+        <div class="why-icon">${item.icon}</div>
         <h3>${item.title}</h3>
         <p>${item.description}</p>
       </div>
     `).join('');
     
     whyContainer.innerHTML = whyHTML;
-    
-    // Guardar en cache para próximas cargas
     saveToCache(CACHE_KEYS.WHY_DIGITAL, whyHTML);
-    
-    animateWhyItems();
+    animateItems('.why-grid .fade-up');
   }
 
-  // Animación de items de ¿por qué digital?
-  function animateWhyItems() {
-    const items = document.querySelectorAll('.why-grid .fade-up');
-    items.forEach((item, index) => {
-      setTimeout(() => {
-        item.classList.add('in');
-      }, 100 + index * 80);
-    });
-  }
-
-  // ---------- Renderizado Optimizado de Funciones ----------
   function renderFunciones() {
-    const funcionesContainer = document.getElementById('funcionesContainer');
+    const funcionesContainer = $('#funcionesContainer');
     if (!funcionesContainer) return;
     
-    // Intentar obtener del cache primero
     const cachedHTML = getFromCache(CACHE_KEYS.FUNCIONES);
     if (cachedHTML) {
       funcionesContainer.innerHTML = cachedHTML;
-      animateFuncionesItems();
+      animateItems('#funcionesContainer .fade-up');
       return;
     }
     
-    // Si no hay cache, renderizar desde datos
-    const funcionesHTML = FUNCIONES_DATA.map(funcion => `
+    const funcionesHTML = DATA.FUNCIONES.map(funcion => `
       <div class="funcion-card fade-up">
-        <div class="funcion-icon">
-          ${funcion.icon}
-        </div>
+        <div class="funcion-icon">${funcion.icon}</div>
         <h3>${funcion.title}</h3>
         <p>${funcion.description}</p>
       </div>
     `).join('');
     
     funcionesContainer.innerHTML = funcionesHTML;
-    
-    // Guardar en cache para próximas cargas
     saveToCache(CACHE_KEYS.FUNCIONES, funcionesHTML);
-    
-    animateFuncionesItems();
+    animateItems('#funcionesContainer .fade-up');
   }
 
-  // Animación de items de funciones
-  function animateFuncionesItems() {
-    const items = document.querySelectorAll('#funcionesContainer .fade-up');
-    items.forEach((item, index) => {
-      setTimeout(() => {
-        item.classList.add('in');
-      }, 100 + index * 80);
-    });
-  }
-
-  // Animación de items de galería
-  function animateGalleryItems() {
-    const items = document.querySelectorAll('#catalog .fade-up');
-    items.forEach((item, index) => {
-      setTimeout(() => {
-        item.classList.add('in');
-      }, 100 + index * 80);
-    });
-  }
-
-  // Función para inicializar interacciones de galería
-  function initGalleryInteractions() {
-    // Eliminado el código relacionado con la modal
-  }
-
-  // ---------- Renderizado Optimizado de Planes ----------
   function renderPlans() {
-    const plansContainer = document.querySelector('.plans-grid');
+    const plansContainer = $('.plans-grid');
     if (!plansContainer) return;
     
-    // Intentar obtener del cache primero
     const cachedHTML = getFromCache(CACHE_KEYS.PLANS);
     if (cachedHTML) {
       plansContainer.innerHTML = cachedHTML;
       initPlanInteractions();
-      animatePlanItems();
+      animateItems('.plans-grid .plan-card', 220, 110);
       return;
     }
     
-    // Si no hay cache, renderizar desde datos
-    const plansHTML = PLANS_DATA.map(plan => `
+    const plansHTML = DATA.PLANS.map(plan => `
       <article class="plan-card fade-up ${plan.recommended ? 'recommended' : ''}" 
                role="listitem" aria-labelledby="plan-${plan.id}">
         ${plan.recommended ? '<div class="plan-badge" aria-hidden="true">Recomendado</div>' : ''}
-        
         <header>
           <h3 id="plan-${plan.id}" class="plan-title">${plan.title}</h3>
           <p class="plan-sub">${plan.subtitle}</p>
         </header>
-
         <div class="plan-price" aria-hidden="true">${plan.price} <small>/ pago único</small></div>
-
         <ul class="plan-features">
           ${plan.features.map(feature => `<li>${feature}</li>`).join('')}
         </ul>
-
         <div class="plan-cta-row">
           <button type="button" class="btn plan-cta" 
                   data-plan="${plan.title}" 
@@ -1692,31 +1346,15 @@
     `).join('');
     
     plansContainer.innerHTML = plansHTML;
-    
-    // Guardar en cache para próximas cargas
     saveToCache(CACHE_KEYS.PLANS, plansHTML);
-    
     initPlanInteractions();
-    animatePlanItems();
+    animateItems('.plans-grid .plan-card', 220, 110);
   }
 
-  // Animación de items de planes
-  function animatePlanItems() {
-    const items = document.querySelectorAll('.plans-grid .plan-card');
-    items.forEach((item, index) => {
-      setTimeout(() => {
-        item.classList.add('in');
-      }, 220 + index * 110);
-    });
-  }
-
-  // Función para inicializar interacciones de planes
   function initPlanInteractions() {
-    // Reinicializar event listeners para botones de planes
     wirePlanCTAs();
   }
 
-  // ---------- Carga Diferida con Intersection Observer ----------
   function initLazyLoading() {
     const sections = [
       { id: 'galeria', loader: renderGallery },
@@ -1725,12 +1363,9 @@
       { id: 'precios', loader: renderPlans }
     ];
 
-    const observers = [];
-
     sections.forEach(({ id, loader }) => {
       const section = document.getElementById(id);
       if (!section) return;
-
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1738,270 +1373,209 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { 
-        rootMargin: '100px', // Carga 100px antes de que sea visible
-        threshold: 0.1 
-      });
-
+      }, { rootMargin: '100px', threshold: 0.1 });
       observer.observe(section);
-      observers.push(observer);
     });
-
-    return observers;
   }
 
-  // ---------- Inicialización del selector de fecha ----------
   function initDatepicker(){
     if(typeof flatpickr === 'undefined'){ console.warn('flatpickr no cargado'); return; }
-    // Localizar a español si está disponible
     try { if(flatpickr.l10ns && flatpickr.l10ns.es) flatpickr.localize(flatpickr.l10ns.es); } catch(e){}
     flatpickr('#date', {
-      dateFormat: 'd/m/Y',        // Formato dd/mm/aaaa
+      dateFormat: 'd/m/Y',
       altInput: false,
       allowInput: true,
       clickOpens: true,
-      disableMobile: true,        // Usar flatpickr en móviles para formato consistente
-      minDate: 'today'            // Bloquear fechas anteriores al día actual
+      disableMobile: true,
+      minDate: 'today'
     });
   }
 
-  // ---------- Formateo de teléfono ----------
   function formatPhoneDigits(digits){
     if(!digits) return '';
-    let prefix = '';
-    let core = digits;
-    
-    // Manejar código de país
-    if(core.startsWith('52') && core.length > 2){
-      prefix = '+52 ';
-      core = core.slice(2);
-    } else if(core.startsWith('521') && core.length > 3){
-      prefix = '+52 ';
-      core = core.slice(3);
-    }
-    
-    // Formatear número según longitud
+    let prefix = '', core = digits;
+    if(core.startsWith('52') && core.length > 2){ prefix = '+52 '; core = core.slice(2); } 
+    else if(core.startsWith('521') && core.length > 3){ prefix = '+52 '; core = core.slice(3); }
     if(core.length <= 2) return prefix + core;
-    if(core.length <= 6) {
-      return prefix + core.slice(0,2) + ' ' + core.slice(2);
-    }
-    
-    const a = core.slice(0,2);         // Lada
-    const b = core.slice(2,6);         // Primeros 4 dígitos
-    const c = core.slice(6,10);        // Últimos 4 dígitos
-    if(c) return prefix + `${a} ${b} ${c}`;
-    return prefix + `${a} ${b}`;
+    if(core.length <= 6) return prefix + core.slice(0,2) + ' ' + core.slice(2);
+    const a = core.slice(0,2), b = core.slice(2,6), c = core.slice(6,10);
+    return prefix + (c ? `${a} ${b} ${c}` : `${a} ${b}`);
   }
 
-  // Aplicar máscara de teléfono
   function wirePhoneMask(){
-    const phoneEl = document.getElementById('phone');
+    const phoneEl = $('#phone');
     if(!phoneEl) return;
-    
     phoneEl.addEventListener('input', (e) => {
       const digits = phoneEl.value.replace(/\D/g,'');
-      const formatted = formatPhoneDigits(digits);
-      phoneEl.value = formatted;
+      phoneEl.value = formatPhoneDigits(digits);
     });
-    
     phoneEl.addEventListener('paste', (ev) => {
       ev.preventDefault();
       const text = (ev.clipboardData || window.clipboardData).getData('text') || '';
-      const digits = text.replace(/\D/g,'');
-      phoneEl.value = formatPhoneDigits(digits);
+      phoneEl.value = formatPhoneDigits(text.replace(/\D/g,''));
     });
   }
 
-  // ---------- Botones de planes ----------
   function wirePlanCTAs(){
     const planBtns = $$('.plan-cta');
-    planBtns.forEach(b => { b.replaceWith(b.cloneNode(true)); });
+    const nameField = $('#name');
+    const messageField = $('#message');
+    const selectedPlanField = $('#selectedPlan');
+    const planSelect = $('#plan');
+    const contacto = $('#contacto');
+
+    // Mapeo de precios para usar cuando se selecciona manualmente el combo
+    const planPrices = {
+        'Básico': '$499 MXN',
+        'Estándar': '$899 MXN',
+        'Premium': '$1,199 MXN'
+    };
+
+    // Lógica 1: Cuando el usuario cambia manualmente el combo
+    if(planSelect){
+      planSelect.addEventListener('change', () => {
+        const val = planSelect.value;
+        const price = planPrices[val];
+        
+        if (val && price && messageField) {
+            // Actualizar Textarea
+            messageField.value = `Estoy interesad@ en el plan "${val}" (pago único ${price}).`;
+            // Actualizar campo oculto
+            if(selectedPlanField) selectedPlanField.value = `${val} — paquete seleccionado (${price})`;
+        }
+      });
+    }
+
+    // Lógica 2: Cuando el usuario hace clic en los botones "Comprar" de arriba
+    planBtns.forEach(b => b.replaceWith(b.cloneNode(true)));
     
     $$('.plan-cta').forEach(b => b.addEventListener('click', ()=> {
       const plan = b.dataset.plan || '';
       const price = b.dataset.price || '';
-      const nameField = $('#name');
-      const messageField = $('#message');
-      const selectedPlanField = $('#selectedPlan');
 
       if (selectedPlanField) selectedPlanField.value = `${plan} — paquete seleccionado (${price})`;
       if (messageField) messageField.value = `Estoy interesad@ en el plan "${plan}" (pago único ${price}).`;
+      
+      // Sincronizar visualmente el combo con el botón presionado
+      if(planSelect) {
+        Array.from(planSelect.options).forEach(option => {
+           if(option.value === plan) {
+              planSelect.value = option.value;
+           }
+        });
+      }
 
-      const contacto = $('#contacto');
       if (contacto) contacto.scrollIntoView({behavior:'smooth', block:'start'});
       setTimeout(()=>{ if(nameField) nameField.focus(); }, 600);
     }));
   }
 
-  // ---------- WhatsApp y muestra rápida ----------
   function wireWhatsAppAndQuickSample(){
-    const whatsappBtn = document.getElementById('whatsappBtn');
-    if(whatsappBtn){
-      whatsappBtn.addEventListener('click', ()=>{
-        const attrPhone = whatsappBtn.dataset.phone;
-        const PHONE_IN_E164 = (typeof attrPhone === 'string' && attrPhone.trim() !== '') ? attrPhone.replace(/\D/g,'') : '5215512345678';
-        const validPhone = /^[0-9]{7,15}$/.test(PHONE_IN_E164);
-        if(!validPhone){ showToast('WhatsApp no configurado'); return; }
-        const text = encodeURIComponent('Hola, quiero información sobre una invitación digital. ¿Podrían ayudarme?');
-        const url = `https://wa.me/${PHONE_IN_E164}?text=${text}`;
-        const win = window.open(url, '_blank', 'noopener');
-        if(win) try { win.opener = null; } catch(e){ }
-        else { window.location.href = url; }
-      });
+    const whatsappBtn = $('#whatsappBtn');
+    const whatsappFloat = $('#whatsappFloat');
+    
+    function openWhatsApp() {
+      const PHONE_IN_E164 = '5215512345678';
+      if(!/^[0-9]{7,15}$/.test(PHONE_IN_E164)){ showToast('WhatsApp no configurado'); return; }
+      const text = encodeURIComponent('Hola, quiero información sobre una invitación digital. ¿Podrían ayudarme?');
+      const url = `https://wa.me/${PHONE_IN_E164}?text=${text}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
-
-    const quickSample = document.getElementById('quickSample');
-    if(quickSample){
-      quickSample.addEventListener('click', ()=>{
-        const el = document.getElementById('message');
-        if(el) el.value = 'Hola, ¿podrían enviarme una muestra de diseños similares a...';
-        document.getElementById('name')?.focus();
-        showToast('Formulario prellenado — edita y envía');
-      });
+    
+    if(whatsappBtn){
+      whatsappBtn.addEventListener('click', openWhatsApp);
+    }
+    
+    if(whatsappFloat){
+      whatsappFloat.addEventListener('click', openWhatsApp);
     }
   }
 
-  // ---------- Manejo del formulario de contacto ----------
   (function wireContactForm(){
-    const form = document.getElementById('contactForm');
-    if(!form) { console.warn('Contacto: no se encontró #contactForm'); return; }
+    const form = $('#contactForm');
+    if(!form) return;
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
 
       clearInvalids(form);
-
-      const submitBtn = document.getElementById('submitBtn');
+      const submitBtn = $('#submitBtn');
       const name = (form.name?.value || '').trim();
       const email = (form.email?.value || '').trim();
-      const phoneRaw = (form.phone?.value || '').trim();
-      const phoneDigits = phoneRaw.replace(/\D/g,'');
-      const phoneOk = phoneDigits.length >= 7; // Mínimo 7 dígitos
+      const phoneDigits = (form.phone?.value || '').replace(/\D/g,'');
       const type = (form.type?.value || '').trim();
+      const planVal = (form.plan?.value || '').trim();
       const message = (form.message?.value || '').trim();
       const dateVal = (form.date?.value || '').trim();
-      const selectedPlan = (form.selectedPlan && form.selectedPlan.value) ? form.selectedPlan.value : null;
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
+      const selectedPlan = (form.selectedPlan?.value) || '';
 
-      // Validación de fecha (dd/mm/aaaa)
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const phoneOk = phoneDigits.length >= 7;
+      
       const dateMatch = dateVal.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-      let dateISO = null;
-      let dateOk = false;
+      let dateOk = false, dateISO = null;
       if(dateMatch){
         const d = parseInt(dateMatch[1],10), m = parseInt(dateMatch[2],10), y = parseInt(dateMatch[3],10);
         const candidate = new Date(y, m - 1, d);
-        if(candidate && candidate.getFullYear() === y && (candidate.getMonth() + 1) === m && candidate.getDate() === d){
+        if(candidate.getFullYear() === y && (candidate.getMonth() + 1) === m && candidate.getDate() === d){
           dateOk = true;
-          const mm = String(m).padStart(2,'0');
-          const dd = String(d).padStart(2,'0');
-          dateISO = `${y}-${mm}-${dd}`;
+          dateISO = `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
         }
       }
 
-      // Validación de campos
-      if(!name || !emailOk || !phoneOk || !type || !message || !dateOk){
+      if(!name || !emailOk || !phoneOk || !type || !planVal || !message || !dateOk){
         if(!name) markInvalid(form.name);
         if(!emailOk) markInvalid(form.email, 'Ingresa un correo válido');
         if(!phoneOk) markInvalid(form.phone, 'Ingresa un teléfono válido (mín. 7 dígitos)');
         if(!type) markInvalid(form.type);
+        if(!planVal) markInvalid(form.plan);
         if(!message) markInvalid(form.message);
         if(!dateOk) markInvalid(form.date, 'Fecha inválida. Usa dd/mm/aaaa');
-        const firstInvalid = form.querySelector('[aria-invalid="true"]');
-        if(firstInvalid && typeof firstInvalid.focus === 'function') firstInvalid.focus();
         showToast('Completa todos los campos correctamente');
         return;
       }
 
-      const payloadForServer = {
-        name,
-        email,
-        phone: phoneDigits,
-        type,
-        message,
-        date_ddmmyyyy: dateVal,
-        date_iso: dateISO,
-        selectedPlan: selectedPlan || '',
-        ts: new Date().toISOString()
-      };
-
-      // Estado de envío
+      const payloadForServer = { name, email, phone: phoneDigits, type, plan: planVal, message, date_ddmmyyyy: dateVal, date_iso: dateISO, selectedPlan, ts: new Date().toISOString() };
       const prevBtnText = submitBtn ? submitBtn.textContent : null;
       if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
       form.setAttribute('aria-busy','true');
       setFormStatus('');
 
-      // Envío a Firestore
       let firestoreOk = false;
       if(db){
         try {
-          const colRef = collection(db, 'contact_requests');
-          await addDoc(colRef, {
-            ...payloadForServer,
-            createdAt: serverTimestamp(),
-            userAgent: navigator.userAgent || null
-          });
+          await addDoc(collection(db, 'contact_requests'), { ...payloadForServer, createdAt: serverTimestamp(), userAgent: navigator.userAgent || null });
           firestoreOk = true;
           form.reset();
           showToast('¡Solicitud enviada!');
           setFormStatus('¡Gracias! Recibimos tu solicitud. Te contactamos pronto.');
-        } catch (err) {
-          console.error('Error escribiendo en Firestore:', err);
-        }
+        } catch (err) { console.error('Error escribiendo en Firestore:', err); }
       }
 
-      // Fallback a API propia si Firestore falla
       if(!firestoreOk){
-        try {
-          const res = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify(payloadForServer),
-            credentials: 'omit'
-          });
-          if(!res.ok) throw new Error('Error de envío servidor');
-          form.reset();
-          showToast(firestoreOk ? '¡Solicitud registrada!' : '¡Solicitud enviada (vía servidor)!');
-          setFormStatus('¡Gracias! Recibimos tu solicitud. Te contactamos pronto.');
-        } catch (err){
-          console.error('Fallback (POST /api/contact) falló:', err);
-          showToast('Error al enviar. Intenta más tarde.');
-          setFormStatus('Error al enviar. Escríbenos a invitea.design@gmail.com');
-        }
+        console.warn('No hay backend disponible (Github Pages)');
+        showToast('Error de conexión. Intenta por WhatsApp.');
+        setFormStatus('Error al enviar. Por favor contáctanos por WhatsApp o Email.');
       }
 
-      // Restaurar estado del botón
       if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = prevBtnText || 'Enviar solicitud'; }
       form.removeAttribute('aria-busy');
     });
   })();
 
-  // ---------- Inicialización Optimizada de la Aplicación ----------
   (function init(){
-    // Precarga de imágenes críticas
-    const criticalImages = [
-      'https://i.ibb.co/1Qf3kqZ/invitea-logo.png',
-      'https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=720&auto=format&fit=crop'
-    ];
-    
-    criticalImages.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
+    const criticalImages = ['https://i.ibb.co/1Qf3kqZ/invitea-logo.png', 'https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=720&auto=format&fit=crop'];
+    criticalImages.forEach(src => { (new Image()).src = src; });
 
-    // Inicializar componentes básicos
     initDatepicker();
     wireWhatsAppAndQuickSample();
     wirePhoneMask();
-
-    // Carga diferida de secciones pesadas
     initLazyLoading();
 
-    // Año actual en footer
     const yearEl = $('#year'); 
     if(yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Menú móvil
     const btnMobile = $('#btnMobile'), mobileMenu = $('#mobileMenu');
     let mobileOpen = false;
     
@@ -2011,44 +1585,34 @@
       mobileMenu.style.display = mobileOpen ? 'block' : 'none';
       mobileMenu.setAttribute('aria-hidden', String(!mobileOpen));
       btnMobile.setAttribute('aria-expanded', String(mobileOpen));
-      const main = document.querySelector('main');
+      const main = $('main');
       if(main){
-        if('inert' in HTMLElement.prototype){ main.inert = mobileOpen; }
-        else { if(mobileOpen) main.setAttribute('aria-hidden', 'true'); else main.removeAttribute('aria-hidden'); }
+        if('inert' in HTMLElement.prototype) main.inert = mobileOpen;
+        else main.setAttribute('aria-hidden', mobileOpen ? 'true' : 'false');
       }
     }
     
-    if(btnMobile){ 
-      btnMobile.addEventListener('click', ()=> toggleMobile(!mobileOpen)); 
-    }
+    if(btnMobile) btnMobile.addEventListener('click', ()=> toggleMobile(!mobileOpen));
 
-    // Navegación suave
     $$('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', (e)=>{
         const target = a.getAttribute('href');
         if(target === '#') return;
-        const el = document.querySelector(target);
+        const el = $(target);
         if(el){ 
           e.preventDefault(); 
           el.scrollIntoView({behavior:'smooth', block:'start'}); 
-          if(mobileOpen && mobileMenu){ toggleMobile(false); } 
+          if(mobileOpen && mobileMenu) toggleMobile(false);
         }
       });
     });
 
-    // Animaciones de entrada básicas (solo para elementos visibles inicialmente)
     window.addEventListener('load', ()=>{
-      // Solo animar elementos del hero inicialmente
-      document.querySelectorAll('.hero .fade-up').forEach((el, i) => 
-        setTimeout(() => el.classList.add('in'), 100 + i * 80)
-      );
+      animateItems('.hero .fade-up');
     });
   })();
-
   </script>
 
-  <!-- Polyfill para accesibilidad -->
   <script src="https://unpkg.com/wicg-inert@3.0.0/dist/inert.min.js" defer></script>
-
 </body>
 </html>
