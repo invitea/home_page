@@ -64,7 +64,7 @@ function getFromCache(key, maxAge = 86400000) {
 const DATA = {
   GALLERY: [
     { id: 1, title: "Basico (Cumpleaños)", description: "Diseño festivo y colorido para celebrar.", image: "https://i.ibb.co/wFVHyPtL/04476d50-b059-4919-b8dc-81ac6d097f40.jpg", demoUrl: "https://invitea.github.io/JulianYEliasFEST/", type: "cumple" },
-    { id: 2, title: "Estándar (Primera Comunión)", description: "Diseño festivo y elegante para celebrar.", image: "https://i.ibb.co/MyswS4v6/image.jpg", demoUrl: "https://invitea.github.io/JimenaLopezGaona/", confirmUrl: "https://invitea.github.io/JimenaLopezGaona_PanelControl/", type: "comunion" },
+    { id: 2, title: "Estándar (Primera Comunión)", description: "Diseño festivo y elegante para celebrar.", image: "https://i.ibb.co/MyswS4v6/image.jpg", demoUrl: "https://invitea.github.io/EjemploPrimeraComunion/", confirmUrl: "https://invitea.github.io/EjemploPrimeraComunion_Confirmaciones/", type: "comunion" },
     { id: 3, title: "Premium (Boda)", description: "Diseño elegante para celebrar.", image: "https://i.ibb.co/fzTcNfzT/Maria-YJose.png", demoUrl: "https://invitea.github.io/NuestraBoda_Jose_Y_Maria/", confirmUrl: "https://invitea.github.io/Confirmaciones_Boda_Maria_Y_Jose/", type: "boda" }
   ],
   WHY_DIGITAL: [
