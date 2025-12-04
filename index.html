@@ -1,34 +1,75 @@
-fo<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Invitea · Invitaciones Digitales</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Invitéa · Invitaciones digitales personalizadas para bodas, XV años y eventos</title>
 
-  <link rel="preload" as="image" href="https://i.ibb.co/whbSZvqg/invitacion-Muck-UP.png">
-  
+  <!-- Preconnects y preloads críticos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://firestore.googleapis.com">
   <link rel="dns-prefetch" href="https://www.gstatic.com">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <!-- Preload CSS crítico -->
+  <link rel="preload" href="styles.css" as="style">
+  <link href="styles.css" rel="stylesheet">
+
+  <!-- Preload logo (imagen crítica) -->
+  <link rel="preload" as="image" href="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
 
   <link rel="icon" type="image/png" href="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
-  <meta name="description" content="Invitea — Invitaciones digitales modernas y personalizadas. Diseños elegantes para bodas, cumpleaños y eventos especiales.">
-  
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Invitea · Invitaciones Digitales">
-  <meta property="og:description" content="Invitaciones digitales modernas y personalizadas para bodas, cumpleaños y eventos.">
-  <meta property="og:image" content="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Invitea · Invitaciones Digitales">
-  <meta name="twitter:description" content="Invitaciones digitales modernas y personalizadas.">
-  <meta name="twitter:image" content="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
-
+  <meta name="description" content="Invitéa crea invitaciones digitales personalizadas para bodas, XV años, cumpleaños y eventos. Diseños elegantes, envío en 48h y ahorro de hasta $3,000 MXN.">
   <meta name="theme-color" content="#2D68F8">
+  <link rel="canonical" href="https://invitea.github.io/home_page/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Invitéa · Invitaciones digitales personalizadas">
+  <meta property="og:description" content="Invitaciones digitales modernas y personalizadas para bodas, cumpleaños y eventos especiales.">
+  <meta property="og:image" content="https://i.ibb.co/1Qf3kqZ/invitea-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- JSON-LD: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Invitéa",
+    "image": "https://i.ibb.co/1Qf3kqZ/invitea-logo.png",
+    "url": "https://invitea.github.io/home_page/",
+    "telephone": "+5215612676844",
+    "priceRange": "$$",
+    "description": "Invitaciones digitales personalizadas para bodas, XV años, cumpleaños y eventos.",
+    "address": { "@type": "PostalAddress", "addressCountry": "MX" },
+    "sameAs": [
+      "https://www.instagram.com/Invit3aDesign",
+      "https://www.facebook.com/Invit3aDesign"
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "¿Cuánto tarda mi invitación digital?",
+     "acceptedAnswer": { "@type": "Answer", "text": "Tu invitación queda lista en un máximo de 48 horas después de aprobar el diseño." }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Qué incluye la invitación digital?",
+     "acceptedAnswer": { "@type": "Answer", "text": "Incluye portada personalizada, mapa de ubicaciones, galería, mesa de regalos, itinerario, cuenta regresiva y RSVP con panel de confirmaciones." }
+    }
+   ]
+  }
+  </script>
+
 </head>
 <body>
 
@@ -45,7 +86,7 @@ fo<!doctype html>
     <button class="modal-close" aria-label="Cerrar modal">×</button>
     <div class="modal-content">
       <img src="https://i.ibb.co/gM5pbNfG/Screenshot-2025-11-23-10-02-48-PM.png" 
-           alt="Vista ampliada de la invitación digital" 
+           alt="Ejemplo de invitación digital interactiva Invitéa" 
            id="modalImage">
     </div>
   </div>
@@ -54,7 +95,7 @@ fo<!doctype html>
     <div class="container header-inner" role="navigation" aria-label="Navegación principal">
       <div class="logo">
         <div class="logo-img-wrap">
-          <div class="logo-text">Invitéa</div>
+          <img src="https://i.ibb.co/1Qf3kqZ/invitea-logo.png" alt="Logotipo Invitéa" width="150" height="42" style="display:block">
         </div>
       </div>
 
@@ -85,15 +126,13 @@ fo<!doctype html>
 
       <section class="hero" aria-labelledby="heroTitle">
         <div class="hero-left fade-up in">
-          <h1 id="heroTitle">Invitaciones que tus invitados AMARÁN</h1>
+          <h1 id="heroTitle">Invitaciones digitales personalizadas para bodas, XV años y eventos</h1>
+          <h2 class="seo-sub">Invitaciones que tus invitados AMARÁN</h2>
           <p class="lead">Diseños interactivos personalizados para bodas, XV años, cumpleaños y eventos especiales. 90% más económico que las invitaciones tradicionales.</p>
 
           <div class="hero-cta" role="region" aria-label="Llamadas a la acción">
             <a class="btn btn-primary" href="#demo" id="ctaPrimary" style="display: inline-flex; align-items: center; gap: 8px;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
               <span>Ver Demo en Vivo</span>
             </a>
             <a class="btn btn-secondary" href="#precios">Ver Planes Desde $499 MXN</a>
@@ -101,13 +140,12 @@ fo<!doctype html>
         </div>
 
         <div class="hero-right fade-up in">
-          <div class="mockup-frame" id="mockupTrigger">
+          <div class="mockup-frame" id="mockupTrigger" tabindex="0" role="button" aria-label="Abrir mockup ampliado">
             <div class="mockup-inner">
               <img class="mockup-image" 
                    src="https://i.ibb.co/gM5pbNfG/Screenshot-2025-11-23-10-02-48-PM.png"
                    alt="Mockup de invitación digital - Haz clic para ampliar"
-                   width="720" 
-                   height="960"
+                   width="720" height="960"
                    loading="eager"
                    style="object-fit: contain; background: transparent;">
             </div>
@@ -134,12 +172,12 @@ fo<!doctype html>
           </div>
         </div>
       </section>
+
       <section id="why-digital" class="why-digital" aria-labelledby="whyDigitalTitle">
         <div class="section-head">
-          <h2 id="whyDigitalTitle" class="section-title">¿Por qué el 95% de nuestros clientes eligen invitaciones digitales?</h2>
+          <h2 id="whyDigitalTitle" class="section-title">Ventajas de usar invitaciones digitales para tu evento</h2>
         </div>
-        <div class="why-grid" role="list" aria-label="Ventajas de las invitaciones digitales">
-          </div>
+        <div class="why-grid" role="list" aria-label="Ventajas de las invitaciones digitales"></div>
       </section>
 
       <section class="testimonials">
@@ -148,7 +186,7 @@ fo<!doctype html>
             <h2 class="section-title">Lo que dicen nuestros clientes</h2>
             <p style="color:var(--muted);">Más de 500 eventos exitosos con nuestras invitaciones</p>
           </div>
-          
+
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
             <div class="testimonial-card">
               <div class="testimonial-header">
@@ -167,7 +205,7 @@ fo<!doctype html>
                 <span>Fuente: Facebook</span>
               </div>
             </div>
-            
+
             <div class="testimonial-card">
               <div class="testimonial-header">
                 <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&h=100&fit=crop&crop=face')"></div>
@@ -193,8 +231,7 @@ fo<!doctype html>
         <div class="section-head">
           <h2 id="galeriaTitle" class="section-title">Galería de invitaciones</h2>
         </div>
-        <div class="grid" id="catalog" aria-live="polite">
-          </div>
+        <div class="grid" id="catalog" aria-live="polite"></div>
       </section>
 
       <div class="strategic-cta">
@@ -209,8 +246,7 @@ fo<!doctype html>
         <div class="section-head">
           <h2 id="funcionesTitle" class="section-title">Funciones de tus invitaciones</h2>
         </div>
-        <div class="funciones-grid" id="funcionesContainer" role="list" aria-label="Lista de funciones disponibles">
-          </div>
+        <div class="funciones-grid" id="funcionesContainer" role="list" aria-label="Lista de funciones disponibles"></div>
       </section>
 
       <section id="precios" aria-labelledby="preciosTitle">
@@ -219,8 +255,7 @@ fo<!doctype html>
           <p style="color:var(--muted); max-width:600px; margin:0 auto;">Todos los planes incluyen diseño personalizado y soporte prioritario</p>
         </div>
 
-        <div class="plans-grid" role="list" aria-label="Planes y precios">
-          </div>
+        <div class="plans-grid" role="list" aria-label="Planes y precios"></div>
 
         <div class="compare-panel" aria-hidden="false">
           <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
@@ -252,114 +287,114 @@ fo<!doctype html>
         </div>
       </section>
 
+      <section id="contacto" class="contact-modern" aria-labelledby="contactoTitle">
+        <div class="contact-grid">
+          <div style="grid-column: 1 / -1; margin:0 0 2px 0;">
+            <h2 id="contactoTitle" class="section-title">Personaliza tu invitación</h2>
+          </div>
+
+          <div class="contact-left">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
+            <form id="contactForm" class="contact-form-modern" novalidate aria-describedby="formHelp" autocomplete="on">
+              <div class="row" style="margin-bottom:8px">
+                <label class="field">
+                  <input id="name" name="name" type="text" placeholder=" " required autocomplete="name" />
+                  <span class="label">Nombre</span>
+                </label>
+
+                <label class="field">
+                  <input id="email" name="email" type="email" placeholder=" " required autocomplete="email" />
+                  <span class="label">Correo</span>
+                </label>
+
+                <label class="field">
+                  <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="55 1234 5678" required autocomplete="tel" />
+                  <span class="label">Teléfono</span>
+                </label>
+              </div>
+
+              <div class="row" style="margin-bottom:8px">
+                <label class="field select-field">
+                  <select id="type" name="type" required>
+                    <option value="" disabled selected>Selecciona tipo de evento</option>
+                    <option value="Cumpleaños">Cumpleaños</option>
+                    <option value="XV Años">XV Años</option>
+                    <option value="Aniversario">Aniversario</option>
+                    <option value="Boda">Boda</option>
+                    <option value="Baby Shower">Baby Shower</option>
+                    <option value="Revelación de género">Revelación de género</option>
+                    <option value="Bautizo">Bautizo</option>
+                    <option value="Primera comunión">Primera comunión</option>
+                    <option value="Confirmación">Confirmación</option>
+                    <option value="Graduación">Graduación</option>
+                    <option value="Corporativo">Corporativo</option>
+                    <option value="Eventos especiales">Eventos especiales</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </label>
+
+                <label class="field select-field">
+                  <select id="plan" name="plan" required>
+                    <option value="" disabled selected>Selecciona tu plan</option>
+                    <option value="Básico">Plan Básico ($499)</option>
+                    <option value="Estándar">Plan Estándar ($899)</option>
+                    <option value="Premium">Plan Premium ($1,199)</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="row" style="margin-bottom:8px">
+                 <label class="field">
+                  <input id="date" name="date" type="text" placeholder="dd/mm/aaaa" required aria-describedby="dateHelp" />
+                  <span class="label">Fecha del evento</span>
+                </label>
+              </div>
+
+              <label class="field full" style="margin-bottom:4px">
+                <textarea id="message" name="message" placeholder=" " required></textarea>
+                <span class="label">Mensaje / Detalles</span>
+              </label>
+
+              <input type="hidden" id="selectedPlan" name="selectedPlan" value="">
+
+              <div class="inline-controls" role="group" aria-label="Acciones del formulario">
+                <button class="btn btn-primary" type="submit" id="submitBtn">Enviar solicitud</button>
+
+                <button type="button" class="btn btn-outline" id="whatsappBtn" data-phone="5215612676844" aria-label="Contactar por WhatsApp">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="margin-right:8px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.199.297-.768.966-.94 1.163-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.617-.92-2.23-.242-.579-.487-.5-.672-.51l-.573-.01c-.199 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487  .709.306 1.26.489 1.692.626.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="#0F1724"/></svg>
+                  WhatsApp
+                </button>
+
+                <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+              </div>
+
+              <div id="formHelp" class="muted-small" style="margin-top:6px">
+                Respuesta en <strong>24–48 hrs</strong>. También puedes escribir directamente a <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>.
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="contactToast" role="status" aria-live="polite" aria-atomic="true"></div>
+      </section>
+
     </div>
 
-    <section id="contacto" class="contact-modern" aria-labelledby="contactoTitle">
-      <div class="contact-grid">
-        <div style="grid-column: 1 / -1; margin:0 0 2px 0;">
-          <h2 id="contactoTitle" class="section-title">Personaliza tu invitación</h2>
-        </div>
-
-        <div class="contact-left">
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-          <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-          <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
-
-          <form id="contactForm" class="contact-form-modern" novalidate aria-describedby="formHelp" autocomplete="on">
-            <div class="row" style="margin-bottom:8px">
-              <label class="field">
-                <input id="name" name="name" type="text" placeholder=" " required autocomplete="name" />
-                <span class="label">Nombre</span>
-              </label>
-
-              <label class="field">
-                <input id="email" name="email" type="email" placeholder=" " required autocomplete="email" />
-                <span class="label">Correo</span>
-              </label>
-
-              <label class="field">
-                <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="55 1234 5678" required autocomplete="tel" />
-                <span class="label">Teléfono</span>
-              </label>
-            </div>
-
-            <div class="row" style="margin-bottom:8px">
-              <label class="field select-field">
-                <select id="type" name="type" required>
-                  <option value="" disabled selected>Selecciona tipo de evento</option>
-                  <option value="Cumpleaños">Cumpleaños</option>
-                  <option value="XV Años">XV Años</option>
-                  <option value="Aniversario">Aniversario</option>
-                  <option value="Boda">Boda</option>
-                  <option value="Baby Shower">Baby Shower</option>
-                  <option value="Revelación de género">Revelación de género</option>
-                  <option value="Bautizo">Bautizo</option>
-                  <option value="Primera comunión">Primera comunión</option>
-                  <option value="Confirmación">Confirmación</option>
-                  <option value="Graduación">Graduación</option>
-                  <option value="Corporativo">Corporativo</option>
-                  <option value="Eventos especiales">Eventos especiales</option>
-                  <option value="Otro">Otro</option>
-                </select>
-              </label>
-
-              <label class="field select-field">
-                <select id="plan" name="plan" required>
-                  <option value="" disabled selected>Selecciona tu plan</option>
-                  <option value="Básico">Plan Básico ($499)</option>
-                  <option value="Estándar">Plan Estándar ($899)</option>
-                  <option value="Premium">Plan Premium ($1,199)</option>
-                </select>
-              </label>
-            </div>
-            
-            <div class="row" style="margin-bottom:8px">
-               <label class="field">
-                <input id="date" name="date" type="text" placeholder="dd/mm/aaaa" required aria-describedby="dateHelp" />
-                <span class="label">Fecha del evento</span>
-              </label>
-            </div>
-
-            <label class="field full" style="margin-bottom:4px">
-              <textarea id="message" name="message" placeholder=" " required></textarea>
-              <span class="label">Mensaje / Detalles</span>
-            </label>
-
-            <input type="hidden" id="selectedPlan" name="selectedPlan" value="">
-
-            <div class="inline-controls" role="group" aria-label="Acciones del formulario">
-              <button class="btn btn-primary" type="submit" id="submitBtn">Enviar solicitud</button>
-
-              <button type="button" class="btn btn-outline" id="whatsappBtn" data-phone="5215612676844" aria-label="Contactar por WhatsApp">
-                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="margin-right:8px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.199.297-.768.966-.94 1.163-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.617-.92-2.23-.242-.579-.487-.5-.672-.51l-.573-.01c-.199 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487  .709.306 1.26.489 1.692.626.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z" fill="#0F1724"/></svg>
-                WhatsApp
-              </button>
-
-              <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
-            </div>
-
-            <div id="formHelp" class="muted-small" style="margin-top:6px">
-              Respuesta en <strong>24–48 hrs</strong>. También puedes escribir directamente a <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>.
-            </div>
-          </form>
-        </div>
-      </div>
-      <div id="contactToast" role="status" aria-live="polite" aria-atomic="true"></div>
-    </section>
+    <div class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.199.297-.768.966-.94 1.163-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.617-.92-2.23-.242-.579-.487-.5-.672-.51l-.573-.01c-.199 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487  .709.306 1.26.489 1.692.626.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z"/>
+      </svg>
+    </div>
 
   </main>
-
-  <div class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.199.297-.768.966-.94 1.163-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.074-.149-.672-1.617-.92-2.23-.242-.579-.487-.5-.672-.51l-.573-.01c-.199 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487  .709.306 1.26.489 1.692.626.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.273-.198-.57-.347z"/>
-    </svg>
-  </div>
 
   <footer>
     <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
       <div style="display:flex;gap:12px;align-items:center">
         <div class="footer-brand" style="font-weight:700">Invitéa</div>
-  
+
         <div class="footer-social" aria-hidden="false">
           <a href="https://www.instagram.com/Invit3aDesign" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Invitea">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F1724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -368,7 +403,7 @@ fo<!doctype html>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
           </a>
-  
+
           <a href="https://www.facebook.com/Invit3aDesign" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Invitea">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F1724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
@@ -376,498 +411,25 @@ fo<!doctype html>
           </a>
         </div>
       </div>
-  
+
       <div style="text-align:right;color:var(--muted);font-size:14px">
         <div>© <span id="year"></span> Invitea — Todos los derechos reservados</div>
         <div><a href="#contacto" style="color:var(--azul)">Contacto</a> · <a href="mailto:invitea.design@gmail.com" style="color:var(--muted)">invitea.design@gmail.com</a></div>
       </div>
     </div>
   </footer>
-  
+
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">Mensaje enviado</div>
 
-  <!-- Cargar app.js primero -->
+  <!-- Cargar app.js optimizado -->
   <script type="module" src="app.js"></script>
-  
-  <!-- Luego cargar el resto de la funcionalidad -->
-  <script type="module">
-    // DOM Utils optimizados
-    const $ = sel => document.querySelector(sel);
-    const $$ = sel => Array.from(document.querySelectorAll(sel));
-    const toastEl = $('#contactToast') || $('#toast');
-
-    function showToast(msg){
-      if(!toastEl) { console.log('[toast]', msg); return; }
-      toastEl.textContent = msg;
-      toastEl.style.display = 'block';
-      setTimeout(()=> { toastEl.style.display = 'none'; }, 2600);
-    }
-
-    function setFormStatus(msg){
-      const s = $('#formStatus');
-      if(s) s.textContent = msg;
-    }
-
-    function clearInvalids(form){
-      ['name','email','phone','type','date','message'].forEach(id=>{
-        const el = form[id];
-        if(el) el.removeAttribute('aria-invalid');
-      });
-      setFormStatus('');
-    }
-
-    function markInvalid(el, msg){
-      if(!el) return;
-      el.setAttribute('aria-invalid','true');
-      if(msg) setFormStatus(msg);
-    }
-
-    // Función de animación genérica
-    function animateItems(selector, initialDelay = 100, stepDelay = 80) {
-      $$(selector).forEach((item, index) => {
-        setTimeout(() => item.classList.add('in'), initialDelay + index * stepDelay);
-      });
-    }
-
-    // Render Functions optimizadas
-    function renderGallery() {
-      const galleryContainer = $('#catalog');
-      if (!galleryContainer) return;
-      
-      const cachedHTML = window.inviteaApp.getFromCache(window.inviteaApp.CACHE_KEYS.GALLERY);
-      if (cachedHTML) {
-        galleryContainer.innerHTML = cachedHTML;
-        animateItems('#catalog .fade-up');
-        return;
-      }
-      
-      const galleryHTML = window.inviteaApp.DATA.GALLERY.map(item => `
-        <article class="card elev-1 fade-up" data-title="${item.title}" data-type="${item.type}">
-          <div class="thumb" role="img" aria-label="${item.title}">
-            <img loading="lazy" decoding="async" alt="Invitación ${item.title}" 
-                 src="${item.image}" 
-                 width="800" height="500"
-                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDgwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjRjhGOUZBIi8+Cjwvc3ZnPgo='">
-          </div>
-          <div style="margin-top:10px">
-            <h3>${item.title}</h3>
-            <p>${item.description}</p>
-            <div class="meta">
-              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                <a class="btn btn-secondary" href="${item.demoUrl}" target="_blank" rel="noopener noreferrer">Demo</a>
-                ${item.confirmUrl ? `<a class="btn btn-secondary" href="${item.confirmUrl}" target="_blank" rel="noopener noreferrer">Demo Panel Confirmaciones</a>` : ''}
-              </div>
-            </div>
-          </div>
-        </article>
-      `).join('');
-      
-      galleryContainer.innerHTML = galleryHTML;
-      window.inviteaApp.saveToCache(window.inviteaApp.CACHE_KEYS.GALLERY, galleryHTML);
-      animateItems('#catalog .fade-up');
-    }
-
-    function renderWhyDigital() {
-      const whyContainer = $('.why-grid');
-      if (!whyContainer) return;
-      
-      const cachedHTML = window.inviteaApp.getFromCache(window.inviteaApp.CACHE_KEYS.WHY_DIGITAL);
-      if (cachedHTML) {
-        whyContainer.innerHTML = cachedHTML;
-        animateItems('.why-grid .fade-up');
-        return;
-      }
-      
-      const whyHTML = window.inviteaApp.DATA.WHY_DIGITAL.map(item => `
-        <div class="why-card fade-up">
-          <div class="why-icon">${item.icon}</div>
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-        </div>
-      `).join('');
-      
-      whyContainer.innerHTML = whyHTML;
-      window.inviteaApp.saveToCache(window.inviteaApp.CACHE_KEYS.WHY_DIGITAL, whyHTML);
-      animateItems('.why-grid .fade-up');
-    }
-
-    function renderFunciones() {
-      const funcionesContainer = $('#funcionesContainer');
-      if (!funcionesContainer) return;
-      
-      const cachedHTML = window.inviteaApp.getFromCache(window.inviteaApp.CACHE_KEYS.FUNCIONES);
-      if (cachedHTML) {
-        funcionesContainer.innerHTML = cachedHTML;
-        animateItems('#funcionesContainer .fade-up');
-        return;
-      }
-      
-      const funcionesHTML = window.inviteaApp.DATA.FUNCIONES.map(funcion => `
-        <div class="funcion-card fade-up">
-          <div class="funcion-icon">${funcion.icon}</div>
-          <h3>${funcion.title}</h3>
-          <p>${funcion.description}</p>
-        </div>
-      `).join('');
-      
-      funcionesContainer.innerHTML = funcionesHTML;
-      window.inviteaApp.saveToCache(window.inviteaApp.CACHE_KEYS.FUNCIONES, funcionesHTML);
-      animateItems('#funcionesContainer .fade-up');
-    }
-
-    function renderPlans() {
-      const plansContainer = $('.plans-grid');
-      if (!plansContainer) return;
-      
-      const cachedHTML = window.inviteaApp.getFromCache(window.inviteaApp.CACHE_KEYS.PLANS);
-      if (cachedHTML) {
-        plansContainer.innerHTML = cachedHTML;
-        initPlanInteractions();
-        animateItems('.plans-grid .plan-card', 220, 110);
-        return;
-      }
-      
-      const plansHTML = window.inviteaApp.DATA.PLANS.map(plan => `
-        <article class="plan-card fade-up ${plan.recommended ? 'recommended' : ''}" 
-                 role="listitem" aria-labelledby="plan-${plan.id}">
-          ${plan.recommended ? '<div class="plan-badge" aria-hidden="true">Recomendado</div>' : ''}
-          <header>
-            <h3 id="plan-${plan.id}" class="plan-title">${plan.title}</h3>
-            <p class="plan-sub">${plan.subtitle}</p>
-          </header>
-          <div class="plan-price" aria-hidden="true">${plan.price} <small>/ pago único</small></div>
-          <ul class="plan-features">
-            ${plan.features.map(feature => `<li>${feature}</li>`).join('')}
-          </ul>
-          <div class="plan-cta-row">
-            <button type="button" class="btn plan-cta" 
-                    data-plan="${plan.title}" 
-                    data-price="${plan.price}" 
-                    aria-label="Comprar plan ${plan.title}">
-              Comprar
-            </button>
-          </div>
-        </article>
-      `).join('');
-      
-      plansContainer.innerHTML = plansHTML;
-      window.inviteaApp.saveToCache(window.inviteaApp.CACHE_KEYS.PLANS, plansHTML);
-      initPlanInteractions();
-      animateItems('.plans-grid .plan-card', 220, 110);
-    }
-
-    function initPlanInteractions() {
-      wirePlanCTAs();
-    }
-
-    function initLazyLoading() {
-      const sections = [
-        { id: 'galeria', loader: renderGallery },
-        { id: 'why-digital', loader: renderWhyDigital },
-        { id: 'funciones', loader: renderFunciones },
-        { id: 'precios', loader: renderPlans }
-      ];
-
-      sections.forEach(({ id, loader }) => {
-        const section = document.getElementById(id);
-        if (!section) return;
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              loader();
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { rootMargin: '100px', threshold: 0.1 });
-        observer.observe(section);
-      });
-    }
-
-    function initDatepicker(){
-      if(typeof flatpickr === 'undefined'){ console.warn('flatpickr no cargado'); return; }
-      try { if(flatpickr.l10ns && flatpickr.l10ns.es) flatpickr.localize(flatpickr.l10ns.es); } catch(e){}
-      flatpickr('#date', {
-        dateFormat: 'd/m/Y',
-        altInput: false,
-        allowInput: true,
-        clickOpens: true,
-        disableMobile: true,
-        minDate: 'today'
-      });
-    }
-
-    function formatPhoneDigits(digits){
-      if(!digits) return '';
-      let prefix = '', core = digits;
-      if(core.startsWith('52') && core.length > 2){ prefix = '+52 '; core = core.slice(2); } 
-      else if(core.startsWith('521') && core.length > 3){ prefix = '+52 '; core = core.slice(3); }
-      if(core.length <= 2) return prefix + core;
-      if(core.length <= 6) return prefix + core.slice(0,2) + ' ' + core.slice(2);
-      const a = core.slice(0,2), b = core.slice(2,6), c = core.slice(6,10);
-      return prefix + (c ? `${a} ${b} ${c}` : `${a} ${b}`);
-    }
-
-    function wirePhoneMask(){
-      const phoneEl = $('#phone');
-      if(!phoneEl) return;
-      phoneEl.addEventListener('input', (e) => {
-        const digits = phoneEl.value.replace(/\D/g,'');
-        phoneEl.value = formatPhoneDigits(digits);
-      });
-      phoneEl.addEventListener('paste', (ev) => {
-        ev.preventDefault();
-        const text = (ev.clipboardData || window.clipboardData).getData('text') || '';
-        phoneEl.value = formatPhoneDigits(text.replace(/\D/g,''));
-      });
-    }
-
-    function wirePlanCTAs(){
-      const planBtns = $$('.plan-cta');
-      const nameField = $('#name');
-      const messageField = $('#message');
-      const selectedPlanField = $('#selectedPlan');
-      const planSelect = $('#plan');
-      const contacto = $('#contacto');
-
-      // Mapeo de precios para usar cuando se selecciona manualmente el combo
-      const planPrices = {
-          'Básico': '$499 MXN',
-          'Estándar': '$899 MXN',
-          'Premium': '$1,199 MXN'
-      };
-
-      // Lógica 1: Cuando el usuario cambia manualmente el combo
-      if(planSelect){
-        planSelect.addEventListener('change', () => {
-          const val = planSelect.value;
-          const price = planPrices[val];
-          
-          if (val && price && messageField) {
-              // Actualizar Textarea
-              messageField.value = `Estoy interesad@ en el plan "${val}" (pago único ${price}).`;
-              // Actualizar campo oculto
-              if(selectedPlanField) selectedPlanField.value = `${val} — paquete seleccionado (${price})`;
-          }
-        });
-      }
-
-      // Lógica 2: Cuando el usuario hace clic en los botones "Comprar" de arriba
-      planBtns.forEach(b => b.replaceWith(b.cloneNode(true)));
-      
-      $$('.plan-cta').forEach(b => b.addEventListener('click', ()=> {
-        const plan = b.dataset.plan || '';
-        const price = b.dataset.price || '';
-
-        if (selectedPlanField) selectedPlanField.value = `${plan} — paquete seleccionado (${price})`;
-        if (messageField) messageField.value = `Estoy interesad@ en el plan "${plan}" (pago único ${price}).`;
-        
-        // Sincronizar visualmente el combo con el botón presionado
-        if(planSelect) {
-          Array.from(planSelect.options).forEach(option => {
-             if(option.value === plan) {
-                planSelect.value = option.value;
-             }
-          });
-        }
-
-        if (contacto) contacto.scrollIntoView({behavior:'smooth', block:'start'});
-        setTimeout(()=>{ if(nameField) nameField.focus(); }, 600);
-      }));
-    }
-
-    function wireWhatsAppAndQuickSample(){
-      const whatsappBtn = $('#whatsappBtn');
-      const whatsappFloat = $('#whatsappFloat');
-      
-      function openWhatsApp() {
-        const PHONE_IN_E164 = '5215612676844'; // Número actualizado
-        if(!/^[0-9]{7,15}$/.test(PHONE_IN_E164)){ showToast('WhatsApp no configurado'); return; }
-        const text = encodeURIComponent('Hola, quiero información sobre una invitación digital. ¿Podrían ayudarme?');
-        const url = `https://wa.me/${PHONE_IN_E164}?text=${text}`;
-        window.open(url, '_blank', 'noopener,noreferrer');
-      }
-      
-      if(whatsappBtn){
-        whatsappBtn.addEventListener('click', openWhatsApp);
-      }
-      
-      if(whatsappFloat){
-        whatsappFloat.addEventListener('click', openWhatsApp);
-      }
-    }
-
-    // Modal functionality
-    function initModal() {
-      const modal = document.getElementById('mockupModal');
-      const modalImage = document.getElementById('modalImage');
-      const mockupTrigger = document.getElementById('mockupTrigger');
-      const closeBtn = document.querySelector('.modal-close');
-
-      if (!modal || !mockupTrigger) return;
-
-      function openModal() {
-        modal.classList.add('show');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeModal() {
-        modal.classList.remove('show');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-
-      // Open modal on mockup click
-      mockupTrigger.addEventListener('click', openModal);
-      
-      // Close modal on close button click
-      if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
-      }
-
-      // Close modal on background click
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          closeModal();
-        }
-      });
-
-      // Close modal on Escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
-          closeModal();
-        }
-      });
-    }
-
-    (function wireContactForm(){
-      const form = $('#contactForm');
-      if(!form) return;
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-
-        clearInvalids(form);
-        const submitBtn = $('#submitBtn');
-        const name = (form.name?.value || '').trim();
-        const email = (form.email?.value || '').trim();
-        const phoneDigits = (form.phone?.value || '').replace(/\D/g,'');
-        const type = (form.type?.value || '').trim();
-        const planVal = (form.plan?.value || '').trim();
-        const message = (form.message?.value || '').trim();
-        const dateVal = (form.date?.value || '').trim();
-        const selectedPlan = (form.selectedPlan?.value) || '';
-
-        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        const phoneOk = phoneDigits.length >= 7;
-        
-        const dateMatch = dateVal.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-        let dateOk = false, dateISO = null;
-        if(dateMatch){
-          const d = parseInt(dateMatch[1],10), m = parseInt(dateMatch[2],10), y = parseInt(dateMatch[3],10);
-          const candidate = new Date(y, m - 1, d);
-          if(candidate.getFullYear() === y && (candidate.getMonth() + 1) === m && candidate.getDate() === d){
-            dateOk = true;
-            dateISO = `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-          }
-        }
-
-        if(!name || !emailOk || !phoneOk || !type || !planVal || !message || !dateOk){
-          if(!name) markInvalid(form.name);
-          if(!emailOk) markInvalid(form.email, 'Ingresa un correo válido');
-          if(!phoneOk) markInvalid(form.phone, 'Ingresa un teléfono válido (mín. 7 dígitos)');
-          if(!type) markInvalid(form.type);
-          if(!planVal) markInvalid(form.plan);
-          if(!message) markInvalid(form.message);
-          if(!dateOk) markInvalid(form.date, 'Fecha inválida. Usa dd/mm/aaaa');
-          showToast('Completa todos los campos correctamente');
-          return;
-        }
-
-        const payloadForServer = { name, email, phone: phoneDigits, type, plan: planVal, message, date_ddmmyyyy: dateVal, date_iso: dateISO, selectedPlan, ts: new Date().toISOString() };
-        const prevBtnText = submitBtn ? submitBtn.textContent : null;
-        if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
-        form.setAttribute('aria-busy','true');
-        setFormStatus('');
-
-        let firestoreOk = false;
-        if(window.inviteaApp.db){
-          try {
-            const { collection, addDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js");
-            await addDoc(collection(window.inviteaApp.db, 'contact_requests'), { ...payloadForServer, createdAt: serverTimestamp(), userAgent: navigator.userAgent || null });
-            firestoreOk = true;
-            form.reset();
-            showToast('¡Solicitud enviada!');
-            setFormStatus('¡Gracias! Recibimos tu solicitud. Te contactamos pronto.');
-          } catch (err) { console.error('Error escribiendo en Firestore:', err); }
-        }
-
-        if(!firestoreOk){
-          console.warn('No hay backend disponible (Github Pages)');
-          showToast('Error de conexión. Intenta por WhatsApp.');
-          setFormStatus('Error al enviar. Por favor contáctanos por WhatsApp o Email.');
-        }
-
-        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = prevBtnText || 'Enviar solicitud'; }
-        form.removeAttribute('aria-busy');
-      });
-    })();
-
-    (function init(){
-      const criticalImages = ['https://i.ibb.co/1Qf3kqZ/invitea-logo.png', 'https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=720&auto=format&fit=crop'];
-      criticalImages.forEach(src => { (new Image()).src = src; });
-
-      initModal(); // Inicializar modal
-      initDatepicker();
-      wireWhatsAppAndQuickSample();
-      wirePhoneMask();
-      initLazyLoading();
-
-      const yearEl = $('#year'); 
-      if(yearEl) yearEl.textContent = new Date().getFullYear();
-
-      const btnMobile = $('#btnMobile'), mobileMenu = $('#mobileMenu');
-      let mobileOpen = false;
-      
-      function toggleMobile(open){
-        if(!mobileMenu || !btnMobile) return;
-        mobileOpen = !!open;
-        mobileMenu.style.display = mobileOpen ? 'block' : 'none';
-        mobileMenu.setAttribute('aria-hidden', String(!mobileOpen));
-        btnMobile.setAttribute('aria-expanded', String(mobileOpen));
-        const main = $('main');
-        if(main){
-          if('inert' in HTMLElement.prototype) main.inert = mobileOpen;
-          else main.setAttribute('aria-hidden', mobileOpen ? 'true' : 'false');
-        }
-      }
-      
-      if(btnMobile) btnMobile.addEventListener('click', ()=> toggleMobile(!mobileOpen));
-
-      $$('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', (e)=>{
-          const target = a.getAttribute('href');
-          if(target === '#') return;
-          const el = $(target);
-          if(el){ 
-            e.preventDefault(); 
-            el.scrollIntoView({behavior:'smooth', block:'start'}); 
-            if(mobileOpen && mobileMenu) toggleMobile(false);
-          }
-        });
-      });
-
-      window.addEventListener('load', ()=>{
-        animateItems('.hero .fade-up');
-      });
-    })();
-  </script>
 
   <script src="https://unpkg.com/wicg-inert@3.0.0/dist/inert.min.js" defer></script>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
-
-
-
-
