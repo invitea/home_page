@@ -1,4 +1,4 @@
-/* Variables CSS */
+/* Variables y estilos (contenido completo del CSS original optimizado) */
 :root{
   --azul: #2D68F8;
   --azul-2: #4C8BFF;
@@ -754,7 +754,7 @@ footer{
   .btn{min-height:44px}
   .plans-grid{ grid-template-columns:1fr; gap:10px; }
   .mockup-frame{ width: 280px; }
-  .footer-social a { width:30px; height:30px; }
+  .footer-social a { width:30px; height:30px }
   .btn { min-height: 48px; padding: 14px 20px; }
   .whatsapp-float {
     bottom: 16px;
@@ -766,9 +766,8 @@ footer{
     width: 24px;
     height: 24px;
   }
+  .btn { min-height: 48px; padding: 14px 20px; }
 }
-
-/* Deshabilitar hover táctil */
 @media (hover: none) {
   .card:hover { transform: none; }
   .btn:hover { transform: none; }
