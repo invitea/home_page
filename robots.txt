@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://invitea.github.io/home_page/sitemap.xml
