@@ -1,16 +1,14 @@
-[file name]: robots.txt
-[file content begin]
 User-agent: *
 Allow: /
 Allow: /index.html
 Allow: /styles.css
 Allow: /app.js
 
-Sitemap: https://invitea.github.io/sitemap.xml
+Sitemap: https://invitea.github.io/home_page/sitemap.xml
 
 # Block none
 Disallow: 
 
 # Crawl delay
 Crawl-delay: 1
-[file content end]
+
