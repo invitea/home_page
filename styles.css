@@ -1,3 +1,29 @@
+[file name]: styles.css
+[file content begin]
+/* OPTIMIZACIÓN DE VELOCIDAD - Precarga de fuentes críticas */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Precargar fuentes críticas */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa2JL7W0Q5n-wU.woff2) format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2) format('woff2');
+  }
+}
+
 /* Variables CSS */
 :root{
   --azul: #2D68F8;
@@ -777,3 +803,4 @@ footer{
   .why-card:hover { transform: none; }
   .whatsapp-float:hover { transform: none; }
 }
+[file content end]
